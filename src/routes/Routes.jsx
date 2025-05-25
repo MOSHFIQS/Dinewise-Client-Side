@@ -1,3 +1,4 @@
+import Home from '../pages/home/Home';
 import Root from './../layouts/Root';
 import {
   createBrowserRouter
@@ -5,7 +6,9 @@ import {
 
 const router = createBrowserRouter([
   {
-    path: "/", element: <Root />
+    path: "/", element: <Root />, children: [
+      { path: '/', element: <Home /> }
+    ]
   },
 ]);
 
