@@ -4,7 +4,7 @@ import SectionTitle from '../../../components/sectionTitle/SectionTitle';
 const Featured = () => {
     return (
         <div
-            className="relative featured-item bg-fixed text-white py-16 my-20 overflow-hidden"
+            className="relative featured-item bg-fixed text-white py-16  overflow-hidden"
             style={{
                 backgroundImage: "url('/home/featured.jpg')",
                 backgroundSize: 'cover',

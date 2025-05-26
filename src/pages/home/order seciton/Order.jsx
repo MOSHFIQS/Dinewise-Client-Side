@@ -6,7 +6,7 @@ import SectionTitle from '../../../components/sectionTitle/SectionTitle';
 
 const Order = () => {
     return (
-        <div className="max-w-[90vw] mx-auto p-4 overflow-hidden">
+        <div className="w-full  overflow-hidden">
             <SectionTitle subHeading={'---From 11:00am to 10:00pm---'} Heading={'order online'}> </SectionTitle>
             <Swiper
                 spaceBetween={20}
