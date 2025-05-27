@@ -1,21 +1,27 @@
 import React, { useEffect, useState } from 'react';
+import SectionTitle from './../sectionTitle/SectionTitle';
+import Cover from './Cover';
 
 
 
 
-const MenuItem = ({category}) => {
+const MenuItem = ({category,Heading,subHeading,coverHeading,coverSubHeading,img}) => {
     const [menu, setMenu] = useState([])
     useEffect(() => {
         fetch('menu.json')
             .then(res => res.json())
             .then(data => {
-                const popularItems = data.filter(item => item.category == category)
-                setMenu(popularItems)
+                const specificItems = data.filter(item => item.category == category)
+                setMenu(specificItems)
             })
     }, [])
 
     return (
-        <div className='uppercase flex  gap-5 border p-4 items-center text-gray-600'>
+        <div className='uppercase flex  gap-5  items-center text-gray-600 flex-col w-full'>
+            <Cover coverHeading={coverHeading} coverSubHeading={coverSubHeading} img={img}></Cover>
+            {
+                !(Heading && subHeading) == '' && < SectionTitle Heading={Heading} subHeading={subHeading}></SectionTitle>
+            }
             <div className='grid  lg:grid-cols-2 w-full gap-5 '>
                 {
                     menu.map((item, idx) => <div key={idx} className='border flex items-center  p-4 gap-4'>

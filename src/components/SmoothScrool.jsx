@@ -6,11 +6,19 @@ const SmoothScroll = () => {
         let currentScroll = window.scrollY;
         let isAnimating = false;
 
+        const easing = 0.1; // Smoother easing (try 0.08–0.12 for a balance)
+        const minDifference = 0.2; // Lower this for finer stopping
+
         const onWheel = (e) => {
+            if (e.ctrlKey) {
+                // Allow default zoom behavior (Ctrl + Scroll)
+                return;
+            }
+
             e.preventDefault();
+
             targetScroll += e.deltaY;
-            targetScroll = Math.max(0, targetScroll); // Prevent scrolling above the page
-            targetScroll = Math.min(document.body.scrollHeight - window.innerHeight, targetScroll); // Prevent scrolling below the page
+            targetScroll = Math.max(0, Math.min(targetScroll, document.body.scrollHeight - window.innerHeight));
 
             if (!isAnimating) {
                 isAnimating = true;
@@ -19,12 +27,14 @@ const SmoothScroll = () => {
         };
 
         const smoothScroll = () => {
-            currentScroll += (targetScroll - currentScroll) * .1; // Adjust easing factor here (0.05 - 0.15)
+            currentScroll += (targetScroll - currentScroll) * easing;
+
             window.scrollTo(0, currentScroll);
 
-            if (Math.abs(targetScroll - currentScroll) > 0.5) {
+            if (Math.abs(targetScroll - currentScroll) > minDifference) {
                 requestAnimationFrame(smoothScroll);
             } else {
+                currentScroll = targetScroll; // Snap to target
                 isAnimating = false;
             }
         };

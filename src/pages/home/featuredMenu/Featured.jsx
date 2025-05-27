@@ -17,7 +17,7 @@ const Featured = () => {
             <div className="relative z-10">
                 <SectionTitle subHeading="check it out" Heading="Featured Item" />
 
-                <div className="md:flex justify-center items-center bg-black/70  p-6 text-justify lg:max-w-[80vw] max-w-[95vw]  mx-auto">
+                <div className="md:flex justify-center items-center bg-black/70  p-6 text-justify lg:max-w-[80vw] container  mx-auto">
                     <div className="md:w-1/2">
                         <img
                             src="/home/featured.jpg"

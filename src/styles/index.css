@@ -14,3 +14,14 @@
     /* Optional: Rounded corners */
 }
 
+
+
+
+/* Remove default react-tabs styles */
+
+
+
+.react-tabs__tab--selected {
+    border-bottom: 4px solid tomato;
+    outline: none;
+}

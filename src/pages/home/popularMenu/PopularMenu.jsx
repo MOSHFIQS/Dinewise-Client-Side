@@ -4,8 +4,16 @@ import MenuItem from '../../../components/shared/MenuItem';
 const PopularMenu = () => {
     return (
         <seciton>
-            <SectionTitle subHeading={'----popular menu----'} Heading={'FROM OUR MENU'}></SectionTitle>
-            <MenuItem category={"pizza"}></MenuItem>
+            <MenuItem
+                category={"offered"}
+                coverHeading={'BISTRO BOSS'}
+                coverSubHeading={'Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus, libero accusamus laborum deserunt ratione dolor officiis praesentium! Deserunt magni aperiam dolor eius dolore at, nihil iusto ducimus incidunt quibusdam nemo.'}
+                subHeading={'hello this is very good'}
+                Heading={'wow nice reciepe'}
+                img={'/home/featured.jpg'}
+            >
+                {/* category,Heading,subHeading,coverHeading,coverSubHeading,img */}
+            </MenuItem>
         </seciton>
     );
 };

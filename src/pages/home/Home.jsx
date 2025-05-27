@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async'
 import Banner from './Banner'
-import BistroBoss from './BistroBoss/BistroBoss'
+// import BistroBoss from './BistroBoss/BistroBoss'
 import CallUs from './callUs/CallUs'
 import ChefRecommends from './chef-recommends/ChefRecommends'
 import Featured from './featuredMenu/Featured'
@@ -16,9 +16,9 @@ const Home = () => {
         <title>Bistro Boss || Home</title>
       </Helmet>
       <Banner />
-      <div className='max-w-[90vw] mx-auto space-y-14'>
+      <div className='container mx-auto space-y-14'>
         <Order />
-        <BistroBoss />
+        {/* <BistroBoss /> */}
         <PopularMenu />
         <CallUs />
         <ChefRecommends />
