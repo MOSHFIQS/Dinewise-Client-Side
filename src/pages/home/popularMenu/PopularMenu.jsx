@@ -14,7 +14,7 @@ const PopularMenu = () => {
     }, [])
     return (
         <seciton>
-            <SectionTitle subHeading={'---popular menu---'} Heading={'FROM OUR MENU'}></SectionTitle>
+            <SectionTitle subHeading={'----popular menu----'} Heading={'FROM OUR MENU'}></SectionTitle>
             <div className='grid  lg:grid-cols-2 w-full gap-5 '>
                 {
                     menu.map((item,idx) => <MenuItem key={idx} item={item}/>)
