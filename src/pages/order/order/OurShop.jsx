@@ -1,54 +1,66 @@
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-// import 'react-tabs/style/react-tabs.css';
-import Cover from '../../../components/shared/Cover';
 import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import Cover from '../../../components/shared/Cover';
 import OrderPanel from '../../../components/shared/OrderPanel';
 
 const OurShop = () => {
-    const [menu, setMenu] = useState([]);
-    const [category, setCategory] = useState('salad');
+    const { search } = useLocation();
+    const navigate = useNavigate();
 
+    const categories = ['salad', 'pizza', 'soup', 'dessert', 'drinks'];
+    const filteredSearch = search.slice(1); // Get 'salad', 'pizza', etc.
+    const filteredSearchTabIndex = categories.indexOf(filteredSearch);
+
+    const [tabIndex, setTabIndex] = useState(filteredSearchTabIndex >= 0 ? filteredSearchTabIndex : 0);
+    const [menu, setMenu] = useState([]);
+
+    // When tabIndex changes, fetch menu items
     useEffect(() => {
-        fetch('menu.json')
+        fetch('/menu.json')
             .then(res => res.json())
             .then(allMenu => {
-                const specificMenu = allMenu.filter(menuData => menuData.category === category);
+                const specificMenu = allMenu.filter(item => item.category === categories[tabIndex]);
                 setMenu(specificMenu);
             });
-    }, [category]);
+    }, [tabIndex]);
+
+    // When the URL changes, update tabIndex
+    useEffect(() => {
+        if (filteredSearchTabIndex >= 0) {
+            setTabIndex(filteredSearchTabIndex);
+        }
+    }, [filteredSearchTabIndex]);
+
+    // When a tab is clicked, update both tabIndex and URL
+    const handleTabSelect = (index) => {
+        setTabIndex(index);
+        navigate(`?${categories[index]}`);  // this will updating the URL when a tab is selected. but without the navigate it also show the data 
+    };
 
     return (
         <div className="w-full">
+
             <Cover
                 coverHeading={'OUR SHOP'}
-                coverSubHeading={'would you like to try a dish ?'}
+                coverSubHeading={'Would you like to try a dish?'}
                 img={'/shop/banner2.jpg'}
             />
 
-            <Tabs>
-                <TabList className="flex gap-4 w-full justify-center py-10 text-2xl font-extrabold">
-                    <Tab onClick={() => setCategory('salad')}>SALAD</Tab>
-                    <Tab onClick={() => setCategory('pizza')}>PIZZA</Tab>
-                    <Tab onClick={() => setCategory('soup')}>SOUP</Tab>
-                    <Tab onClick={() => setCategory('dessert')}>DESSERTS</Tab>
-                    <Tab onClick={() => setCategory('drinks')}>DRINKS</Tab>
+            <Tabs selectedIndex={tabIndex} onSelect={handleTabSelect}>
+                <TabList className="flex gap-4 w-full justify-center py-10 text-2xl font-extrabold" >
+                    <Tab className={'btn btn-ghost'}>SALAD</Tab>
+                    <Tab className={'btn btn-ghost'}>PIZZA</Tab>
+                    <Tab className={'btn btn-ghost'}>SOUP</Tab>
+                    <Tab className={'btn btn-ghost'}>DESSERTS</Tab>
+                    <Tab className={'btn btn-ghost'}>DRINKS</Tab>
                 </TabList>
 
-                <TabPanel>
-                    <OrderPanel items={menu}></OrderPanel>
-                </TabPanel>
-                <TabPanel>
-                    <OrderPanel items={menu}></OrderPanel>
-                </TabPanel>
-                <TabPanel>
-                    <OrderPanel items={menu}></OrderPanel>
-                </TabPanel>
-                <TabPanel>
-                    <OrderPanel items={menu}></OrderPanel>
-                </TabPanel>
-                <TabPanel>
-                    <OrderPanel items={menu}></OrderPanel>
-                </TabPanel>
+                <TabPanel><OrderPanel items={menu} /></TabPanel>
+                <TabPanel><OrderPanel items={menu} /></TabPanel>
+                <TabPanel><OrderPanel items={menu} /></TabPanel>
+                <TabPanel><OrderPanel items={menu} /></TabPanel>
+                <TabPanel><OrderPanel items={menu} /></TabPanel>
             </Tabs>
         </div>
     );

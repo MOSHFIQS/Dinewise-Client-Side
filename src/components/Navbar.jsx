@@ -16,8 +16,7 @@ const Navbar = () => {
                         <NavLink>Contact Us</NavLink>
                         <NavLink>Dashboard</NavLink>
                         <NavLink to={'/menu'}>Our Menu</NavLink>
-                        <NavLink to={'/order'}>Our Shop</NavLink>
-                        <NavLink>Home </NavLink>
+                        <NavLink to={'/ourShop'}>Our Shop</NavLink>
 
 
                         <NavLink>Sign In</NavLink>
@@ -37,8 +36,7 @@ const Navbar = () => {
                     <NavLink>Contact Us</NavLink>
                     <NavLink>Dashboard</NavLink>
                     <NavLink to={'/menu'}>Our Menu</NavLink>
-                    <NavLink to={'/order'}>Our Shop</NavLink>
-                    <NavLink>Home </NavLink>
+                    <NavLink to={'/ourShop'}>Our Shop</NavLink>
 
 
                     <NavLink>Sign In</NavLink>

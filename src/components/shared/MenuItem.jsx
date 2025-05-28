@@ -5,7 +5,7 @@ import Cover from './Cover';
 
 
 
-const MenuItem = ({category,Heading,subHeading,coverHeading,coverSubHeading,img}) => {
+const MenuItem = ({ category, Heading, subHeading, coverHeading, coverSubHeading, img, tabName }) => {
     const [menu, setMenu] = useState([])
     useEffect(() => {
         fetch('menu.json')
@@ -18,7 +18,7 @@ const MenuItem = ({category,Heading,subHeading,coverHeading,coverSubHeading,img}
 
     return (
         <div className='uppercase flex  gap-5  items-center text-gray-600 flex-col w-full'>
-            <Cover coverHeading={coverHeading} coverSubHeading={coverSubHeading} img={img}></Cover>
+            <Cover coverHeading={coverHeading} coverSubHeading={coverSubHeading} img={img} tabName={tabName}></Cover>
             {
                 !(Heading && subHeading) == '' && < SectionTitle Heading={Heading} subHeading={subHeading}></SectionTitle>
             }
