@@ -8,9 +8,10 @@ import Cover from './Cover';
 const MenuItem = ({ category, Heading, subHeading, coverHeading, coverSubHeading, img, tabName }) => {
     const [menu, setMenu] = useState([])
     useEffect(() => {
-        fetch(`${import.meta.env.BASE_URL}/menu`)
+        fetch(`${import.meta.env.VITE_BASE_URL}/menu`)
             .then(res => res.json())
             .then(data => {
+                console.log(data)
                 const specificItems = data.filter(item => item.category == category)
                 setMenu(specificItems)
             })

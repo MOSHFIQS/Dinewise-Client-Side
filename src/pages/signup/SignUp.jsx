@@ -1,7 +1,32 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FaFacebookF, FaGoogle, FaGithub } from 'react-icons/fa';
+import { useForm } from 'react-hook-form';
+import { AuthContext } from '../../providers/AuthProvider';
+import { toast } from 'react-hot-toast';
 
 const SignUp = () => {
+    const { signUpUser } = useContext(AuthContext)
+    const { register, handleSubmit, watch, formState: { errors }, } = useForm()
+
+    const onSubmit = (data) => {
+        // console.log(data)
+        const { name, email, password } = data
+        console.log(name, email, password)
+        signUpUser(email, password)
+            .then(result => {
+                toast.success('signUp successful')
+            }).catch((error) => {
+                const errorMessage = error.code.replace("auth/", ""); // Remove "auth/" prefix
+                toast.error(errorMessage)
+            })
+
+    }
+
+
+
+
+
+
     return (
         <div
             style={{ backgroundImage: `url('/others/authentication.png')` }}
@@ -20,17 +45,19 @@ const SignUp = () => {
                 {/* Right Side - Login Form */}
                 <div className="w-full lg:w-1/2 p-8">
                     <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">SignUp</h2>
-                    <form className="space-y-4">
+                    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                         <div>
                             <label htmlFor="name" className="block text-sm font-medium text-gray-600">
                                 name
                             </label>
                             <input
                                 type="text"
-                                id="name"
+
+                                {...register("name", { required: "insert a name" })}
                                 className="mt-1 w-full p-3 bg-white border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
                                 placeholder="Type here"
                             />
+                            {errors.name && <span className="text-red-500 text-sm">নাম আবশ্যক</span>}
                         </div>
                         <div>
                             <label htmlFor="email" className="block text-sm font-medium text-gray-600">
@@ -38,7 +65,8 @@ const SignUp = () => {
                             </label>
                             <input
                                 type="email"
-                                id="email"
+
+                                {...register("email", { required: true })}
                                 className="mt-1 w-full p-3 bg-white border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
                                 placeholder="Type here"
                             />
@@ -50,7 +78,8 @@ const SignUp = () => {
                             </label>
                             <input
                                 type="password"
-                                id="password"
+
+                                {...register("password", { required: true })}
                                 className="mt-1 w-full p-3 bg-white border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
                                 placeholder="Enter your password"
                             />

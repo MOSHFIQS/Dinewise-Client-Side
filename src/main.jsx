@@ -5,13 +5,18 @@ import router from './routes/Routes'
 import { RouterProvider } from 'react-router-dom'
 import { HelmetProvider } from 'react-helmet-async'
 import SmoothScroll from './components/SmoothScrool'
+import AuthProvider from './providers/AuthProvider'
+import toast, { Toaster } from 'react-hot-toast';
 
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <HelmetProvider>
-      <SmoothScroll />
-      <RouterProvider router={router} />
-    </HelmetProvider>
+    <AuthProvider>
+      <HelmetProvider>
+        <SmoothScroll />
+        <Toaster />
+        <RouterProvider router={router} />
+      </HelmetProvider>
+    </AuthProvider>
   </StrictMode>,
 )

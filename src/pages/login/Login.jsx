@@ -1,7 +1,55 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { FaFacebookF, FaGoogle, FaGithub } from 'react-icons/fa';
+import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
+import { AuthContext } from '../../providers/AuthProvider';
+import toast from 'react-hot-toast';
+
+
+
+
 
 const Login = () => {
+    const { signInUser } = useContext(AuthContext)
+    const { register, handleSubmit, watch, formState: { errors }, } = useForm()
+    const [captchaInput, setCaptchaInput] = useState('')
+    const [disable,setDisable] = useState(true)
+
+    useEffect(() => {
+        loadCaptchaEnginge(6);
+    }, [])
+
+
+    const onSubmit = (data) => {
+        // console.log(data)
+        const { email, password } = data
+        console.log( email, password)
+        signInUser(email, password)
+            .then(result => {
+                toast.success('signIn successful')
+            }).catch((error) => {
+                const errorMessage = error.code.replace("auth/", ""); // Remove "auth/" prefix
+                toast.error(errorMessage)
+            })
+
+    }
+
+    const handleCaptcha = (e) => {
+        e.preventDefault(); // Prevent page reload when clicking the button
+
+        if (validateCaptcha(captchaInput)) {
+            setDisable(false); // Enable the login button
+            return toast.success("Captcha validated successfully!");
+        } else {
+            setDisable(true); // Keep the login button disabled
+            return toast.error("Captcha validation failed. Please try again.");
+        }
+    };
+      
+
+
+
+
     return (
         <div
             style={{ backgroundImage: `url('/others/authentication.png')` }}
@@ -20,7 +68,7 @@ const Login = () => {
                 {/* Right Side - Login Form */}
                 <div className="w-full lg:w-1/2 p-8">
                     <h2 className="text-3xl font-bold text-gray-800 mb-6">Login</h2>
-                    <form className="space-y-4">
+                    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                         <div>
                             <label htmlFor="email" className="block text-sm font-medium text-gray-600">
                                 Email
@@ -28,7 +76,8 @@ const Login = () => {
                             <input
                                 type="email"
                                 id="email"
-                                className="mt-1 w-full p-3 bg-white border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
+                                {...register("email", { required: true })}
+                                className="input w-full focus:outline-none"
                                 placeholder="Type here"
                             />
                         </div>
@@ -40,39 +89,37 @@ const Login = () => {
                             <input
                                 type="password"
                                 id="password"
-                                className="mt-1 w-full p-3 bg-white border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
+                                {...register("password", { required: true })}
+                                className="input w-full focus:outline-none"
                                 placeholder="Enter your password"
                             />
                         </div>
 
-                        <div>
-                            <label htmlFor="captcha" className="block text-sm font-medium text-gray-600">
-                                Captcha
-                            </label>
-                            <input
-                                type="text"
-                                id="generated-captcha"
-                                className="mt-1 w-full p-3 bg-white border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
-                                value="ualii"
-                                readOnly
-                            />
-                            <div className="flex items-center space-x-3 mt-1">
-                                <button type="button" className="text-blue-500 text-sm font-bold hover:underline">
-                                    Reload Captcha
-                                </button>
+                       {
+                        disable && 
+                            <div>
+                                <div >
+                                    <LoadCanvasTemplate />
+                                </div>
+                                <div className='flex gap-4'>
+                                    <input
+                                        type="text"
+                                        id="captcha"
+                                        required
+
+                                        onChange={e => setCaptchaInput(e.target.value)}
+                                        className="input focus:outline-none w-full"
+                                        placeholder="Type here"
+                                    />
+                                    <button onClick={handleCaptcha} className='btn btn-error text-white  '>validate captcha</button>
+                                </div>
                             </div>
-                            <input
-                                type="text"
-                                id="captcha"
-                                className="mt-1 w-full p-3 bg-white border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
-                                placeholder="Type here"
-                            />
-                        </div>
+                       }
 
                         <button
                             type="submit"
-                            className="w-full py-3 bg-gradient-to-r from-orange-400 to-orange-300 text-white font-bold rounded-lg hover:from-orange-500 hover:to-orange-400 transition-all"
-                        >
+                             disabled={disable}
+                            className="btn  w-full bg-white">
                             Sign In
                         </button>
 
