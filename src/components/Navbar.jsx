@@ -17,12 +17,9 @@ const Navbar = () => {
                         <NavLink>Dashboard</NavLink>
                         <NavLink to={'/menu'}>Our Menu</NavLink>
                         <NavLink to={'/ourShop'}>Our Shop</NavLink>
-
-
-                        <NavLink>Sign In</NavLink>
-                        <NavLink>Sign Up</NavLink>
-
-                        <NavLink>SignOUt</NavLink>
+                        <NavLink to={'login'}>Sign In</NavLink>
+                        <NavLink to={'/signup'}>Sign Up</NavLink>
+                        <NavLink >SignOUt</NavLink>
                     </div>
                 </div>
                 <a className="btn btn-ghost text-xl">Bistro</a>
@@ -39,10 +36,10 @@ const Navbar = () => {
                     <NavLink to={'/ourShop'}>Our Shop</NavLink>
 
 
-                    <NavLink>Sign In</NavLink>
-                    <NavLink>Sign Up</NavLink>
+                    <NavLink to={'login'}>Sign In</NavLink>
+                    <NavLink to={'/signup'}>Sign Up</NavLink>
 
-                    <NavLink>SignOUt</NavLink>
+                    <NavLink >SignOUt</NavLink>
 
                 </div>
             </div>

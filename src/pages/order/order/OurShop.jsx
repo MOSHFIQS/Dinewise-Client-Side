@@ -17,13 +17,14 @@ const OurShop = () => {
 
     // When tabIndex changes, fetch menu items
     useEffect(() => {
-        fetch('/menu.json')
+        fetch(`${import.meta.env.VITE_BASE_URL}/menu`)
             .then(res => res.json())
             .then(allMenu => {
                 const specificMenu = allMenu.filter(item => item.category === categories[tabIndex]);
                 setMenu(specificMenu);
             });
     }, [tabIndex]);
+
 
     // When the URL changes, update tabIndex
     useEffect(() => {
