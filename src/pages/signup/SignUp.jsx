@@ -3,10 +3,12 @@ import { FaFacebookF, FaGoogle, FaGithub } from 'react-icons/fa';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../providers/AuthProvider';
 import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
     const { signUpUser } = useContext(AuthContext)
     const { register, handleSubmit, watch, formState: { errors }, } = useForm()
+    const navigate = useNavigate()
 
     const onSubmit = (data) => {
         // console.log(data)
@@ -15,6 +17,7 @@ const SignUp = () => {
         signUpUser(email, password)
             .then(result => {
                 toast.success('signUp successful')
+                navigate('/')
             }).catch((error) => {
                 const errorMessage = error.code.replace("auth/", ""); // Remove "auth/" prefix
                 toast.error(errorMessage)
@@ -30,7 +33,7 @@ const SignUp = () => {
     return (
         <div
             style={{ backgroundImage: `url('/others/authentication.png')` }}
-            className="min-h-screen flex items-center justify-center bg-gray-100 w-full bg-cover bg-center"
+            className="min-h-screen flex items-center justify-center bg-gray-100 w-full bg-cover bg-center "
         >
             <div className="flex w-full flex-row-reverse container bg-transparent border-gray-300 border shadow-lg overflow-hidden">
                 {/* Left Side - Illustration */}

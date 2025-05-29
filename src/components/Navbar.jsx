@@ -1,7 +1,19 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import useAuth from './../hooks/useAuth';
 
 const Navbar = () => {
+    const { logOutUser, user } = useAuth()
+    const navigate = useNavigate()
+
+    const handleLogout = () => {
+        logOutUser()
+            .then(res => {
+                navigate('/')
+            })
+    }
+
+
     return (
         <div className="navbar  md:text-white bg-black/55 md:border-b-4 shadow-sm uppercase fixed z-20 backdrop-blur-md ">
             <div className="navbar-start">
@@ -17,9 +29,21 @@ const Navbar = () => {
                         <NavLink>Dashboard</NavLink>
                         <NavLink to={'/menu'}>Our Menu</NavLink>
                         <NavLink to={'/ourShop'}>Our Shop</NavLink>
-                        <NavLink to={'login'}>Sign In</NavLink>
-                        <NavLink to={'/signup'}>Sign Up</NavLink>
-                        <NavLink >SignOUt</NavLink>
+
+                        <div className="indicator">
+                            <span className="indicator-item badge-sm text-rose-400 font-extrabold ">12</span>
+                            <button className="">my cart</button>
+                        </div>
+
+                        {
+                            user ? <button onClick={handleLogout}>SignOUt</button> :
+                                <>
+                                    <NavLink to={'login'}>Sign In</NavLink>
+                                    <NavLink to={'/signup'}>Sign Up</NavLink>
+                                </>
+
+
+                        }
                     </div>
                 </div>
                 <a className="btn btn-ghost text-xl">Bistro</a>
@@ -34,12 +58,24 @@ const Navbar = () => {
                     <NavLink>Dashboard</NavLink>
                     <NavLink to={'/menu'}>Our Menu</NavLink>
                     <NavLink to={'/ourShop'}>Our Shop</NavLink>
+                    <div className="indicator">
+                        <span className="indicator-item badge-sm text-rose-400 font-extrabold ">12</span>
+                        <button className="">my cart</button>
+                    </div>
 
 
-                    <NavLink to={'login'}>Sign In</NavLink>
-                    <NavLink to={'/signup'}>Sign Up</NavLink>
+                    {
+                        user ? <button onClick={handleLogout}>SignOUt</button> :
+                            <>
+                                <NavLink to={'login'}>Sign In</NavLink>
+                                <NavLink to={'/signup'}>Sign Up</NavLink>
+                            </>
 
-                    <NavLink >SignOUt</NavLink>
+
+                    }
+
+
+
 
                 </div>
             </div>

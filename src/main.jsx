@@ -9,14 +9,28 @@ import AuthProvider from './providers/AuthProvider'
 import toast, { Toaster } from 'react-hot-toast';
 
 
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from '@tanstack/react-query'
+
+
+
+const queryClient = new QueryClient()
+
+
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <AuthProvider>
-      <HelmetProvider>
-        <SmoothScroll />
-        <Toaster />
-        <RouterProvider router={router} />
-      </HelmetProvider>
-    </AuthProvider>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <HelmetProvider>
+          <SmoothScroll />
+          <Toaster />
+          <RouterProvider router={router} />
+        </HelmetProvider>
+      </AuthProvider>
+    </QueryClientProvider>
   </StrictMode>,
 )
