@@ -4,6 +4,7 @@ import { FaFacebookF, FaGoogle, FaGithub } from 'react-icons/fa';
 import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
 import { AuthContext } from '../../providers/AuthProvider';
 import toast from 'react-hot-toast';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 
 
@@ -14,6 +15,10 @@ const Login = () => {
     const { register, handleSubmit, watch, formState: { errors }, } = useForm()
     const [captchaInput, setCaptchaInput] = useState('')
     const [disable,setDisable] = useState(true)
+    const location = useLocation()
+    const navigate = useNavigate()
+    console.log(location?.state?.from?.pathname)
+    const from = location?.state?.from?.pathname || '/'
 
     useEffect(() => {
         loadCaptchaEnginge(6);
@@ -27,6 +32,7 @@ const Login = () => {
         signInUser(email, password)
             .then(result => {
                 toast.success('signIn successful')
+                navigate(from)
             }).catch((error) => {
                 const errorMessage = error.code.replace("auth/", ""); // Remove "auth/" prefix
                 toast.error(errorMessage)

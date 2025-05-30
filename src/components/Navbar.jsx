@@ -1,10 +1,12 @@
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import useAuth from './../hooks/useAuth';
+import useCart from '../hooks/useCart';
 
 const Navbar = () => {
     const { logOutUser, user } = useAuth()
     const navigate = useNavigate()
+    const [cart] = useCart()
 
     const handleLogout = () => {
         logOutUser()
@@ -26,12 +28,12 @@ const Navbar = () => {
                         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
                         <NavLink>Home </NavLink>
                         <NavLink>Contact Us</NavLink>
-                        <NavLink>Dashboard</NavLink>
+                        <NavLink to={'/dashboard'}>Dashboard</NavLink>
                         <NavLink to={'/menu'}>Our Menu</NavLink>
                         <NavLink to={'/ourShop'}>Our Shop</NavLink>
 
                         <div className="indicator">
-                            <span className="indicator-item badge-sm text-rose-400 font-extrabold ">12</span>
+                            <span className="indicator-item badge-sm text-rose-400 font-extrabold ">{cart.length}</span>
                             <button className="">my cart</button>
                         </div>
 
@@ -55,13 +57,13 @@ const Navbar = () => {
                 <div className="menu menu-horizontal px-1 flex-nowrap gap-5">
                     <NavLink>Home </NavLink>
                     <NavLink>Contact Us</NavLink>
-                    <NavLink>Dashboard</NavLink>
+                    <NavLink to={'/dashboard'}>Dashboard</NavLink>
                     <NavLink to={'/menu'}>Our Menu</NavLink>
                     <NavLink to={'/ourShop'}>Our Shop</NavLink>
-                    <div className="indicator">
-                        <span className="indicator-item badge-sm text-rose-400 font-extrabold ">12</span>
+                    <NavLink to={'/dashboard/myCart'} className="indicator">
+                        <span className="indicator-item badge-sm text-rose-400 font-extrabold ">{cart.length}</span>
                         <button className="">my cart</button>
-                    </div>
+                    </NavLink>
 
 
                     {

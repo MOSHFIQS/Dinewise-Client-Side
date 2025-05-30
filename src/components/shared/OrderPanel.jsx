@@ -4,36 +4,42 @@ import useAxiosSecure from './../../hooks/useAxiosSecure';
 import { toast } from 'react-hot-toast';
 import useAuth from './../../hooks/useAuth';
 import { useNavigate, useLocation } from 'react-router-dom';
+import useCart from '../../hooks/useCart';
 
-const OrderPanel = ({items}) => {
-    const {user} = useAuth()
+const OrderPanel = ({ items }) => {
+    const { user } = useAuth()
     console.log(user)
+    const [, refetch] = useCart()
     const axiosSecure = useAxiosSecure()
     const navigate = useNavigate()
     const location = useLocation()
 
     const handleCart = (orderedMenu) => {
-        if(!user){
-            navigate('/login')
+        if (!user) {
+            navigate('/login', { state: { from: location } })
         }
         console.log(orderedMenu)
         const orderDetails = {
-            menuId : orderedMenu._id,
-            name:orderedMenu.name,
+            menuId: orderedMenu._id,
+            name: orderedMenu.name,
+            email: user?.email,
             recipe: orderedMenu.recipe,
             image: orderedMenu.image,
+            price: orderedMenu.price,
             category: orderedMenu.category
         }
         console.log(orderDetails)
-        axiosSecure.post('/cart',orderDetails)
-        .then(res => {
-            toast.success('order successful')
-        })
-        .catch(err => {
-            toast.error('something went wrong 😭😭😭')
-        })
+        axiosSecure.post('/cart', orderDetails)
+            .then(res => {
+                toast.success('order successful')
+                 refetch()
+            })
+            .catch(err => {
+                toast.error('something went wrong 😭😭😭')
+            })
     }
 
+    
     return (
         <div className=" max-w-[85vw] mx-auto grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center gap-4 p-4">
             {items.map((sMenu, idx) => (
