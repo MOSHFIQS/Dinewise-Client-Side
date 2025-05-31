@@ -16,7 +16,7 @@ const OrderPanel = ({ items }) => {
 
     const handleCart = (orderedMenu) => {
         if (!user) {
-            navigate('/login', { state: { from: location } })
+           return navigate('/login', { state: { from: location } })
         }
         console.log(orderedMenu)
         const orderDetails = {

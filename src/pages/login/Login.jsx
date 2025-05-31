@@ -5,6 +5,7 @@ import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, val
 import { AuthContext } from '../../providers/AuthProvider';
 import toast from 'react-hot-toast';
 import { useLocation, useNavigate } from 'react-router-dom';
+import HandleGoogleLogin from '../../components/shared/HandleGoogleLogin';
 
 
 
@@ -17,7 +18,7 @@ const Login = () => {
     const [disable,setDisable] = useState(true)
     const location = useLocation()
     const navigate = useNavigate()
-    console.log(location?.state?.from?.pathname)
+    // console.log(location?.state?.from?.pathname)
     const from = location?.state?.from?.pathname || '/'
 
     useEffect(() => {
@@ -136,18 +137,17 @@ const Login = () => {
                             </a>
                         </p>
 
-                        <div className="flex items-center justify-center space-x-4 pt-4">
-                            <button className="bg-gray-100 border p-3 rounded-full hover:shadow">
-                                <FaFacebookF className="text-gray-600 text-lg" />
-                            </button>
-                            <button className="bg-gray-100 border p-3 rounded-full hover:shadow">
-                                <FaGoogle className="text-gray-600 text-lg" />
-                            </button>
-                            <button className="bg-gray-100 border p-3 rounded-full hover:shadow">
-                                <FaGithub className="text-gray-600 text-lg" />
-                            </button>
-                        </div>
+                       
                     </form>
+                    <div className="flex items-center justify-center space-x-4 pt-4">
+                        <button className="bg-gray-100 border p-3 rounded-full hover:shadow">
+                            <FaFacebookF className="text-gray-600 text-lg" />
+                        </button>
+                        <HandleGoogleLogin />
+                        <button className="bg-gray-100 border p-3 rounded-full hover:shadow">
+                            <FaGithub className="text-gray-600 text-lg" />
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

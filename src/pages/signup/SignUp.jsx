@@ -1,28 +1,38 @@
 import React, { useContext } from 'react';
-import { FaFacebookF, FaGoogle, FaGithub } from 'react-icons/fa';
+import { FaFacebookF, FaGithub } from 'react-icons/fa';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../providers/AuthProvider';
 import { toast } from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import useAxiosPublic from '../../hooks/useAxiosPublic';
+import HandleGoogleLogin from '../../components/shared/HandleGoogleLogin';
 
 const SignUp = () => {
-    const { signUpUser } = useContext(AuthContext)
+    const { signUpUser, googleLogin } = useContext(AuthContext)
     const { register, handleSubmit, watch, formState: { errors }, } = useForm()
     const navigate = useNavigate()
+    const axiosPublic = useAxiosPublic()
+    const location = useLocation()
+    const from = location?.state?.from?.pathname || '/'
 
     const onSubmit = (data) => {
         // console.log(data)
         const { name, email, password } = data
+        const userInfo = {
+            name: name, email: email, password: password,type:'email and password'
+        }
         console.log(name, email, password)
         signUpUser(email, password)
             .then(result => {
-                toast.success('signUp successful')
-                navigate('/')
+                axiosPublic.post('/user', userInfo)
+                    .then(res => {
+                        toast.success('signUp successful')
+                        navigate(from)
+                    })
             }).catch((error) => {
                 const errorMessage = error.code.replace("auth/", ""); // Remove "auth/" prefix
                 toast.error(errorMessage)
             })
-
     }
 
 
@@ -102,19 +112,16 @@ const SignUp = () => {
                                 Create a New Account
                             </a>
                         </p>
-
-                        <div className="flex items-center justify-center space-x-4 pt-4">
-                            <button className="bg-gray-100 border p-3 rounded-full hover:shadow">
-                                <FaFacebookF className="text-gray-600 text-lg" />
-                            </button>
-                            <button className="bg-gray-100 border p-3 rounded-full hover:shadow">
-                                <FaGoogle className="text-gray-600 text-lg" />
-                            </button>
-                            <button className="bg-gray-100 border p-3 rounded-full hover:shadow">
-                                <FaGithub className="text-gray-600 text-lg" />
-                            </button>
-                        </div>
                     </form>
+                    <div className="flex items-center justify-center space-x-4 pt-4">
+                        <button className="bg-gray-100 border p-3 rounded-full hover:shadow">
+                            <FaFacebookF className="text-gray-600 text-lg" />
+                        </button>
+                        <HandleGoogleLogin />
+                        <button className="bg-gray-100 border p-3 rounded-full hover:shadow">
+                            <FaGithub className="text-gray-600 text-lg" />
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
