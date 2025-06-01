@@ -1,4 +1,5 @@
 import Dashboard from '../layouts/dashboard/Dashboard';
+import AllUsers from '../pages/dashboard/allUsers/AllUsers';
 import MyCart from '../pages/dashboard/cart/MyCart';
 import Home from '../pages/home/Home';
 import Login from '../pages/login/Login';
@@ -22,7 +23,10 @@ const router = createBrowserRouter([
   },
   {
     path: '/dashboard', element: <Dashboard />, children: [
-      { path: 'myCart',element:<MyCart></MyCart> }
+      { path: 'myCart', element: <MyCart></MyCart> },
+
+      // admin routes
+      { path: 'allUsers', element: <AllUsers /> }
     ]
   }
 ]);

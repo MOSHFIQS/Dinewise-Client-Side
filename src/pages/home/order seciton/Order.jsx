@@ -28,7 +28,7 @@ const Order = () => {
                     <h3 className="text-4xl uppercase text-center -mt-16 text-white">Salads</h3>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src="/home/slide2.jpg" alt="Slide 2" className="w-full sm:h-auto object-contain h-60   rounded" />
+                    <img src="/home/slide4.jpg" alt="Slide 2" className="w-full sm:h-auto object-contain h-60   rounded" />
                      <h3 className="text-4xl uppercase text-center -mt-16 text-white">Salads</h3>
                 </SwiperSlide>
                 <SwiperSlide>
@@ -41,6 +41,10 @@ const Order = () => {
                 </SwiperSlide>
                 <SwiperSlide>
                     <img src="/home/slide5.jpg" alt="Slide 5" className="w-full sm:h-auto object-contain h-60   rounded" />
+                     <h3 className="text-4xl uppercase text-center -mt-16 text-white">Salads</h3>
+                </SwiperSlide>
+                <SwiperSlide>
+                    <img src="/home/slide2.jpg" alt="Slide 5" className="w-full sm:h-auto object-contain h-60   rounded" />
                      <h3 className="text-4xl uppercase text-center -mt-16 text-white">Salads</h3>
                 </SwiperSlide>
             </Swiper>

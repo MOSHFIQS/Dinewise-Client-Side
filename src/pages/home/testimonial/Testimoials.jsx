@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import SectionTitle from '../../../components/sectionTitle/SectionTitle';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
-import Rating from 'react-rating';
-import { FaStar, FaRegStar, FaQuoteLeft } from 'react-icons/fa';
+import ReactStars from 'react-rating-stars-component';
+import { FaQuoteLeft } from 'react-icons/fa';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -28,7 +28,7 @@ const Testimonials = () => {
                 spaceBetween={20}
                 pagination={{ clickable: true }}
                 navigation={true}
-                loop={true}
+                loop={reviews.length > 1}  // 🔥 Safely loop only when enough slides
                 autoplay={{ delay: 4000, disableOnInteraction: false }}
                 modules={[Pagination, Navigation, Autoplay]}
                 className="w-full"
@@ -36,19 +36,24 @@ const Testimonials = () => {
                     280: { slidesPerView: 1 },
                 }}
             >
+
                 {reviews.map((review, index) => (
                     <SwiperSlide
                         key={index}
-                        className="flex flex-col items-center justify-center gap-4 p-8"
+                        className="flex flex-col w-full items-center justify-center gap-4 p-8"
                     >
-                        <Rating
-                            initialRating={review.rating}
-                            readonly
-                            emptySymbol={<FaRegStar className="text-2xl text-gray-300" />}
-                            fullSymbol={<FaStar className="text-2xl text-yellow-500" />}
-                            fractions={2}
-                        />
-                        <FaQuoteLeft className="text-6xl text-center w-full my-6" />
+                        <div className='w-full flex  justify-center'>
+                            <ReactStars
+                                count={5}
+                                value={review.rating}
+                                size={24}
+                                edit={false}
+                                isHalf={true}
+                                activeColor="#facc15"
+                                className={''} // Tailwind yellow-400
+                            />
+                        </div>
+                        <FaQuoteLeft className="text-6xl text-center w-full my-6 text-gray-400" />
                         <p className="text-gray-700 text-base sm:text-lg italic px-10">
                             {review.details}
                         </p>

@@ -3,7 +3,7 @@ import MenuItem from '../../../components/shared/MenuItem';
 
 const PopularMenu = () => {
     return (
-        <seciton>
+        <section>
             <MenuItem
                 category={"offered"}
                 coverHeading={'BISTRO BOSS'}
@@ -14,7 +14,7 @@ const PopularMenu = () => {
             >
                 {/* category,Heading,subHeading,coverHeading,coverSubHeading,img */}
             </MenuItem>
-        </seciton>
+        </section>
     );
 };
 
