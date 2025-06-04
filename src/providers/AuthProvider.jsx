@@ -3,6 +3,7 @@ import axios from 'axios';
 import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 import React, { createContext, useEffect, useState } from 'react';
 import auth from '../firebase/firebase.config';
+import useAxiosPublic from './../hooks/useAxiosPublic';
 
 export const AuthContext = createContext(null)
 
@@ -11,6 +12,7 @@ export const AuthContext = createContext(null)
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
+    const axiosPublic = useAxiosPublic()
 
 
     const signInUser = (email, password) => {
@@ -39,20 +41,20 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
-            // if (currentUser?.email) {
-            //     const loggedUser = { email: currentUser?.email };
-            //     axios
-            //         .post(`${process.env.NEXT_PUBLIC_BASE_URL}/jwt`, loggedUser, { withCredentials: true })
-            //         .then(res => console.log('Token response:', res.data))
-            //         .catch(err => console.error('JWT request error:', err));
-            //     setLoading(false);
-            // } else {
-            //     axios
-            //         .post(`${process.env.NEXT_PUBLIC_BASE_URL}/logout`, {}, { withCredentials: true })
-            //         .then(res => console.log('Logout response:', res.data))
-            //         .catch(err => console.error('Logout request error:', err));
-            //     setLoading(false);
-            // }
+
+            const userInfo = { email: currentUser?.email }
+            if (currentUser) {
+                axiosPublic.post('/jwt', userInfo)
+                    .then(res => {
+                        console.log(res)
+                        if (res.data.token) {
+                            localStorage.setItem('access-token', res.data.token)
+                        }
+                    })
+            } else {
+                localStorage.removeItem('access-token')
+            }
+            
             setLoading(false)
         });
 
