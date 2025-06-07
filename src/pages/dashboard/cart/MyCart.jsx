@@ -4,6 +4,7 @@ import SectionTitle from '../../../components/sectionTitle/SectionTitle';
 import { RiDeleteBin6Line } from "react-icons/ri";
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import toast from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 const MyCart = () => {
     const axiosSecure = useAxiosSecure()
     const [,refetch] = useCart()
@@ -36,7 +37,7 @@ const MyCart = () => {
                 <div className='flex justify-between items-center  p-4  font-extrabold uppercase'>
                     <h4 className=''>total Orders {cart.length}</h4>
                     total Price ${totalPrice}
-                    <button className='btn btn-error'>pay</button>
+                    <Link to={'/dashboard/payment'} className='btn btn-error'>pay</Link>
                 </div>
                 <div className="overflow-x-auto">
                     <table className="table  mt-4">

@@ -6,7 +6,8 @@ import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
 const HandleGoogleLogin = () => {
-    const { googleLogin } = useAuth()
+    const { googleLogin ,user} = useAuth()
+    console.log(user);
     const axiosPublic = useAxiosPublic()
     const navigate = useNavigate()
 
@@ -24,13 +25,15 @@ const HandleGoogleLogin = () => {
                     .then(res => {
                     })
                     .catch(err => {
-                        return toast.error('something went wrong')
+
                     })
                 navigate('/')
                 toast.success('user login successfully')
             })
             .catch((error) => {
                 const errorMessage = error.code.replace("auth/", ""); // Remove "auth/" prefix
+                console.log(errorMessage);
+                if (errorMessage == 'cancelled-popup-request') return
                 toast.error(errorMessage)
             })
     }

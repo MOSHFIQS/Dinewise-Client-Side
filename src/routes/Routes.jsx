@@ -12,6 +12,7 @@ import {
 } from "react-router-dom";
 import PrivateRoute from './PrivateRoute';
 import AddItems from '../pages/dashboard/AddItems';
+import Payment from '../pages/dashboard/payment/Payment';
 
 const router = createBrowserRouter([
   {
@@ -25,7 +26,8 @@ const router = createBrowserRouter([
   },
   {
     path: '/dashboard', element: <PrivateRoute><Dashboard /></PrivateRoute>, children: [
-      { path: 'myCart', element: <MyCart></MyCart> },
+      { path: 'myCart', element: <MyCart /> },
+      { path: 'payment', element: <Payment /> },
 
       // admin routes
       { path: 'allUsers', element: <AllUsers /> },

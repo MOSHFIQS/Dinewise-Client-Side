@@ -1,5 +1,4 @@
-'use client'
-import axios from 'axios';
+
 import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 import React, { createContext, useEffect, useState } from 'react';
 import auth from '../firebase/firebase.config';
@@ -63,7 +62,7 @@ const AuthProvider = ({ children }) => {
                 unsubscribe();
             }
         };
-    }, []);
+    }, [axiosPublic]);
 
     const authInfo = {
         user, setUser, signInUser, signUpUser, googleLogin, updateProfileInfo, logOutUser, loading, setLoading
