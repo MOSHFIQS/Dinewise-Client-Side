@@ -37,7 +37,7 @@ const MyCart = () => {
                 <div className='flex justify-between items-center  p-4  font-extrabold uppercase'>
                     <h4 className=''>total Orders {cart.length}</h4>
                     total Price ${totalPrice}
-                    <Link to={'/dashboard/payment'} className='btn btn-error'>pay</Link>
+                    <Link to={'/dashboard/payment'} disabled={!cart.length}  className='btn btn-error'>pay</Link>
                 </div>
                 <div className="overflow-x-auto">
                     <table className="table  mt-4">
