@@ -70,7 +70,7 @@ const SignUp = () => {
                                 className="mt-1 w-full p-3 bg-white border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
                                 placeholder="Type here"
                             />
-                            {errors.name && <span className="text-red-500 text-sm">নাম আবশ্যক</span>}
+                            {errors.name && <span className="text-red-500 text-sm">Name must neded</span>}
                         </div>
                         <div>
                             <label htmlFor="email" className="block text-sm font-medium text-gray-600">

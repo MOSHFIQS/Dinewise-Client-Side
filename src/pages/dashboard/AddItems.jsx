@@ -11,11 +11,12 @@ import { toast } from 'react-hot-toast';
 const image_Hosting_api = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMAGE_HOSTING_KEY}`;
 
 const AddItems = () => {
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit } = useForm();
   const axiosPublic = useAxiosPublic()
   const axiosSecure = useAxiosSecure()
 
   const onSubmit = async (data) => {
+    console.log(data);
     const imageFile = { image: data.image[0] }
     const res = await axiosPublic.post(image_Hosting_api, imageFile, {
       headers: {
@@ -115,6 +116,7 @@ const AddItems = () => {
               type="file"
               className="file-input w-full max-w-xs"
             />
+            
           </div>
 
           <button className="btn">

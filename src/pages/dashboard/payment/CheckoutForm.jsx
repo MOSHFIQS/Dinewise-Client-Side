@@ -51,7 +51,7 @@ const CheckoutForm = () => {
             setProcessing(false);
             return;
         }
-        else{
+        else {
             console.log(paymentMethod);
         }
 
@@ -70,16 +70,19 @@ const CheckoutForm = () => {
         } else if (paymentIntent.status === 'succeeded') {
             setSuccessMessage('🎉 Payment successful!');
 
-            // Optional: save payment record to DB
-            /*
-            await axiosSecure.post('/payments', {
+            const payment = {
                 email: user.email,
                 amount: price,
-                transactionId: paymentIntent.id,
-                cartItems: cart.map(item => item._id),
                 date: new Date(),
-            });
-            */
+                cartIds: cart.map(item => item._id),
+                menuIds:cart.map(item => item.menuId),
+                status:'pending',
+                transactionId:paymentIntent.id
+            }
+            console.log(payment);
+
+            const res = await axiosSecure.post('/payment',payment)
+            console.log(res);
         }
 
         setProcessing(false);
