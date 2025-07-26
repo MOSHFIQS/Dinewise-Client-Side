@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination } from 'swiper/modules';
+import { Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import SectionTitle from '../../../components/sectionTitle/SectionTitle';
@@ -11,13 +11,13 @@ const Order = () => {
             <Swiper
                 spaceBetween={20}
                 pagination={{ clickable: true }}
-                modules={[Pagination]}
+                modules={[Pagination, Autoplay]}
                 loop={true}
                 autoplay={{ delay: 3000, disableOnInteraction: false }}
                 className="w-full"
                 breakpoints={{
-                    280: { slidesPerView: 2 },
-                    480: { slidesPerView: 3 },
+                    280: { slidesPerView: 1 },
+                    480: { slidesPerView: 2 },
                     768: { slidesPerView: 3 },
                     1024: { slidesPerView: 4 },
                     1280: { slidesPerView: 5 },

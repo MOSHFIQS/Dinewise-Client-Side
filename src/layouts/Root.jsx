@@ -4,9 +4,11 @@ import Footer from "../components/Footer"
 
 const Root = () => {
   return (
-    <div className="flex h-screen w-full items-center flex-col justify-between">
+    <div className="flex flex-col justify-between">
       <Navbar />
-      <Outlet />
+      <div className="max-w-full overflow-x-hidden">
+        <Outlet />
+      </div>
       <Footer />
     </div>
   )

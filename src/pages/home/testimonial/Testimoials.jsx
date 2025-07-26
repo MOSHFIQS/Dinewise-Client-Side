@@ -28,12 +28,13 @@ const Testimonials = () => {
                 spaceBetween={20}
                 pagination={{ clickable: true }}
                 navigation={true}
-                loop={reviews.length > 1}  // 🔥 Safely loop only when enough slides
                 autoplay={{ delay: 4000, disableOnInteraction: false }}
                 modules={[Pagination, Navigation, Autoplay]}
                 className="w-full"
                 breakpoints={{
                     280: { slidesPerView: 1 },
+                    768: { slidesPerView: 1 },
+                    1024: { slidesPerView: 1 },
                 }}
             >
 
