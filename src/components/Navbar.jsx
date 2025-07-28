@@ -15,10 +15,10 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar  md:text-white bg-black/55 md:border-b-4 shadow-sm uppercase fixed z-20 backdrop-blur-md ">
+    <div className="navbar  md:text-white bg-white md:bg-black/25 md:border-b-4   fixed z-20 backdrop-blur-lg  uppercase">
       <div className="navbar-start">
         <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+          <div tabIndex={0} role="button" className="p-2 lg:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -37,9 +37,9 @@ const Navbar = () => {
           </div>
           <div
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+            className="menu menu-sm dropdown-content bg-base-100 w-screen -left-2 z-1 mt-3  p- space-y-3 border-y "
           >
-            <NavLink>Home </NavLink>
+            <NavLink>Homes </NavLink>
             <NavLink to={'/contactUs'}>Contact Us</NavLink>
             <NavLink to={"/dashboard"}>Dashboard</NavLink>
             <NavLink to={"/menu"}>Our Menu</NavLink>
@@ -56,13 +56,13 @@ const Navbar = () => {
               <button onClick={handleLogout}>SignOUt</button>
             ) : (
               <>
-                <NavLink to={"login"}>Sign In</NavLink>
-                <NavLink to={"/signup"}>Sign Up</NavLink>
+                <NavLink to={"login"} >Sign In</NavLink>
+                <NavLink to={"/signup"} >Sign Up</NavLink>
               </>
             )}
           </div>
         </div>
-        <a className="btn btn-ghost text-xl">Bistro</a>
+        <a className=" text-xl">Bistro boss</a>
       </div>
       <div className=" "></div>
       <div className="navbar-end hidden lg:flex w-full">
@@ -80,7 +80,7 @@ const Navbar = () => {
           </NavLink>
 
           {user ? (
-            <button onClick={handleLogout}>SignOUt</button>
+            <button onClick={handleLogout} className="uppercase">SignOUt</button>
           ) : (
             <>
               <NavLink to={"login"}>Sign In</NavLink>
