@@ -17,12 +17,12 @@ const Featured = () => {
             <div className="relative z-10">
                 <SectionTitle subHeading="check it out" Heading="Featured Item" />
 
-                <div className="md:flex justify-center items-center bg-black/70  p-6 text-justify lg:max-w-[80vw] container  mx-auto">
-                    <div className="md:w-1/2">
+                <div className="md:flex justify-center items-center bg-black/80  p-6 text-justify lg:max-w-[80vw] container  mx-auto">
+                    <div className="md:w-1/2 overflow-hidden">
                         <img
                             src="/home/featured.jpg"
                             alt="Featured"
-                            className=" shadow-lg"
+                            className=" border hover:scale-105 duration-500"
                         />
                     </div>
 

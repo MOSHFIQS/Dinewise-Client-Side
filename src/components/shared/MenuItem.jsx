@@ -2,41 +2,56 @@ import React, { useEffect, useState } from 'react';
 import SectionTitle from './../sectionTitle/SectionTitle';
 import Cover from './Cover';
 
-
-
-
 const MenuItem = ({ category, Heading, subHeading, coverHeading, coverSubHeading, img, tabName }) => {
-    const [menu, setMenu] = useState([])
+    const [menu, setMenu] = useState([]);
+
     useEffect(() => {
         fetch(`${import.meta.env.VITE_BASE_URL}/menu`)
             .then(res => res.json())
             .then(data => {
-                console.log(data)
-                const specificItems = data.filter(item => item.category == category)
-                setMenu(specificItems)
-            })
-    }, [])
+                const specificItems = data.filter(item => item.category === category);
+                setMenu(specificItems);
+            });
+    }, [category]);
 
     return (
-        <div className='uppercase flex  gap-5  items-center text-gray-600 flex-col w-full'>
-            <Cover coverHeading={coverHeading} coverSubHeading={coverSubHeading} img={img} tabName={tabName}></Cover>
-            {
-                !(Heading && subHeading) == '' && < SectionTitle Heading={Heading} subHeading={subHeading}></SectionTitle>
-            }
-            <div className='grid  lg:grid-cols-2 w-full gap-5 '>
-                {
-                    menu.map((item, idx) => <div key={idx} className='border flex items-center  p-4 gap-4'>
-                        <img style={{ borderRadius: '0 200px 200px 200px' }} src={item.image} className='w-24 h-24 object-cover' alt="" />
-                        <div className='space-y-2'>
-                            <h3 className='font-bold'>{item.name}-------------</h3>
-                            <h3>{item.recipe}</h3>
-                            <h3>{item.price}</h3>
+        <div className="flex flex-col items-center w-full gap-10">
+            <Cover
+                coverHeading={coverHeading}
+                coverSubHeading={coverSubHeading}
+                img={img}
+                tabName={tabName}
+            />
+
+            {(Heading || subHeading) && (
+                <SectionTitle Heading={Heading} subHeading={subHeading} />
+            )}
+
+            <div className="grid gap-6 w-full sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-4">
+                {menu.map((item, idx) => (
+                    <div
+                        key={idx}
+                        className="bg-white rounded border border-gray-300 overflow-hidden hover:shadow transition-shadow duration-300 flex flex-col sm:flex-row items-start p-4 gap-4 "
+                    >
+                        <img
+                            src={item.image}
+                            alt={item.name}
+                            className="w-28 h-28 object-cover rounded-full border-2 border-black hover:scale-105 duration-200"
+                        />
+                        <div className="flex flex-col justify-between space-y-2">
+                            <div>
+                                <h3 className="text-xl font-semibold text-gray-800">
+                                    {item.name}
+                                </h3>
+                                <p className="text-gray-500 text-sm">{item.recipe}</p>
+                            </div>
+                            <div className="text-orange-500 font-bold text-lg">
+                                ${item.price}
+                            </div>
                         </div>
                     </div>
-                    )
-                }
+                ))}
             </div>
-
         </div>
     );
 };

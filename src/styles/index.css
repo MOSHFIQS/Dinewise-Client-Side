@@ -7,3 +7,10 @@
     border-bottom: 4px solid tomato;
     outline: none;
 }
+
+.active {
+    font-weight: 800;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-transform: uppercase;
+    color: #ff8888;
+}

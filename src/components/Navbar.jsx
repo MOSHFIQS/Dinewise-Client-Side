@@ -40,7 +40,7 @@ const Navbar = () => {
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
           >
             <NavLink>Home </NavLink>
-            <NavLink>Contact Us</NavLink>
+            <NavLink to={'/contactUs'}>Contact Us</NavLink>
             <NavLink to={"/dashboard"}>Dashboard</NavLink>
             <NavLink to={"/menu"}>Our Menu</NavLink>
             <NavLink to={"/ourShop"}>Our Shop</NavLink>
@@ -49,7 +49,7 @@ const Navbar = () => {
               <span className="indicator-item badge-sm text-rose-400 font-extrabold ">
                 {cart.length}
               </span>
-              <button className="">my cart</button>
+              <button className="">MY CART</button>
             </div>
 
             {user ? (
@@ -67,8 +67,8 @@ const Navbar = () => {
       <div className=" "></div>
       <div className="navbar-end hidden lg:flex w-full">
         <div className="menu menu-horizontal px-1 flex-nowrap gap-5">
-          <NavLink>Home </NavLink>
-          <NavLink>Contact Us</NavLink>
+          <NavLink to={"/"}>Home </NavLink>
+          <NavLink to={'/contactUs'}>Contact Us</NavLink>
           <NavLink to={"/dashboard"}>Dashboard</NavLink>
           <NavLink to={"/menu"}>Our Menu</NavLink>
           <NavLink to={"/ourShop"}>Our Shop</NavLink>
@@ -76,7 +76,7 @@ const Navbar = () => {
             <span className="indicator-item badge-sm text-rose-400 font-extrabold ">
               {cart.length}
             </span>
-            <button className="">my cart</button>
+            <button className="">MY CART</button>
           </NavLink>
 
           {user ? (

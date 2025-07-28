@@ -6,15 +6,25 @@ const Cover = ({ coverHeading, coverSubHeading, img, tabName }) => {
         <Parallax
             bgImage={img}
             blur={{ min: -15, max: 15 }}
-            strength={-100}
-            className='w-full h-[600px] flex flex-col items-center justify-center'
+            strength={300}
+            className="w-full h-[600px] flex items-center justify-center"
         >
-
-            <div className='w-full  text-center uppercase text-gray-600  font-mono   lg:py-60 md:py-48 p-4 xl:py-72 '>
-                <div className='border max-w-5xl mx-auto p-10 bg-black/60 backdrop-blur-xl text-white space-y-4 '>
-                    <h1 className='text-5xl '>{coverHeading}</h1>
-                    <p className=''>{coverSubHeading}</p>
-                    <Link to={`/ourShop/?${tabName}`} className='btn  btn-sm border-b-4 hover:bg-black hover:text-white hover:border-black'>Find More</Link>
+            
+            <div className="w-full px-4 text-center text-white uppercase font-sans">
+                
+                <div className="max-w-4xl mx-auto bg-black/50 backdrop-blur-xl border border-white/20 rounded-xl p-10 shadow-lg space-y-6 transition-all duration-500">
+                    <h1 className="text-4xl md:text-5xl font-extrabold tracking-wider drop-shadow-md">
+                        {coverHeading}
+                    </h1>
+                    <p className="text-sm md:text-base font-light text-gray-300 tracking-widest">
+                        {coverSubHeading}
+                    </p>
+                    <Link
+                        to={`/ourShop/?${tabName}`}
+                        className="inline-block mt-4 px-6 py-2 text-sm font-semibold tracking-wide border border-white hover:bg-white hover:text-black hover:border-white transition-all duration-300 rounded-full"
+                    >
+                        Find More
+                    </Link>
                 </div>
             </div>
         </Parallax>

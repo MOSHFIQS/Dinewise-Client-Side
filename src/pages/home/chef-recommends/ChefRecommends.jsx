@@ -14,8 +14,8 @@ const ChefRecommends = () => {
             <div className='grid  sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 justify-items-center gap-4'>
                 {
                     menu.slice(6,10).map((sMenu, idx) => (
-                        <div key={idx} className='text-center border w-full '>
-                            <img src={sMenu.image} className='w-full object-cover' alt="" />
+                        <div key={idx} className='text-center border w-full overflow-hidden'>
+                            <img src={sMenu.image} className='w-full object-cover hover:scale-105 duration-300' alt="" />
                             <div className=' p-2 xl:p-4 space-y-4'>
                                 <h3 className='font-extrabold'>{sMenu.name}</h3>
                                 <h6 className='text-gray-600'>{sMenu.recipe.slice(0, 60).split('').join('')}</h6>

@@ -1,4 +1,4 @@
-import SectionTitle from '../../../components/sectionTitle/SectionTitle';
+
 import MenuItem from '../../../components/shared/MenuItem';
 
 const PopularMenu = () => {
@@ -12,7 +12,6 @@ const PopularMenu = () => {
                 Heading={'wow nice reciepe'}
                 img={'/home/featured.jpg'}
             >
-                {/* category,Heading,subHeading,coverHeading,coverSubHeading,img */}
             </MenuItem>
         </section>
     );

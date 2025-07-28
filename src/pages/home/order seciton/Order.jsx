@@ -4,14 +4,26 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import SectionTitle from '../../../components/sectionTitle/SectionTitle';
 
+const categories = [
+    { img: '/home/slide1.jpg', title: 'Salads' },
+    { img: '/home/slide2.jpg', title: 'Soups' },
+    { img: '/home/slide3.jpg', title: 'Pizzas' },
+    { img: '/home/slide4.jpg', title: 'Desserts' },
+    { img: '/home/slide5.jpg', title: 'Drinks' },
+    { img: '/home/slide4.jpg', title: 'Specials' },
+];
+
 const Order = () => {
     return (
-        <div className="w-full  overflow-hidden">
-            <SectionTitle subHeading={'---From 11:00am to 10:00pm---'} Heading={'order online'}> </SectionTitle>
+        <div className="w-full overflow-hidden py-10">
+            <SectionTitle
+                subHeading="--- From 11:00am to 10:00pm ---"
+                Heading="Order Online"
+            />
             <Swiper
                 spaceBetween={20}
                 pagination={{ clickable: true }}
-                modules={[Pagination, Autoplay]}
+                modules={[ Autoplay]}
                 loop={true}
                 autoplay={{ delay: 3000, disableOnInteraction: false }}
                 className="w-full"
@@ -23,30 +35,22 @@ const Order = () => {
                     1280: { slidesPerView: 5 },
                 }}
             >
-                <SwiperSlide>
-                    <img src="/home/slide1.jpg" alt="Slide 1" className="w-full sm:h-auto object-contain h-60   rounded" />
-                    <h3 className="text-4xl uppercase text-center -mt-16 text-white">Salads</h3>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src="/home/slide4.jpg" alt="Slide 2" className="w-full sm:h-auto object-contain h-60   rounded" />
-                     <h3 className="text-4xl uppercase text-center -mt-16 text-white">Salads</h3>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src="/home/slide3.jpg" alt="Slide 3" className="w-full sm:h-auto object-contain h-60   rounded" />
-                     <h3 className="text-4xl uppercase text-center -mt-16 text-white">Salads</h3>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src="/home/slide4.jpg" alt="Slide 4" className="w-full sm:h-auto object-contain h-60   rounded" />
-                     <h3 className="text-4xl uppercase text-center -mt-16 text-white">Salads</h3>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src="/home/slide5.jpg" alt="Slide 5" className="w-full sm:h-auto object-contain h-60   rounded" />
-                     <h3 className="text-4xl uppercase text-center -mt-16 text-white">Salads</h3>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src="/home/slide2.jpg" alt="Slide 5" className="w-full sm:h-auto object-contain h-60   rounded" />
-                     <h3 className="text-4xl uppercase text-center -mt-16 text-white">Salads</h3>
-                </SwiperSlide>
+                {categories.map((item, index) => (
+                    <SwiperSlide key={index}>
+                        <div className="relative group">
+                            <img
+                                src={item.img}
+                                alt={item.title}
+                                className="w-full h-60 sm:h-72 md:h-80 object-cover rounded-lg transition-transform duration-300 group-hover:scale-105"
+                            />
+                            <div className="absolute bottom-0 w-full bg-black bg-opacity-60 py-4 transition-transform duration-300 group-hover:scale-105">
+                                <h3 className="text-white text-xl md:text-2xl font-bold uppercase text-center tracking-wide">
+                                    {item.title}
+                                </h3>
+                            </div>
+                        </div>
+                    </SwiperSlide>
+                ))}
             </Swiper>
         </div>
     );
