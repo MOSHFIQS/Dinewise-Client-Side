@@ -12,8 +12,8 @@ const Menu = () => {
                 Heading={'Todays Offer'}
                 subHeading={`---don't miss---`}
                 category={'popular'}
-                coverHeading={'OurMenu'}
-                coverSubHeading={'would you like to try a dish ?'}
+                coverHeading={'Our Menu'}
+                coverSubHeading={'Discover today’s special offers, crafted fresh with love and packed with irresistible flavor just for you to enjoy.'}
                 className={'w-full'}
             />
             <MenuItem
@@ -21,7 +21,7 @@ const Menu = () => {
                 category={'dessert'}
                 tabName={'dessert'}
                 coverHeading={'Desserts'}
-                coverSubHeading={`Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.`}
+                coverSubHeading={`Treat yourself to our delicious desserts, made with rich ingredients to satisfy every sweet craving you have today.`}
                 className={'w-full'}
             />
             <MenuItem
@@ -29,7 +29,7 @@ const Menu = () => {
                 category={'pizza'}
                 tabName={'pizza'}
                 coverHeading={'PIZZA'}
-                coverSubHeading={`Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.`}
+                coverSubHeading={`Enjoy our mouthwatering pizzas topped with premium ingredients, baked to perfection in a traditional stone-fired oven.`}
                 className={'w-full'}
             />
             <MenuItem
@@ -37,7 +37,7 @@ const Menu = () => {
                 category={'salad'}
                 tabName={'salad'}
                 coverHeading={'SALAD'}
-                coverSubHeading={`Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.`}
+                coverSubHeading={`Refresh your senses with our healthy, vibrant salads made from the freshest greens and seasonal vegetables every day.`}
                 className={'w-full'}
             />
             <MenuItem
@@ -45,7 +45,7 @@ const Menu = () => {
                 category={'soup'}
                 tabName={'soup'}
                 coverHeading={'SOUP'}
-                coverSubHeading={'Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'}
+                coverSubHeading={`Savor the warmth and comfort of our flavorful soups, slow-cooked to bring out rich, authentic taste in every bowl.`}
                 className={'w-full'}
             />
             <MenuItem
@@ -53,12 +53,9 @@ const Menu = () => {
                 category={'drinks'}
                 tabName={'drinks'}
                 coverHeading={'DRINKS'}
-                coverSubHeading={'Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'}
+                coverSubHeading={`Quench your thirst with our refreshing selection of drinks, from icy coolers to handcrafted specialty beverages and more.`}
                 className={'w-full'}
             />
-
-
-
         </div>
     );
 };

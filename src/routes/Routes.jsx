@@ -14,10 +14,11 @@ import PrivateRoute from './PrivateRoute';
 import AddItems from '../pages/dashboard/AddItems';
 import Payment from '../pages/dashboard/payment/Payment';
 import AllPayments from '../pages/dashboard/allPayments/AllPayments';
+import ErrorPage from '../components/ErrrorPage';
 
 const router = createBrowserRouter([
   {
-    path: "/", element: <Root />, children: [
+    path: "/", element: <Root />, errorElement:<ErrorPage />,children: [
       { path: '/', element: <Home /> },
       { path: '/menu', element: <Menu /> },
       { path: '/ourShop', element: <OurShop /> },

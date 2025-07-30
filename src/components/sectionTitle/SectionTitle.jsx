@@ -1,25 +1,20 @@
 const SectionTitle = ({ Heading, subHeading }) => {
     return (
-        <div className="w-full text-center flex flex-col items-center justify-center pb-12 space-y-4">
+        <div className="w-full max-w-xl mx-auto text-center py-12">
+            {/* Top Accent Line */}
+            <div className="w-10 h-1 bg-yellow-500 mx-auto mb-4 rounded-full" />
 
             {/* Subheading */}
-            <p className="text-sm md:text-base text-yellow-500 tracking-wider italic">
+            <p className=" text-sm md:text-base font-bold tracking-wide uppercase mb-2">
                 {subHeading}
             </p>
 
-            {/* Line & Heading combined */}
-            <div className="relative w-fit px-6">
-                {/* Top decorative line */}
-                <div className="absolute top-1/2 left-0 w-full h-[2px] bg-gray-300 z-0"></div>
-
-                {/* Heading text with background */}
-                <h2 className="relative z-10 text-2xl md:text-4xl font-bold uppercase bg-white px-4 text-gray-800">
-                    {Heading}
-                </h2>
-            </div>
-
-            {/* Bottom Line */}
-            <div className="w-24 h-1 bg-yellow-500 rounded-full"></div>
+            {/* Heading */}
+            <h2 className="text-3xl md:text-4xl font-black uppercase  relative inline-block">
+                {Heading}
+                {/* Glowing underline */}
+                <span className="block h-[4px] w-36 bg-yellow-400 rounded-full mt-2 mx-auto shadow-lg shadow-yellow-300/50" />
+            </h2>
         </div>
     );
 };

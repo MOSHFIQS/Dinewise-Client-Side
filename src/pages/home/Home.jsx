@@ -10,13 +10,13 @@ import Testimonials from './testimonial/Testimoials'
 
 const Home = () => {
   return (
-    <div className='space-y-14 pb-14 '>
+    <div className='space-y-10 pb-10 '>
       
       <Helmet>
         <title>Bistro Boss || Home</title>
       </Helmet>
       <Banner />
-      <div className='container mx-auto space-y-14'>
+      <div className='container mx-auto space-y-10'>
         <Order />
         {/* <BistroBoss /> */}
         <PopularMenu />
