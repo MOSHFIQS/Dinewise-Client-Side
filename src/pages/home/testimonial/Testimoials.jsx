@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import ReactStars from 'react-rating-stars-component';
+import SectionTitle from '../../../components/sectionTitle/SectionTitle';
 
 const Testimonials = () => {
     const [reviews, setReviews] = useState([]);
@@ -14,12 +15,7 @@ const Testimonials = () => {
         <section className="bg-gradient-to-b from-white via-gray-50 to-white dark:from-gray-900 dark:to-gray-800 py-20 px-6">
             <div className="max-w-7xl mx-auto ">
                <div className='text-center'>
-                    <h2 className="text-4xl md:text-5xl font-extrabold text-gray-800 dark:text-white mb-4">
-                        What Our Clients Say
-                    </h2>
-                    <p className="text-gray-500 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
-                        Real stories from our satisfied customers.
-                    </p>
+                    <SectionTitle Heading={'What Our Clients Say'} subHeading={' Real stories from our satisfied customers.'}/>
                </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">

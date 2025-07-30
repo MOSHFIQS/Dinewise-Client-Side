@@ -11,19 +11,27 @@ const Banner = () => {
             className='main-slide text-center '
         >
             <div >
-                <img className='mt-[65px] md:mt-0 xl:h-[850px] xl:object-cover    ' src="/home/01.jpg" />
+                <img className='mt-[65px] md:mt-0 xl:h-[850px] xl:object-cover    ' src="/home/banner1.png" />
 
             </div>
             <div >
-                <img className='mt-[65px] md:mt-0 xl:h-[850px] xl:object-cover    ' src="/home/02.jpg" />
+                <img className='mt-[65px] md:mt-0 xl:h-[850px] xl:object-cover    ' src="/home/banner2.png" />
 
             </div>
             <div >
-                <img className='mt-[65px] md:mt-0 xl:h-[850px] xl:object-cover    ' src="/home/03.png" />
+                <img className='mt-[65px] md:mt-0 xl:h-[850px] xl:object-cover    ' src="/home/banner3.png" />
 
             </div>
             <div >
-                <img className='mt-[65px] md:mt-0 xl:h-[850px] xl:object-cover    ' src="/home/04.jpg" />
+                <img className='mt-[65px] md:mt-0 xl:h-[850px] xl:object-cover    ' src="/home/banner4.png" />
+
+            </div>
+            <div >
+                <img className='mt-[65px] md:mt-0 xl:h-[850px] xl:object-cover    ' src="/home/banner5.png" />
+
+            </div>
+            <div >
+                <img className='mt-[65px] md:mt-0 xl:h-[850px] xl:object-cover    ' src="/home/banner6.png" />
 
             </div>
         </Carousel>

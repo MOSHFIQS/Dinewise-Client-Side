@@ -8,7 +8,7 @@ const Menu = () => {
                 <title>Bistro Boss || Menu</title>
             </Helmet>
             <MenuItem
-                img={'/menu/banner3.jpg'}
+                img={'/menu/mainBanner.png'}
                 Heading={'Todays Offer'}
                 subHeading={`---don't miss---`}
                 category={'popular'}
@@ -49,7 +49,7 @@ const Menu = () => {
                 className={'w-full'}
             />
             <MenuItem
-                img={'/public/menu/soup-bg.jpg'}
+                img={'/public/menu/drinks-bg.jpg'}
                 category={'drinks'}
                 tabName={'drinks'}
                 coverHeading={'DRINKS'}
