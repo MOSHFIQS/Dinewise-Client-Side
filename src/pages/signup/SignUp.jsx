@@ -3,129 +3,118 @@ import { FaFacebookF, FaGithub } from 'react-icons/fa';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../providers/AuthProvider';
 import { toast } from 'react-hot-toast';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useAxiosPublic from '../../hooks/useAxiosPublic';
 import HandleGoogleLogin from '../../components/shared/HandleGoogleLogin';
 
 const SignUp = () => {
-    const { signUpUser, googleLogin } = useContext(AuthContext)
-    const { register, handleSubmit, watch, formState: { errors }, } = useForm()
-    const navigate = useNavigate()
-    const axiosPublic = useAxiosPublic()
-    const location = useLocation()
-    const from = location?.state?.from?.pathname || '/'
+    const { signUpUser } = useContext(AuthContext);
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const navigate = useNavigate();
+    const axiosPublic = useAxiosPublic();
+    const location = useLocation();
+    const from = location?.state?.from?.pathname || '/';
 
     const onSubmit = (data) => {
-        // console.log(data)
-        const { name, email, password } = data
-        const userInfo = {
-            name: name, email: email, password: password,type:'email and password'
-        }
-        console.log(name, email, password)
+        const { name, email, password } = data;
+        const userInfo = { name, email, password, type: 'email and password' };
+
         signUpUser(email, password)
-            .then(result => {
-                axiosPublic.post('/user', userInfo)
-                    .then(res => {
-                        toast.success('signUp successful')
-                        navigate(from)
-                    })
-            }).catch((error) => {
-                const errorMessage = error.code.replace("auth/", ""); // Remove "auth/" prefix
-                toast.error(errorMessage)
+            .then(() => {
+                axiosPublic.post('/user', userInfo).then(() => {
+                    toast.success('Sign up successful');
+                    navigate(from);
+                });
             })
-    }
-
-
-
-
-
+            .catch((error) => {
+                const errorMessage = error.code.replace('auth/', '');
+                toast.error(errorMessage);
+            });
+    };
 
     return (
         <div
-            style={{ backgroundImage: `url('/others/authentication.png')` }}
-            className="min-h-screen flex items-center justify-center bg-gray-100 w-full bg-cover bg-center "
+            style={{ backgroundImage: `url('/others/authentication.jpg')` }}
+            className="min-h-screen flex items-center justify-center bg-cover bg-center px-4 relative"
         >
-            <div className="flex w-full flex-row-reverse container bg-transparent border-gray-300 border shadow-lg overflow-hidden">
-                {/* Left Side - Illustration */}
-                <div className="hidden lg:flex lg:w-1/2 items-center justify-center p-8">
-                    <img
-                        src="/others/authentication2.png" // Adjusted path for Vite/React
-                        alt="Illustration"
-                        className="max-w-full h-auto"
-                    />
-                </div>
+            {/* Dark overlay */}
+            <div className="absolute inset-0 bg-black/60 z-0"></div>
 
-                {/* Right Side - Login Form */}
-                <div className="w-full lg:w-1/2 p-8">
-                    <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">SignUp</h2>
-                    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-                        <div>
-                            <label htmlFor="name" className="block text-sm font-medium text-gray-600">
-                                name
-                            </label>
-                            <input
-                                type="text"
+            {/* SignUp form container */}
+            <div className="relative z-10 w-full max-w-[80vw] bg-black/50 p-8 backdrop-blur-md text-red-400 shadow rounded-md border border-white">
+                <h2 className="text-3xl font-bold text-center mb-6">Sign Up</h2>
 
-                                {...register("name", { required: "insert a name" })}
-                                className="mt-1 w-full p-3 bg-white border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
-                                placeholder="Type here"
-                            />
-                            {errors.name && <span className="text-red-500 text-sm">Name must neded</span>}
-                        </div>
-                        <div>
-                            <label htmlFor="email" className="block text-sm font-medium text-gray-600">
-                                Email
-                            </label>
-                            <input
-                                type="email"
-
-                                {...register("email", { required: true })}
-                                className="mt-1 w-full p-3 bg-white border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
-                                placeholder="Type here"
-                            />
-                        </div>
-
-                        <div>
-                            <label htmlFor="password" className="block text-sm font-medium text-gray-600">
-                                Password
-                            </label>
-                            <input
-                                type="password"
-
-                                {...register("password", { required: true })}
-                                className="mt-1 w-full p-3 bg-white border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
-                                placeholder="Enter your password"
-                            />
-                        </div>
-
-
-                        <button
-                            type="submit"
-                            className="w-full py-3 bg-gradient-to-r from-orange-400 to-orange-300 text-white font-bold rounded-lg hover:from-orange-500 hover:to-orange-400 transition-all"
-                        >
-                            Sign Up
-                        </button>
-
-                        <p className="text-center text-sm text-gray-600">
-                            New here?{' '}
-                            <a href="#" className="text-orange-500 font-semibold hover:underline">
-                                Create a New Account
-                            </a>
-                        </p>
-                    </form>
-                    <div className="flex items-center justify-center space-x-4 pt-4">
-                        <button className="bg-gray-100 border p-3 rounded-full hover:shadow">
-                            <FaFacebookF className="text-gray-600 text-lg" />
-                        </button>
-                        <HandleGoogleLogin />
-                        <button className="bg-gray-100 border p-3 rounded-full hover:shadow">
-                            <FaGithub className="text-gray-600 text-lg" />
-                        </button>
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                    {/* Name field */}
+                    <div>
+                        <label htmlFor="name" className="block text-sm font-semibold">
+                            Name
+                        </label>
+                        <input
+                            type="text"
+                            {...register("name", { required: "Name is required" })}
+                            className="w-full px-4 py-2 border text-white rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                            placeholder="Your name"
+                        />
+                        {errors.name && <p className="text-sm text-red-400 mt-1">{errors.name.message}</p>}
                     </div>
+
+                    {/* Email field */}
+                    <div>
+                        <label htmlFor="email" className="block text-sm font-semibold">
+                            Email
+                        </label>
+                        <input
+                            type="email"
+                            {...register("email", { required: "Email is required" })}
+                            className="w-full px-4 py-2 border text-white rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                            placeholder="you@example.com"
+                        />
+                        {errors.email && <p className="text-sm text-red-400 mt-1">{errors.email.message}</p>}
+                    </div>
+
+                    {/* Password field */}
+                    <div>
+                        <label htmlFor="password" className="block text-sm font-semibold">
+                            Password
+                        </label>
+                        <input
+                            type="password"
+                            {...register("password", { required: "Password is required" })}
+                            className="w-full px-4 py-2 border text-white rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                            placeholder="••••••••"
+                        />
+                        {errors.password && <p className="text-sm text-red-400 mt-1">{errors.password.message}</p>}
+                    </div>
+
+                    <button
+                        type="submit"
+                        className="w-full py-2 rounded-md font-semibold bg-indigo-600 hover:bg-indigo-700 transition text-white"
+                    >
+                        Sign Up
+                    </button>
+
+                    <p className="text-center text-sm text-white/70 mt-2">
+                        Already have an account?{' '}
+                        <Link to="/login" className="text-amber-400 font-semibold hover:underline">
+                            Login
+                        </Link>
+                    </p>
+                </form>
+
+                <div className="flex justify-center items-center gap-4 pt-6">
+                    <button className="p-3 bg-white border rounded-full hover:shadow-md transition cursor-pointer">
+                        <FaFacebookF className="text-blue-600 text-lg" />
+                    </button>
+                    <HandleGoogleLogin />
+                    <button className="p-3 bg-white border rounded-full hover:shadow-md transition cursor-pointer">
+                        <FaGithub className="text-gray-800 text-lg" />
+                    </button>
                 </div>
             </div>
         </div>
     );
-};
+    }
+
 
 export default SignUp;

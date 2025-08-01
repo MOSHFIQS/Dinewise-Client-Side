@@ -38,7 +38,7 @@ const HandleGoogleLogin = () => {
             })
     }
     return (
-        <button className="bg-gray-100 border p-3 rounded-full hover:shadow">
+        <button className="bg-gray-100 border p-3 rounded-full hover:shadow cursor-pointer">
             <FaGoogle onClick={handleGoogle} className="text-gray-600 text-lg" />
         </button>
     );
