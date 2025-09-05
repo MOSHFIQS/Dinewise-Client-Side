@@ -41,7 +41,7 @@ const OrderPanel = ({ items }) => {
 
     
     return (
-        <div className=" max-w-[85vw] mx-auto grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center gap-4 p-4">
+        <div className=" max-w-full lg:max-w-[90vw] mx-auto grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center gap-4 p-1 lg:p-4">
             {items.map((sMenu, idx) => (
                 <div key={idx} className="relative text-center border w-full">
                     <img src={sMenu.image} className="w-full h-48 object-cover" alt={sMenu.name} />

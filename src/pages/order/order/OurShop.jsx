@@ -49,7 +49,7 @@ const OurShop = () => {
             />
 
             <Tabs selectedIndex={tabIndex} onSelect={handleTabSelect}>
-                <TabList className="flex gap-4 w-full justify-center py-10 text-2xl font-extrabold" >
+                <TabList className="flex gap-2 w-full justify-center flex-wrap  py-10 text-2xl font-extrabold" >
                     <Tab className={'btn btn-ghost'}>SALAD</Tab>
                     <Tab className={'btn btn-ghost'}>PIZZA</Tab>
                     <Tab className={'btn btn-ghost'}>SOUP</Tab>
