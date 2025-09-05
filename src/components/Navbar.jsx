@@ -15,13 +15,20 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar  md:text-white bg-white md:bg-black/25 md:border-b-4   fixed z-20 backdrop-blur-lg  uppercase px-2 lg:px-10">
-      <div className="navbar-start">
+    <div className="navbar  md:text-white bg-white md:bg-black/25 md:border-b-4   fixed z-20 backdrop-blur-lg  uppercase px-4 lg:px-10">
+      <div className="navbar-start justify-between w-full">
+
+        <div className="flex items-center justify-center gap-4 ">
+          <img src="/logo.png" className="h-8 lg:h-10 w-auto " alt="" />
+          <a className=" text-xl font-extrabold ">Dinewise</a>
+        </div>
+
+
         <div className="dropdown">
           <div tabIndex={0} role="button" className="p-2 lg:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
+              className="h-7 w-7 "
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -37,7 +44,7 @@ const Navbar = () => {
           </div>
           <div
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 w-screen -left-2 z-1 mt-3  p- space-y-3 border-y "
+            className="menu menu-sm dropdown-content bg-base-100 w-screen -right-5  px-8 z-1 mt-2  p- space-y-3 border-y font-extrabold  "
           >
             <NavLink>Homes </NavLink>
             <NavLink to={'/contactUs'}>Contact Us</NavLink>
@@ -62,7 +69,6 @@ const Navbar = () => {
             )}
           </div>
         </div>
-        <a className=" text-xl font-extrabold ">Dinewise</a>
       </div>
       <div className=" "></div>
       <div className="navbar-end hidden lg:flex w-full">
