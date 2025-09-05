@@ -8,7 +8,7 @@ import useCart from '../../hooks/useCart';
 
 const OrderPanel = ({ items }) => {
     const { user } = useAuth()
-    console.log(user)
+    // console.log(user)
     const [, refetch] = useCart()
     const axiosSecure = useAxiosSecure()
     const navigate = useNavigate()
@@ -18,7 +18,7 @@ const OrderPanel = ({ items }) => {
         if (!user) {
            return navigate('/login', { state: { from: location } })
         }
-        console.log(orderedMenu)
+        // console.log(orderedMenu)
         const orderDetails = {
             menuId: orderedMenu._id,
             name: orderedMenu.name,
@@ -28,7 +28,7 @@ const OrderPanel = ({ items }) => {
             price: orderedMenu.price,
             category: orderedMenu.category
         }
-        console.log(orderDetails)
+        // console.log(orderDetails)
         axiosSecure.post('/cart', orderDetails)
             .then(res => {
                 toast.success('order successful')

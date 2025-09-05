@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 const HandleGoogleLogin = () => {
     const { googleLogin ,user} = useAuth()
-    console.log(user);
+    // console.log(user);
     const axiosPublic = useAxiosPublic()
     const navigate = useNavigate()
 
@@ -20,7 +20,7 @@ const HandleGoogleLogin = () => {
                     email: result?.user?.email,
                     type: 'google'
                 }
-                console.log(userInfo)
+                // console.log(userInfo)
                 axiosPublic.post('/user', userInfo)
                     .then(res => {
                     })
@@ -32,7 +32,7 @@ const HandleGoogleLogin = () => {
             })
             .catch((error) => {
                 const errorMessage = error.code.replace("auth/", ""); // Remove "auth/" prefix
-                console.log(errorMessage);
+                console.error(errorMessage);
                 if (errorMessage == 'cancelled-popup-request') return
                 toast.error(errorMessage)
             })

@@ -16,14 +16,14 @@ const AddItems = () => {
   const axiosSecure = useAxiosSecure()
 
   const onSubmit = async (data) => {
-    console.log(data);
+    // console.log(data);
     const imageFile = { image: data.image[0] }
     const res = await axiosPublic.post(image_Hosting_api, imageFile, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
     })
-    console.log(res.data)
+    // console.log(res.data)
     if (res.data.success) {
       const menuItem = {
         name: data.name,

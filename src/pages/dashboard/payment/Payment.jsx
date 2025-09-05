@@ -5,7 +5,7 @@ import CheckoutForm from './CheckoutForm';
 
 const stripePromise = loadStripe(`pk_test_51RZQDLH5jCA2htFKSiutvVQh97UxtEU7rz2Cl2n2iUnEHA6AMvEZJDtOhcVg6WTyw3hDb8bXTPaKofQgtGPAxavL00OJsNyv6X`);
 // const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_GATEWAY_KEY);
-console.log(import.meta.env.VITE_PAYMENT_GATEWAY_KEY);
+// console.log(import.meta.env.VITE_PAYMENT_GATEWAY_KEY);
 
 const Payment = () => {
     return (

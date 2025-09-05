@@ -18,7 +18,7 @@ const AllUsers = () => {
 
 
     const handleDeleteUsers = (id) => {
-        console.log(id)
+        // console.log(id)
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -32,14 +32,14 @@ const AllUsers = () => {
 
                 axiosSecure.delete(`users/admin/${id}`)
                     .then(res => {
-                        console.log(res)
-                        // if (res.data.deletedCount > 0) {
-                        // Swal.fire({
-                        //     title: "User Deleted Successfully",
-                        //     text: "🥳🥳🥳🥳🥳🥳🥳",
-                        //     icon: "success"
-                        // });
-                        // }
+                        // console.log(res)
+                        if (res.data.deletedCount > 0) {
+                        Swal.fire({
+                            title: "User Deleted Successfully",
+                            text: "🥳🥳🥳🥳🥳🥳🥳",
+                            icon: "success"
+                        });
+                        }
                         refetch()
                     })
                     .catch(err => {

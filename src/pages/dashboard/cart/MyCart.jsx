@@ -10,7 +10,7 @@ const MyCart = () => {
     const [,refetch] = useCart()
 
     const [cart] = useCart()
-    console.log(cart)
+    // console.log(cart)
     const totalPrice = cart.reduce((acc, curr) => {
         return acc + curr.price
     }, 0)
@@ -18,7 +18,7 @@ const MyCart = () => {
 
 
     const handleDeleteCart = (id) => {
-        console.log(id)
+        // console.log(id)
         axiosSecure.delete(`/cart/${id}`)
         .then(res => {
             toast.success('order delete successfully')
@@ -28,8 +28,8 @@ const MyCart = () => {
     }
 
 
+    // console.log(totalPrice)
 
-    console.log(totalPrice)
     return (
         <div className={'max-w-[75vw] mx-auto '} >
             <SectionTitle Heading={'Wanna Add More'} subHeading={'----My cart----'} />

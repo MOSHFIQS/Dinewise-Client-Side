@@ -52,7 +52,7 @@ const CheckoutForm = () => {
             return;
         }
         else {
-            console.log(paymentMethod);
+            // console.log(paymentMethod);
         }
 
         const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(clientSecret, {
@@ -79,10 +79,9 @@ const CheckoutForm = () => {
                 status:'pending',
                 transactionId:paymentIntent.id
             }
-            console.log(payment);
+            // console.log(payment);
 
-            const res = await axiosSecure.post('/payment',payment)
-            console.log(res);
+            await axiosSecure.post('/payment',payment)
         }
 
         setProcessing(false);
