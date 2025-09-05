@@ -6,7 +6,7 @@ const PopularMenu = () => {
         <section>
             <MenuItem
                 category={"offered"}
-                coverHeading={'BISTRO BOSS'}
+                coverHeading={'Dinewise'}
                 coverSubHeading={'Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus, libero accusamus laborum deserunt ratione dolor officiis praesentium! Deserunt magni aperiam dolor eius dolore at, nihil iusto ducimus incidunt quibusdam nemo.'}
                 subHeading={'hello this is very good'}
                 Heading={'wow nice reciepe'}

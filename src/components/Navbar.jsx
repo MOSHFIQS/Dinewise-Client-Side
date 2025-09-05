@@ -15,7 +15,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar  md:text-white bg-white md:bg-black/25 md:border-b-4   fixed z-20 backdrop-blur-lg  uppercase">
+    <div className="navbar  md:text-white bg-white md:bg-black/25 md:border-b-4   fixed z-20 backdrop-blur-lg  uppercase px-2 lg:px-10">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="p-2 lg:hidden">
@@ -62,7 +62,7 @@ const Navbar = () => {
             )}
           </div>
         </div>
-        <a className=" text-xl">Bistro boss</a>
+        <a className=" text-xl font-extrabold ">Dinewise</a>
       </div>
       <div className=" "></div>
       <div className="navbar-end hidden lg:flex w-full">

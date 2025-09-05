@@ -16,7 +16,7 @@ const Dashboard = () => {
 
             {/* Topbar (Mobile only) */}
             <div className="lg:hidden flex items-center justify-between bg-gray-800 text-white px-4 py-3 shadow-md z-20">
-                <h1 className="text-xl font-bold">Bistro Boss</h1>
+                <h1 className="text-xl font-bold">Dinewise</h1>
                 <button onClick={toggleSidebar}>
                     {isSidebarOpen ? <IoClose size={24} /> : <FaBars size={24} />}
                 </button>
@@ -27,7 +27,7 @@ const Dashboard = () => {
                 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}
                 lg:translate-x-0 lg:static lg:block`}>
 
-                <h1 className="text-xl font-mono mb-6 mt-4 lg:mt-0">Bistro Boss<br />Restaurant</h1>
+                <h1 className="text-xl font-mono mb-6 mt-4 lg:mt-0">Dinewise<br />Restaurant</h1>
 
                 <ul className="space-y-4 text-lg font-medium">
                     {isAdmin ? (

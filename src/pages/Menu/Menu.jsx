@@ -5,7 +5,7 @@ const Menu = () => {
     return (
         <div className='w-full space-y-14 mb-14 '>
             <Helmet>
-                <title>Bistro Boss || Menu</title>
+                <title>Dinewise || Menu</title>
             </Helmet>
             <MenuItem
                 img={'/menu/mainBanner.png'}
