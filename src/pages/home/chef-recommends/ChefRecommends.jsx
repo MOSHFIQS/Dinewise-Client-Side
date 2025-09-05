@@ -11,7 +11,7 @@ const ChefRecommends = () => {
     return (
         <div className=' '>
             <SectionTitle subHeading={'---Should Try---'} Heading={'Chef Recommends'}></SectionTitle>
-            <div className='grid  sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 justify-items-center gap-4'>
+            <div className='grid  sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 justify-items-center gap-4 p-1'>
                 {
                     menu.slice(6,10).map((sMenu, idx) => (
                         <div key={idx} className='text-center border w-full overflow-hidden'>

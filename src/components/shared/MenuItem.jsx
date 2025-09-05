@@ -27,7 +27,7 @@ const MenuItem = ({ category, Heading, subHeading, coverHeading, coverSubHeading
                 <SectionTitle Heading={Heading} subHeading={subHeading} />
             )}
 
-            <div className="grid gap-6 w-full sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-4">
+            <div className="grid gap-6 w-full sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-1 lg:px-4">
                 {menu.map((item, idx) => (
                     <div
                         key={idx}
