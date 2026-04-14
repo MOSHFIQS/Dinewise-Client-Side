@@ -16,25 +16,15 @@
       "static/chunks/main-app.js",
       "static/chunks/app/(commonLayout)/page.js"
     ],
-    "/(commonLayout)/menu/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(commonLayout)/menu/page.js"
-    ],
-    "/(commonLayout)/login/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(commonLayout)/login/page.js"
-    ],
     "/(commonLayout)/register/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/(commonLayout)/register/page.js"
     ],
-    "/_not-found/page": [
+    "/(commonLayout)/menu/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/_not-found/page.js"
+      "static/chunks/app/(commonLayout)/menu/page.js"
     ]
   }
 }
