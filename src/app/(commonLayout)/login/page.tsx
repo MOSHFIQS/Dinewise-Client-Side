@@ -1,0 +1,9 @@
+import LoginForm from "@/components/login-form";
+
+export default function LoginPage() {
+    return (
+        <main className="flex-1 w-full flex items-center justify-center bg-muted/30">
+            <LoginForm />
+        </main>
+    );
+}

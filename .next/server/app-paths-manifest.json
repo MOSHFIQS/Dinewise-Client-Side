@@ -1,0 +1,7 @@
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/(commonLayout)/page": "app/(commonLayout)/page.js",
+  "/(commonLayout)/menu/page": "app/(commonLayout)/menu/page.js",
+  "/(commonLayout)/login/page": "app/(commonLayout)/login/page.js",
+  "/(commonLayout)/register/page": "app/(commonLayout)/register/page.js"
+}
