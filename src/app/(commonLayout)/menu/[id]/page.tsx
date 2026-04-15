@@ -5,9 +5,10 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useCartStore } from "@/lib/cart";
 import { toast } from "sonner";
-import { getMenuItemById } from "@/actions/menuItem.action";
+import { getMenuItemById, getAllMenuItems } from "@/actions/menuItem.action";
 import { Badge } from "@/components/ui/badge";
-import { ShoppingCart, Star, Clock, Flame, ChevronLeft, ChevronRight, Check } from "lucide-react";
+import { ShoppingCart, Star, Clock, Flame, ChevronLeft, ChevronRight, Check, UtensilsCrossed, ArrowRight } from "lucide-react";
+import MenuGrid from "@/components/shared/MenuGrid";
 import ReviewSection from "@/components/shared/ReviewSection";
 import { use } from "react";
 import { cn } from "@/lib/utils";
@@ -17,15 +18,34 @@ export default function MenuItemDetails({ params }: { params: Promise<{ id: stri
     const [item, setItem] = useState<any>(null);
     const [loading, setLoading] = useState(true);
     const [activeImage, setActiveImage] = useState(0);
+    const [relatedItems, setRelatedItems] = useState<any[]>([]);
+    const [loadingRelated, setLoadingRelated] = useState(false);
     const addToCart = useCartStore((state) => state.addToCart);
 
     useEffect(() => {
         const fetchItem = async () => {
-            const result = await getMenuItemById(id);
-            if (result.success) {
-                setItem(result.data);
-            } else {
-                toast.error("Failed to load item details");
+            setLoading(true);
+            try {
+                const result = await getMenuItemById(id);
+                if (result.success && result.data) {
+                    const itemData = result.data.data || result.data;
+                    setItem(itemData);
+                    
+                    // Fetch related items from the same category
+                    if (itemData.categoryId) {
+                        setLoadingRelated(true);
+                        const relatedResult = await getAllMenuItems({ categoryId: itemData.categoryId });
+                        if (relatedResult.success && relatedResult.data) {
+                             const allItems = Array.isArray(relatedResult.data) ? relatedResult.data : (relatedResult.data.data || []);
+                             setRelatedItems(allItems.filter((i: any) => i.id !== id).slice(0, 4));
+                        }
+                        setLoadingRelated(false);
+                    }
+                } else {
+                    toast.error("Failed to load item details");
+                }
+            } catch (error) {
+                toast.error("An error occurred while loading item details");
             }
             setLoading(false);
         };
@@ -34,9 +54,12 @@ export default function MenuItemDetails({ params }: { params: Promise<{ id: stri
 
     if (loading) {
         return (
-            <div className="container mx-auto px-4 py-32 flex flex-col items-center justify-center gap-4 animate-pulse">
-                <div className="w-12 h-12 rounded-full border-4 border-primary/20 border-t-primary animate-spin" />
-                <p className="text-muted-foreground font-medium">Preparing dish details...</p>
+            <div className="container mx-auto px-4 py-32 flex flex-col items-center justify-center gap-4 animate-in fade-in duration-700">
+                <div className="relative">
+                    <div className="w-16 h-16 rounded-full border-4 border-primary/10 border-t-primary animate-spin" />
+                    <UtensilsCrossed className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6 text-primary/40" />
+                </div>
+                <p className="text-muted-foreground font-black uppercase tracking-widest text-[10px]">Preparing your selection...</p>
             </div>
         );
     }
@@ -242,6 +265,26 @@ export default function MenuItemDetails({ params }: { params: Promise<{ id: stri
                     </div>
                 </div>
             </div>
+            
+            {/* Related Items section */}
+            {!loading && relatedItems.length > 0 && (
+                 <div className="mt-32 pt-20 border-t border-slate-100">
+                      <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+                           <div>
+                                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/5 text-primary text-[10px] font-black uppercase tracking-widest mb-3">
+                                     <Star className="w-3 h-3 fill-current" />
+                                     Chef's Recommendation
+                                </div>
+                                <h2 className="text-4xl font-black tracking-tight">Related Masterpieces</h2>
+                                <p className="text-muted-foreground text-lg italic">Explore more culinary creations from the {item?.category?.name} collection.</p>
+                           </div>
+                           <Button variant="ghost" onClick={() => window.location.href='/menu'} className="text-slate-400 font-bold uppercase tracking-tight text-xs hover:text-primary gap-2">
+                                View Full Menu <ArrowRight className="w-4 h-4" />
+                           </Button>
+                      </div>
+                      <MenuGrid initialItems={relatedItems} hideFilters={true} />
+                 </div>
+            )}
             
             {/* Reviews Grid */}
              <div className="mt-32 pt-20 border-t border-slate-100">

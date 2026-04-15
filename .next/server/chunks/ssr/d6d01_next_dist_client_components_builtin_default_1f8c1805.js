@@ -1,0 +1,3 @@
+module.exports=[72333,(a,b,c)=>{"use strict";Object.defineProperty(c,"__esModule",{value:!0});var d={PARALLEL_ROUTE_DEFAULT_PATH:function(){return g},default:function(){return h}};for(var e in d)Object.defineProperty(c,e,{enumerable:!0,get:d[e]});let f=a.r(1789),g="next/dist/client/components/builtin/default.js";function h(){(0,f.notFound)()}("function"==typeof c.default||"object"==typeof c.default&&null!==c.default)&&void 0===c.default.__esModule&&(Object.defineProperty(c.default,"__esModule",{value:!0}),Object.assign(c.default,c),b.exports=c.default)}];
+
+//# sourceMappingURL=d6d01_next_dist_client_components_builtin_default_1f8c1805.js.map

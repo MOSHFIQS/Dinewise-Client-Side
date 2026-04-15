@@ -5,15 +5,16 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useRouter } from "next/navigation";
-import { loginAction } from "@/actions/auth.action";
+import { authService } from "@/service/auth.service";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
 import Link from "next/link";
-import { UtensilsCrossed } from "lucide-react";
+import { UtensilsCrossed, Loader2 } from "lucide-react";
 import { useAuth } from "@/context/AuthProvider";
+import { useSearchParams } from "next/navigation";
 
 const formSchema = z.object({
      email: z.string().email("Invalid email address"),
@@ -25,7 +26,9 @@ type FormData = z.infer<typeof formSchema>;
 export default function LoginForm() {
      const [isLoading, setIsLoading] = useState(false);
      const router = useRouter();
-     const { setUser } = useAuth();
+     const searchParams = useSearchParams();
+     const redirect = searchParams.get("redirect") || "/dashboard";
+     const { setCookie } = useAuth();
      
      const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
           resolver: zodResolver(formSchema),
@@ -33,20 +36,23 @@ export default function LoginForm() {
 
      const onSubmit = async (data: FormData) => {
           setIsLoading(true);
-          const formData = new FormData();
-          formData.append("email", data.email);
-          formData.append("password", data.password);
-
-          const result = await loginAction(formData);
-          
-          if (result.success) {
-               toast.success("Login successful!");
-               // Will refresh Context via routing or full reload.
-               window.location.href = "/dashboard";
-          } else {
-               toast.error(result.error || "Failed to login");
+          const toastId = toast.loading("Signing in...");
+          try {
+               const result = await authService.signIn(data);
+               
+               if (result.success) {
+                    setCookie(result.data.user, result.data.token);
+                    toast.success("Welcome back!", { id: toastId });
+                    router.push(redirect);
+                    router.refresh();
+               } else {
+                    toast.error(result.message || "Invalid credentials", { id: toastId });
+               }
+          } catch (error: any) {
+               toast.error(error.message || "Failed to login", { id: toastId });
+          } finally {
+               setIsLoading(false);
           }
-          setIsLoading(false);
      };
 
      return (

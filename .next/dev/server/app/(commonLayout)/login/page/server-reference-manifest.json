@@ -1,0 +1,35 @@
+{
+  "node": {
+    "009b79746ddea04b87602d41e5c0ed31df9a81e0b0": {
+      "workers": {
+        "app/(commonLayout)/login/page": {
+          "moduleId": "[project]/.next-internal/server/app/(commonLayout)/login/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/actions/notification.action.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "getMyNotificationsAction",
+          "filename": "src/actions/notification.action.ts"
+        }
+      },
+      "layer": {
+        "app/(commonLayout)/login/page": "action-browser"
+      },
+      "exportedName": "getMyNotificationsAction",
+      "filename": "src/actions/notification.action.ts"
+    },
+    "40de5e4cc9d74352302684407ae0012838d4483342": {
+      "workers": {
+        "app/(commonLayout)/login/page": {
+          "moduleId": "[project]/.next-internal/server/app/(commonLayout)/login/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/actions/notification.action.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "markNotificationReadAction",
+          "filename": "src/actions/notification.action.ts"
+        }
+      },
+      "layer": {
+        "app/(commonLayout)/login/page": "action-browser"
+      },
+      "exportedName": "markNotificationReadAction",
+      "filename": "src/actions/notification.action.ts"
+    }
+  },
+  "edge": {}
+}

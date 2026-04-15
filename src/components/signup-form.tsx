@@ -6,14 +6,16 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { registerAction } from "@/actions/auth.action";
+import { authService } from "@/service/auth.service";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
-import { UtensilsCrossed } from "lucide-react";
+import { UtensilsCrossed, Loader2 } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useAuth } from "@/context/AuthProvider";
+import { useSearchParams } from "next/navigation";
 
 const formSchema = z.object({
      name: z.string().min(2, "Name must be at least 2 characters"),
@@ -27,6 +29,9 @@ type FormData = z.infer<typeof formSchema>;
 export default function RegisterForm() {
      const [isLoading, setIsLoading] = useState(false);
      const router = useRouter();
+     const searchParams = useSearchParams();
+     const redirect = searchParams.get("redirect") || "/dashboard";
+     const { setCookie } = useAuth();
      
      const { register, handleSubmit, setValue, formState: { errors } } = useForm<FormData>({
           resolver: zodResolver(formSchema),
@@ -35,21 +40,26 @@ export default function RegisterForm() {
 
      const onSubmit = async (data: FormData) => {
           setIsLoading(true);
-          const formData = new FormData();
-          formData.append("name", data.name);
-          formData.append("email", data.email);
-          formData.append("password", data.password);
-          formData.append("role", data.role);
-
-          const result = await registerAction(formData);
-          
-          if (result.success) {
-               toast.success("Registration successful!");
-               window.location.href = "/dashboard";
-          } else {
-               toast.error(result.error || "Failed to register");
+          const toastId = toast.loading("Creating account...");
+          try {
+               const result = await authService.signUp({
+                    ...data,
+                    image: null
+               });
+               
+               if (result.success) {
+                    setCookie(result.data.user, result.data.token);
+                    toast.success("Account created successfully!", { id: toastId });
+                    router.push(redirect);
+                    router.refresh();
+               } else {
+                    toast.error(result.message || "Registration failed", { id: toastId });
+               }
+          } catch (error: any) {
+               toast.error(error.message || "Something went wrong", { id: toastId });
+          } finally {
+               setIsLoading(false);
           }
-          setIsLoading(false);
      };
 
      return (

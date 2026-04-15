@@ -1,70 +1,65 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState, ReactNode } from "react";
 import Cookies from "js-cookie";
-import { useRouter } from "next/navigation";
-import { apiFetchClient } from "@/lib/api";
-
-type User = {
-     id: string;
-     name: string;
-     email: string;
-     role: string;
-     status: string;
-     image: string | null;
-};
+import { User } from "@/types/user.types";
 
 type AuthContextType = {
      user: User | null;
+     token: string | null;
      isLoading: boolean;
-     setUser: React.Dispatch<React.SetStateAction<User | null>>;
+     setCookie: (userData: User, token: string) => void;
+     setUser: (user: User | null) => void;
      logOut: () => void;
 };
 
-const AuthContext = createContext<AuthContextType>({
-     user: null,
-     isLoading: true,
-     setUser: () => {},
-     logOut: () => {},
-});
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const useAuth = () => useContext(AuthContext);
+export const useAuth = () => {
+     const context = useContext(AuthContext);
+     if (!context) throw new Error("useAuth must be used within AuthProvider");
+     return context;
+};
 
-export default function AuthProvider({ children }: { children: React.ReactNode }) {
+export default function AuthProvider({ children }: { children: ReactNode }) {
      const [user, setUser] = useState<User | null>(null);
+     const [token, setToken] = useState<string | null>(null);
      const [isLoading, setIsLoading] = useState(true);
-     const router = useRouter();
 
      useEffect(() => {
-          const fetchUser = async () => {
-               const token = Cookies.get("token");
-               if (token) {
-                    try {
-                         const response = await apiFetchClient("/user/me", {
-                              headers: { "Authorization": `Bearer ${token}` }
-                         });
-                         if (response.success) {
-                              setUser(response.data);
-                         }
-                    } catch (error) {
-                         console.error("Failed to fetch user session", error);
-                         Cookies.remove("token");
-                    }
+          const cookieToken = Cookies.get("token");
+          const cookieUser = Cookies.get("user");
+          
+          if (cookieToken) setToken(cookieToken);
+          if (cookieUser) {
+               try {
+                    setUser(JSON.parse(cookieUser));
+               } catch (error) {
+                    console.error("Failed to parse user cookie", error);
+                    Cookies.remove("user");
                }
-               setIsLoading(false);
-          };
-          fetchUser();
+          }
+          setIsLoading(false);
      }, []);
 
+     const setCookie = (userData: User, token: string) => {
+          setUser(userData);
+          setToken(token);
+          Cookies.set("token", token, { expires: 7 });
+          Cookies.set("user", JSON.stringify(userData), { expires: 7 });
+     };
+
      const logOut = () => {
-          Cookies.remove("token");
           setUser(null);
-          router.push("/login");
-          router.refresh();
+          setToken(null);
+          Cookies.remove("token");
+          Cookies.remove("user");
+          // Full reload to clear any server-side state/middleware cache
+          window.location.href = "/login";
      };
 
      return (
-          <AuthContext.Provider value={{ user, isLoading, setUser, logOut }}>
+          <AuthContext.Provider value={{ user, token, isLoading, setUser, logOut, setCookie }}>
                {children}
           </AuthContext.Provider>
      );

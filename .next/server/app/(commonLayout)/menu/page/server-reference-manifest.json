@@ -1,0 +1,110 @@
+{
+  "node": {
+    "003d8f912c9f4ed6675958d9a403f77216daf17ddb": {
+      "workers": {
+        "app/(commonLayout)/menu/page": {
+          "moduleId": 68697,
+          "async": false,
+          "exportedName": "getMyNotificationsAction",
+          "filename": "src/actions/notification.action.ts"
+        }
+      },
+      "layer": {
+        "app/(commonLayout)/menu/page": "action-browser"
+      },
+      "exportedName": "getMyNotificationsAction",
+      "filename": "src/actions/notification.action.ts"
+    },
+    "4079d8303501e28eeaaca457cf6f2726318ddec8b7": {
+      "workers": {
+        "app/(commonLayout)/menu/page": {
+          "moduleId": 68697,
+          "async": false,
+          "exportedName": "markNotificationReadAction",
+          "filename": "src/actions/notification.action.ts"
+        }
+      },
+      "layer": {
+        "app/(commonLayout)/menu/page": "action-browser"
+      },
+      "exportedName": "markNotificationReadAction",
+      "filename": "src/actions/notification.action.ts"
+    },
+    "402a24ccec08c02b4070c45bb41c7ea5cb886548ee": {
+      "workers": {
+        "app/(commonLayout)/menu/page": {
+          "moduleId": 68697,
+          "async": false,
+          "exportedName": "getMenuItemById",
+          "filename": "src/actions/menuItem.action.ts"
+        }
+      },
+      "layer": {
+        "app/(commonLayout)/menu/page": "rsc"
+      },
+      "exportedName": "getMenuItemById",
+      "filename": "src/actions/menuItem.action.ts"
+    },
+    "4049a036757bc3edadc959d312e3c2db910c39a736": {
+      "workers": {
+        "app/(commonLayout)/menu/page": {
+          "moduleId": 68697,
+          "async": false,
+          "exportedName": "getAllMenuItems",
+          "filename": "src/actions/menuItem.action.ts"
+        }
+      },
+      "layer": {
+        "app/(commonLayout)/menu/page": "rsc"
+      },
+      "exportedName": "getAllMenuItems",
+      "filename": "src/actions/menuItem.action.ts"
+    },
+    "0048017abe9be3150c74d0b1a7a589fb985ce743d5": {
+      "workers": {
+        "app/(commonLayout)/menu/page": {
+          "moduleId": 68697,
+          "async": false,
+          "exportedName": "getAllCategories",
+          "filename": "src/actions/category.action.ts"
+        }
+      },
+      "layer": {
+        "app/(commonLayout)/menu/page": "rsc"
+      },
+      "exportedName": "getAllCategories",
+      "filename": "src/actions/category.action.ts"
+    },
+    "4026a81096bd2e8794529cc20a27328ce6061befae": {
+      "workers": {
+        "app/(commonLayout)/menu/page": {
+          "moduleId": 68697,
+          "async": false,
+          "exportedName": "deleteCategoryAction",
+          "filename": "src/actions/category.action.ts"
+        }
+      },
+      "layer": {
+        "app/(commonLayout)/menu/page": "rsc"
+      },
+      "exportedName": "deleteCategoryAction",
+      "filename": "src/actions/category.action.ts"
+    },
+    "40fbd549f30d6252f24e02d2ae7c00c79ce0d8e961": {
+      "workers": {
+        "app/(commonLayout)/menu/page": {
+          "moduleId": 68697,
+          "async": false,
+          "exportedName": "createCategoryAction",
+          "filename": "src/actions/category.action.ts"
+        }
+      },
+      "layer": {
+        "app/(commonLayout)/menu/page": "rsc"
+      },
+      "exportedName": "createCategoryAction",
+      "filename": "src/actions/category.action.ts"
+    }
+  },
+  "edge": {}
+}

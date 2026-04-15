@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 3, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/moshf/OneDrive/Documents/DINEWISE/Dinewise-Client-Side/node_modules/.pnpm/next%4016.1.4_%40babel%2Bcore%407.2_07c7b45b0f83eb8e0c4154f920fd2e73/node_modules/next/app.js"],"sourcesContent":["module.exports = require('./dist/pages/_app')\n"],"names":[],"mappings":"AAAA,OAAO,OAAO","ignoreList":[0]}}]
+}

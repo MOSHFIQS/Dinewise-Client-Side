@@ -1,0 +1,20 @@
+{
+  "node": {
+    "0048017abe9be3150c74d0b1a7a589fb985ce743d5": {
+      "workers": {
+        "app/dashboard/@chef/addItems/page": {
+          "moduleId": 84094,
+          "async": false,
+          "exportedName": "getAllCategories",
+          "filename": "src/actions/category.action.ts"
+        }
+      },
+      "layer": {
+        "app/dashboard/@chef/addItems/page": "action-browser"
+      },
+      "exportedName": "getAllCategories",
+      "filename": "src/actions/category.action.ts"
+    }
+  },
+  "edge": {}
+}

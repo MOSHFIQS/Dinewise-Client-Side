@@ -11,7 +11,7 @@ import { ShoppingCart, Star, Plus, Eye, Utensils } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
-export default function MenuGrid({ initialItems, categories, isHome = false }: { initialItems: any[], categories?: any[], isHome?: boolean }) {
+export default function MenuGrid({ initialItems, categories, isHome = false, hideFilters = false }: { initialItems: any[], categories?: any[], isHome?: boolean, hideFilters?: boolean }) {
     const [selectedCat, setSelectedCat] = useState<string>("ALL");
     const addToCart = useCartStore((state) => state.addToCart);
 
@@ -31,7 +31,7 @@ export default function MenuGrid({ initialItems, categories, isHome = false }: {
 
     return (
         <div className="w-full">
-            {!isHome && categories && (
+            {!isHome && !hideFilters && categories && (
                 <div className="flex flex-wrap gap-3 justify-center mb-16 px-4">
                      <button 
                         className={cn(

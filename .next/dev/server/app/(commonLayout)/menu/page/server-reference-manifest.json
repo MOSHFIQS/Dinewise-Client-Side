@@ -1,0 +1,110 @@
+{
+  "node": {
+    "009b79746ddea04b87602d41e5c0ed31df9a81e0b0": {
+      "workers": {
+        "app/(commonLayout)/menu/page": {
+          "moduleId": "[project]/.next-internal/server/app/(commonLayout)/menu/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/actions/notification.action.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/actions/menuItem.action.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE2 => \"[project]/src/actions/category.action.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "getMyNotificationsAction",
+          "filename": "src/actions/notification.action.ts"
+        }
+      },
+      "layer": {
+        "app/(commonLayout)/menu/page": "action-browser"
+      },
+      "exportedName": "getMyNotificationsAction",
+      "filename": "src/actions/notification.action.ts"
+    },
+    "40de5e4cc9d74352302684407ae0012838d4483342": {
+      "workers": {
+        "app/(commonLayout)/menu/page": {
+          "moduleId": "[project]/.next-internal/server/app/(commonLayout)/menu/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/actions/notification.action.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/actions/menuItem.action.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE2 => \"[project]/src/actions/category.action.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "markNotificationReadAction",
+          "filename": "src/actions/notification.action.ts"
+        }
+      },
+      "layer": {
+        "app/(commonLayout)/menu/page": "action-browser"
+      },
+      "exportedName": "markNotificationReadAction",
+      "filename": "src/actions/notification.action.ts"
+    },
+    "40b97850b209dbd801928d7c0664694743db6fdaf4": {
+      "workers": {
+        "app/(commonLayout)/menu/page": {
+          "moduleId": "[project]/.next-internal/server/app/(commonLayout)/menu/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/actions/notification.action.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/actions/menuItem.action.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE2 => \"[project]/src/actions/category.action.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "getAllMenuItems",
+          "filename": "src/actions/menuItem.action.ts"
+        }
+      },
+      "layer": {
+        "app/(commonLayout)/menu/page": "rsc"
+      },
+      "exportedName": "getAllMenuItems",
+      "filename": "src/actions/menuItem.action.ts"
+    },
+    "40e978e8ec2df5e0021a14d23222eea778a291119c": {
+      "workers": {
+        "app/(commonLayout)/menu/page": {
+          "moduleId": "[project]/.next-internal/server/app/(commonLayout)/menu/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/actions/notification.action.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/actions/menuItem.action.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE2 => \"[project]/src/actions/category.action.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "getMenuItemById",
+          "filename": "src/actions/menuItem.action.ts"
+        }
+      },
+      "layer": {
+        "app/(commonLayout)/menu/page": "rsc"
+      },
+      "exportedName": "getMenuItemById",
+      "filename": "src/actions/menuItem.action.ts"
+    },
+    "0015fdae16684464bd6f2b4d8a1cf98a222cf92fd9": {
+      "workers": {
+        "app/(commonLayout)/menu/page": {
+          "moduleId": "[project]/.next-internal/server/app/(commonLayout)/menu/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/actions/notification.action.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/actions/menuItem.action.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE2 => \"[project]/src/actions/category.action.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "getAllCategories",
+          "filename": "src/actions/category.action.ts"
+        }
+      },
+      "layer": {
+        "app/(commonLayout)/menu/page": "rsc"
+      },
+      "exportedName": "getAllCategories",
+      "filename": "src/actions/category.action.ts"
+    },
+    "40818a7c6562709774079bcf26cf28e48b7cadf07d": {
+      "workers": {
+        "app/(commonLayout)/menu/page": {
+          "moduleId": "[project]/.next-internal/server/app/(commonLayout)/menu/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/actions/notification.action.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/actions/menuItem.action.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE2 => \"[project]/src/actions/category.action.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "createCategoryAction",
+          "filename": "src/actions/category.action.ts"
+        }
+      },
+      "layer": {
+        "app/(commonLayout)/menu/page": "rsc"
+      },
+      "exportedName": "createCategoryAction",
+      "filename": "src/actions/category.action.ts"
+    },
+    "40a994e725519ece85dbe5ea49b4e8c3ad4124b396": {
+      "workers": {
+        "app/(commonLayout)/menu/page": {
+          "moduleId": "[project]/.next-internal/server/app/(commonLayout)/menu/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/actions/notification.action.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/actions/menuItem.action.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE2 => \"[project]/src/actions/category.action.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "deleteCategoryAction",
+          "filename": "src/actions/category.action.ts"
+        }
+      },
+      "layer": {
+        "app/(commonLayout)/menu/page": "rsc"
+      },
+      "exportedName": "deleteCategoryAction",
+      "filename": "src/actions/category.action.ts"
+    }
+  },
+  "edge": {}
+}

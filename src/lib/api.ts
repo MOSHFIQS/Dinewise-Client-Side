@@ -13,29 +13,30 @@ export const apiFetchClient = async (endpoint: string, options: FetchOptions = {
         Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
     }
 
-    const defaultHeaders: HeadersInit = {
-        "Content-Type": "application/json",
-        ...headers,
-    };
-
-    if (restOptions.body && restOptions.body instanceof FormData) {
-        delete (defaultHeaders as Record<string, string>)["Content-Type"];
-    }
-
     try {
         const response = await fetch(url.toString(), {
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+                ...headers,
+            },
             ...restOptions,
-            headers: defaultHeaders,
         });
         
         const data = await response.json();
         
-        if (!response.ok) {
-            throw new Error(data.message || "An error occurred");
-        }
-        
-        return data;
+        return {
+            success: response.ok,
+            status: response.status,
+            data: data.data || data,
+            message: data.message || (response.ok ? "Success" : "API request failed"),
+        };
     } catch (error: any) {
-        throw new Error(error.message || "Failed to fetch");
+        return {
+            success: false,
+            status: 0,
+            data: null,
+            message: error.message || "Network error",
+        };
     }
 };

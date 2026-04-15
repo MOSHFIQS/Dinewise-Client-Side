@@ -1,30 +1,61 @@
-"use client";
+import { AppSidebar } from "@/components/app-sidebar"
+import { Separator } from "@/components/ui/separator"
+import {
+     SidebarInset,
+     SidebarProvider,
+     SidebarTrigger,
+} from "@/components/ui/sidebar"
+import { Roles } from "@/constants/roles"
+import { sessionService } from "@/service/token.service"
+import { ReactNode } from "react"
+import { redirect } from "next/navigation"
 
-import { AppSidebar } from "@/components/app-sidebar";
-
-export default function DashboardLayout({
-    admin,
-    chef,
-    customer,
+export default async function DashboardLayout({
+     admin,
+     chef,
+     customer,
 }: {
-    admin: React.ReactNode;
-    chef: React.ReactNode;
-    customer: React.ReactNode;
+     admin: ReactNode
+     chef: ReactNode
+     customer: ReactNode
 }) {
-    // Note: the conditional role rendering logic in Next.js 14+ parallel routes 
-    // happens on the page.tsx or layout file via cookies.
-    // For simplicity, we are capturing the role and rendering the slot.
-    // Real implementation would use server component for the Layout and check `cookies().get("token")`
+     const data = await sessionService.getUserFromToken()
 
-    return (
-        <div className="flex h-screen w-full bg-muted/40 overflow-hidden">
-            <AppSidebar />
-            <main className="flex-1 overflow-y-auto h-full p-4 lg:p-8">
-                {/* Normally we'd return a slot based on the role here */}
-                {admin}
-                {chef}
-                {customer}
-            </main>
-        </div>
-    );
+     if (!data) {
+          redirect("/login")
+     }
+
+     const userInfo = {
+          role: data?.role as string,
+     }
+
+     let content: ReactNode
+
+     switch (userInfo.role) {
+          case Roles.ADMIN:
+               content = admin
+               break
+          case Roles.CHEF:
+               content = chef
+               break
+          default:
+               content = customer
+     }
+
+     return (
+          <SidebarProvider>
+               <AppSidebar />
+               <SidebarInset>
+                    <header className="flex h-16 shrink-0 items-center gap-2 border-b">
+                         <div className="flex items-center gap-2 px-3">
+                              <SidebarTrigger />
+                              <Separator orientation="vertical" className="mr-2 h-4" />
+                         </div>
+                    </header>
+                    <div className="flex flex-1 flex-col gap-4 p-4 lg:p-8">
+                         {content}
+                    </div>
+               </SidebarInset>
+          </SidebarProvider>
+     )
 }

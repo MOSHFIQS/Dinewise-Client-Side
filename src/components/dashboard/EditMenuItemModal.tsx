@@ -62,8 +62,16 @@ export function EditMenuItemModal({ item, isOpen, onClose, onSuccess }: EditMenu
 
      useEffect(() => {
           const fetchCats = async () => {
-               const res = await getAllCategories();
-               if (res.success) setCategories(res.data.data);
+               try {
+                    const res = await getAllCategories();
+                    if (res.success && res.data) {
+                         // Handle both wrapped and unwrapped data
+                         const itemsList = Array.isArray(res.data) ? res.data : (res.data.data || []);
+                         setCategories(itemsList);
+                    }
+               } catch (error) {
+                    console.error("Failed to load categories:", error);
+               }
           };
           fetchCats();
      }, []);
@@ -84,13 +92,11 @@ export function EditMenuItemModal({ item, isOpen, onClose, onSuccess }: EditMenu
                discountPrice: data.discountPrice || null,
                ingredients: ingredientsArray,
                images,
-           };
+            };
 
           try {
-               const token = Cookies.get("token");
                const res = await apiFetchClient(`/menu-item/${item.id}`, {
                     method: "PATCH",
-                    headers: { "Authorization": `Bearer ${token}` },
                     body: JSON.stringify(payload),
                });
 
@@ -98,6 +104,8 @@ export function EditMenuItemModal({ item, isOpen, onClose, onSuccess }: EditMenu
                     toast.success("Menu item updated successfully!");
                     onSuccess();
                     onClose();
+               } else {
+                    toast.error(res.message || "Failed to update menu item");
                }
           } catch (error: any) {
                toast.error(error.message || "Failed to update menu item");

@@ -84,72 +84,76 @@ export default function Navbar() {
                </Button>
             </Link>
             
-            {user ? (
-               <>
-                 <NotificationBell />
-                 <DropdownMenu>
-                   <DropdownMenuTrigger asChild>
-                     <Button variant="ghost" className="relative h-10 w-10 rounded-full focus-visible:ring-0">
-                       <Avatar className="h-10 w-10 border-2 border-primary/20">
-                         <AvatarImage src={user.image || `https://ui-avatars.com/api/?name=${user.name}&background=random`} alt={user.name} />
-                         <AvatarFallback>{user.name?.charAt(0)}</AvatarFallback>
-                       </Avatar>
-                     </Button>
-                   </DropdownMenuTrigger>
-                   <DropdownMenuContent className="w-64 p-2" align="end" sideOffset={8}>
-                     <DropdownMenuLabel className="font-normal p-2">
-                       <div className="flex flex-col space-y-1">
-                         <p className="text-sm font-semibold leading-none">{user.name}</p>
-                         <p className="text-xs leading-none text-muted-foreground">{user.email}</p>
-                         <div className="mt-1">
-                            <span className="inline-flex items-center rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-medium text-primary uppercase">
-                              {user.role}
-                            </span>
-                         </div>
-                       </div>
-                     </DropdownMenuLabel>
-                     <DropdownMenuSeparator />
-                     
-                     <DropdownMenuItem asChild className="rounded-lg cursor-pointer py-2.5">
-                       <Link href="/dashboard" className="flex items-center gap-3">
-                         <LayoutDashboard className="h-4 w-4 text-primary" />
-                         <span>Dashboard</span>
-                       </Link>
-                     </DropdownMenuItem>
+            {mounted && (
+              <>
+                {user ? (
+                   <>
+                     <NotificationBell />
+                     <DropdownMenu>
+                       <DropdownMenuTrigger asChild>
+                         <Button variant="ghost" className="relative h-10 w-10 rounded-full focus-visible:ring-0">
+                           <Avatar className="h-10 w-10 border-2 border-primary/20">
+                             <AvatarImage src={user.image || `https://ui-avatars.com/api/?name=${user.name}&background=random`} alt={user.name} />
+                             <AvatarFallback>{user.name?.charAt(0)}</AvatarFallback>
+                           </Avatar>
+                         </Button>
+                       </DropdownMenuTrigger>
+                       <DropdownMenuContent className="w-64 p-2" align="end" sideOffset={8}>
+                         <DropdownMenuLabel className="font-normal p-2">
+                           <div className="flex flex-col space-y-1">
+                             <p className="text-sm font-semibold leading-none">{user.name}</p>
+                             <p className="text-xs leading-none text-muted-foreground">{user.email}</p>
+                             <div className="mt-1">
+                                <span className="inline-flex items-center rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-medium text-primary uppercase">
+                                  {user.role}
+                                </span>
+                             </div>
+                           </div>
+                         </DropdownMenuLabel>
+                         <DropdownMenuSeparator />
+                         
+                         <DropdownMenuItem asChild className="rounded-lg cursor-pointer py-2.5">
+                           <Link href="/dashboard" className="flex items-center gap-3">
+                             <LayoutDashboard className="h-4 w-4 text-primary" />
+                             <span>Dashboard</span>
+                           </Link>
+                         </DropdownMenuItem>
 
-                     {user.role === "CUSTOMER" && (
-                       <DropdownMenuItem asChild className="rounded-lg cursor-pointer py-2.5">
-                         <Link href="/dashboard/myOrders" className="flex items-center gap-3">
-                           <Package className="h-4 w-4 text-primary" />
-                           <span>My Orders</span>
-                         </Link>
-                       </DropdownMenuItem>
-                     )}
+                         {user.role === "CUSTOMER" && (
+                           <DropdownMenuItem asChild className="rounded-lg cursor-pointer py-2.5">
+                             <Link href="/dashboard/myOrders" className="flex items-center gap-3">
+                               <Package className="h-4 w-4 text-primary" />
+                               <span>My Orders</span>
+                             </Link>
+                           </DropdownMenuItem>
+                         )}
 
-                     <DropdownMenuItem asChild className="rounded-lg cursor-pointer py-2.5">
-                       <Link href="/dashboard/settings" className="flex items-center gap-3">
-                         <Settings className="h-4 w-4 text-primary" />
-                         <span>Settings</span>
-                       </Link>
-                     </DropdownMenuItem>
+                         <DropdownMenuItem asChild className="rounded-lg cursor-pointer py-2.5">
+                           <Link href="/dashboard/settings" className="flex items-center gap-3">
+                             <Settings className="h-4 w-4 text-primary" />
+                             <span>Settings</span>
+                           </Link>
+                         </DropdownMenuItem>
 
-                     <DropdownMenuSeparator />
-                     <DropdownMenuItem onClick={handleLogout} className="rounded-lg text-destructive focus:bg-destructive/10 focus:text-destructive cursor-pointer py-2.5">
-                       <LogOut className="h-4 w-4 mr-3" />
-                       <span>Log out</span>
-                     </DropdownMenuItem>
-                   </DropdownMenuContent>
-                 </DropdownMenu>
-               </>
-            ) : (
-                <div className="flex items-center gap-3">
-                  <Link href="/login">
-                    <Button variant="ghost" className="rounded-full">Log In</Button>
-                  </Link>
-                  <Link href="/register">
-                    <Button className="rounded-full px-6">Sign Up</Button>
-                  </Link>
-                </div>
+                         <DropdownMenuSeparator />
+                         <DropdownMenuItem onClick={handleLogout} className="rounded-lg text-destructive focus:bg-destructive/10 focus:text-destructive cursor-pointer py-2.5">
+                           <LogOut className="h-4 w-4 mr-3" />
+                           <span>Log out</span>
+                         </DropdownMenuItem>
+                       </DropdownMenuContent>
+                     </DropdownMenu>
+                   </>
+                ) : (
+                    <div className="flex items-center gap-3">
+                      <Link href="/login">
+                        <Button variant="ghost" className="rounded-full">Log In</Button>
+                      </Link>
+                      <Link href="/register">
+                        <Button className="rounded-full px-6">Sign Up</Button>
+                      </Link>
+                    </div>
+                )}
+              </>
             )}
           </div>
         </div>
@@ -166,63 +170,66 @@ export default function Navbar() {
                  )}
                </Button>
             </Link>
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon">
-                <Menu className="h-6 w-6" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="right">
-              <SheetTitle className="text-xl font-bold mb-8">DineWise</SheetTitle>
-              <nav className="flex flex-col gap-4">
-                {navItems.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={`text-lg transition-colors ${
-                      pathname === item.href ? "text-primary font-bold" : "text-muted-foreground"
-                    }`}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
-                
-                <div className="mt-8 pt-8 border-t flex flex-col gap-4">
-                  {user ? (
-                    <>
-                       <div className="flex items-center gap-3 mb-4">
-                         <Avatar className="h-12 w-12 border-2 border-primary/20">
-                           <AvatarImage src={user.image ?? undefined} />
-                           <AvatarFallback>{user.name?.charAt(0)}</AvatarFallback>
-                         </Avatar>
-                         <div>
-                          <p className="font-bold">{user.name}</p>
-                          <p className="text-xs text-muted-foreground">{user.email}</p>
+          
+          {mounted && (
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon">
+                  <Menu className="h-6 w-6" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right">
+                <SheetTitle className="text-xl font-bold mb-8">DineWise</SheetTitle>
+                <nav className="flex flex-col gap-4">
+                  {navItems.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={`text-lg transition-colors ${
+                        pathname === item.href ? "text-primary font-bold" : "text-muted-foreground"
+                      }`}
+                    >
+                      {item.name}
+                    </Link>
+                  ))}
+                  
+                  <div className="mt-8 pt-8 border-t flex flex-col gap-4">
+                    {user ? (
+                      <>
+                         <div className="flex items-center gap-3 mb-4">
+                           <Avatar className="h-12 w-12 border-2 border-primary/20">
+                             <AvatarImage src={user.image ?? undefined} />
+                             <AvatarFallback>{user.name?.charAt(0)}</AvatarFallback>
+                           </Avatar>
+                           <div>
+                            <p className="font-bold">{user.name}</p>
+                            <p className="text-xs text-muted-foreground">{user.email}</p>
+                           </div>
                          </div>
-                       </div>
-                       <Link href="/dashboard" className="w-full">
-                         <Button variant="outline" className="w-full justify-start gap-3 h-12 rounded-xl">
-                           <LayoutDashboard className="h-5 w-5 text-primary" /> Dashboard
+                         <Link href="/dashboard" className="w-full">
+                           <Button variant="outline" className="w-full justify-start gap-3 h-12 rounded-xl">
+                             <LayoutDashboard className="h-5 w-5 text-primary" /> Dashboard
+                           </Button>
+                         </Link>
+                         <Button variant="ghost" onClick={handleLogout} className="w-full justify-start gap-3 h-12 text-destructive hover:bg-destructive/10 rounded-xl">
+                           <LogOut className="h-5 w-5" /> Log out
                          </Button>
-                       </Link>
-                       <Button variant="ghost" onClick={handleLogout} className="w-full justify-start gap-3 h-12 text-destructive hover:bg-destructive/10 rounded-xl">
-                         <LogOut className="h-5 w-5" /> Log out
-                       </Button>
-                    </>
-                  ) : (
-                    <div className="flex flex-col gap-3">
-                      <Link href="/login" className="w-full">
-                         <Button variant="outline" className="w-full h-12 rounded-xl">Log In</Button>
-                      </Link>
-                      <Link href="/register" className="w-full">
-                         <Button className="w-full h-12 rounded-xl">Sign Up</Button>
-                      </Link>
-                    </div>
-                  )}
-                </div>
-              </nav>
-            </SheetContent>
-          </Sheet>
+                      </>
+                    ) : (
+                      <div className="flex flex-col gap-3">
+                        <Link href="/login" className="w-full">
+                           <Button variant="outline" className="w-full h-12 rounded-xl">Log In</Button>
+                        </Link>
+                        <Link href="/register" className="w-full">
+                           <Button className="w-full h-12 rounded-xl">Sign Up</Button>
+                        </Link>
+                      </div>
+                    )}
+                  </div>
+                </nav>
+              </SheetContent>
+            </Sheet>
+          )}
         </div>
       </div>
     </header>

@@ -13,8 +13,10 @@ export default function NotificationBell() {
 
     const fetchNotifications = async () => {
         const res = await getMyNotificationsAction();
-        if (res.success) {
-             setNotifications(res.data.data);
+        if (res.success && res.data) {
+             // Handle both { data: [...] } and directly [...]
+             const items = Array.isArray(res.data) ? res.data : (res.data.data || []);
+             setNotifications(items);
         }
     };
 
@@ -30,7 +32,7 @@ export default function NotificationBell() {
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
-    const unreadCount = notifications.filter(n => !n.isRead).length;
+    const unreadCount = (notifications || []).filter(n => n && !n.isRead).length;
 
     const handleMarkRead = async (id: string) => {
          const res = await markNotificationReadAction(id);

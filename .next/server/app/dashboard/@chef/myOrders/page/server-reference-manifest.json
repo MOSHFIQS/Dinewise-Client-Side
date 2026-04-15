@@ -1,0 +1,35 @@
+{
+  "node": {
+    "40a4706afc0b728eee7bc4f8f63b2732388b19533f": {
+      "workers": {
+        "app/dashboard/@chef/myOrders/page": {
+          "moduleId": 62951,
+          "async": false,
+          "exportedName": "getAllOrdersAction",
+          "filename": "src/actions/order.action.ts"
+        }
+      },
+      "layer": {
+        "app/dashboard/@chef/myOrders/page": "action-browser"
+      },
+      "exportedName": "getAllOrdersAction",
+      "filename": "src/actions/order.action.ts"
+    },
+    "6078d041f374ee46621578054ebc0849b2da181d04": {
+      "workers": {
+        "app/dashboard/@chef/myOrders/page": {
+          "moduleId": 62951,
+          "async": false,
+          "exportedName": "updateOrderStatusAction",
+          "filename": "src/actions/order.action.ts"
+        }
+      },
+      "layer": {
+        "app/dashboard/@chef/myOrders/page": "action-browser"
+      },
+      "exportedName": "updateOrderStatusAction",
+      "filename": "src/actions/order.action.ts"
+    }
+  },
+  "edge": {}
+}

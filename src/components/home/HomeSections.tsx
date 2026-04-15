@@ -32,20 +32,24 @@ export function FeaturesSection() {
     ];
 
     return (
-        <section className="py-20 bg-muted/30">
+        <section className="py-24 bg-slate-50/50">
             <div className="container px-4 mx-auto">
-                <div className="text-center max-w-3xl mx-auto mb-16">
-                    <h2 className="text-3xl font-bold mb-4">Why Choose DineWise?</h2>
-                    <p className="text-muted-foreground">We combine culinary excellence with modern technology to bring the restaurant experience to your home.</p>
+                <div className="text-center max-w-3xl mx-auto mb-20">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/5 text-primary text-[10px] font-black uppercase tracking-widest mb-4">
+                        <Zap className="w-3 h-3 fill-current" />
+                        The Dinewise Edge
+                    </div>
+                    <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tight text-slate-900 border-b-4 border-primary/10 inline-block">Why Choose Us?</h2>
+                    <p className="text-muted-foreground text-lg italic">We combine culinary excellence with modern technology to bring the restaurant experience to your home.</p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     {features.map((f, i) => (
-                        <div key={i} className="p-8 rounded-2xl bg-background border hover:shadow-lg transition-shadow">
-                            <div className="bg-primary/10 w-12 h-12 rounded-xl flex items-center justify-center mb-6">
+                        <div key={i} className="group p-10 rounded-[2.5rem] bg-white border border-slate-100 hover:border-primary/20 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 hover:-translate-y-2">
+                            <div className="bg-primary/5 w-16 h-16 rounded-[1.5rem] flex items-center justify-center mb-8 group-hover:bg-primary group-hover:text-white transition-colors duration-500 shadow-inner">
                                 {f.icon}
                             </div>
-                            <h3 className="text-xl font-bold mb-3">{f.title}</h3>
-                            <p className="text-muted-foreground text-sm leading-relaxed">{f.description}</p>
+                            <h3 className="text-2xl font-black mb-4 tracking-tight uppercase text-slate-800">{f.title}</h3>
+                            <p className="text-slate-500 text-sm leading-relaxed font-medium">{f.description}</p>
                         </div>
                     ))}
                 </div>
@@ -60,8 +64,16 @@ export function PopularDishesSection() {
 
     useEffect(() => {
         const fetchItems = async () => {
-            const res = await getAllMenuItems({ limit: "3" });
-            if (res.success) setItems(res.data.data);
+            setLoading(true);
+            try {
+                const res = await getAllMenuItems({ limit: "4" });
+                if (res.success && res.data) {
+                    const itemsList = Array.isArray(res.data) ? res.data : (res.data.data || []);
+                    setItems(itemsList);
+                }
+            } catch (error) {
+                console.error("Home feed fetch error:", error);
+            }
             setLoading(false);
         };
         fetchItems();
@@ -70,13 +82,17 @@ export function PopularDishesSection() {
     return (
         <section className="py-20">
             <div className="container px-4 mx-auto">
-                <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
-                    <div className="max-w-xl">
-                        <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Signature Dishes</h2>
-                        <p className="text-muted-foreground">Most loved creations by our community. Try them once and you'll be hooked.</p>
+                <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+                    <div className="max-w-xl text-center md:text-left">
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50 text-orange-600 text-[10px] font-black uppercase tracking-widest mb-4">
+                            <Star className="w-3 h-3 fill-current" />
+                            Guest Favorites
+                        </div>
+                        <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tight text-slate-900 leading-tight">Our Signature Dishes</h2>
+                        <p className="text-muted-foreground text-lg">Most loved creations by our community. Try them once and you'll be hooked.</p>
                     </div>
                     <Link href="/menu">
-                        <Button variant="outline" className="rounded-full">View Full Menu</Button>
+                        <Button variant="outline" className="rounded-full h-12 px-8 font-bold border-2 hover:bg-primary hover:text-white transition-all transform hover:scale-105 active:scale-95">View Full Menu</Button>
                     </Link>
                 </div>
                 
@@ -109,40 +125,59 @@ export function TestimonialsSection() {
     ];
 
     return (
-        <section className="py-20 bg-primary/5">
-            <div className="container px-4 mx-auto">
-                <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <section className="py-32 bg-slate-900 text-white overflow-hidden relative">
+            {/* Background Decor */}
+            <div className="absolute top-0 right-0 w-96 h-96 bg-primary/20 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2" />
+            <div className="absolute bottom-0 left-0 w-96 h-96 bg-orange-500/10 blur-[120px] rounded-full translate-y-1/2 -translate-x-1/2" />
+
+            <div className="container px-4 mx-auto relative z-10">
+                <div className="grid lg:grid-cols-2 gap-24 items-center">
                     <div>
-                        <h2 className="text-3xl md:text-5xl font-bold mb-8 leading-tight">What Our Customers <br /> <span className="text-primary italic">Are Saying</span></h2>
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 text-primary text-[10px] font-black uppercase tracking-widest mb-6 border border-white/10">
+                            <Utensils className="w-3 h-3" />
+                            Community Voice
+                        </div>
+                        <h2 className="text-4xl md:text-6xl font-black mb-10 leading-tight tracking-tight">
+                            What Our <br /> 
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-orange-400 italic">Customers Say</span>
+                        </h2>
+                        
                         <div className="space-y-8">
                             {testimonials.map((t, i) => (
-                                <div key={i} className="bg-background p-8 rounded-2xl shadow-sm border border-primary/10 relative">
-                                    <Quote className="absolute top-4 right-4 h-8 w-8 text-primary/10" />
-                                    <p className="text-lg mb-6 italic text-muted-foreground">"{t.text}"</p>
-                                    <div className="flex items-center gap-4">
-                                        <img src={t.avatar} className="w-12 h-12 rounded-full border-2 border-primary/20" alt={t.name} />
+                                <div key={i} className="group bg-white/5 backdrop-blur-xl p-10 rounded-[2.5rem] border border-white/10 relative transition-all duration-500 hover:bg-white/[0.08] hover:border-white/20">
+                                    <Quote className="absolute top-8 right-10 h-10 w-10 text-primary/10 group-hover:text-primary/20 transition-colors" />
+                                    <p className="text-xl mb-8 italic text-slate-300 font-medium leading-relaxed">"{t.text}"</p>
+                                    <div className="flex items-center gap-5">
+                                        <div className="relative">
+                                            <img src={t.avatar} className="w-16 h-16 rounded-2xl object-cover border-2 border-primary/20 shadow-xl" alt={t.name} />
+                                            <div className="absolute -bottom-1 -right-1 bg-green-500 w-4 h-4 rounded-full border-2 border-slate-900" />
+                                        </div>
                                         <div>
-                                            <p className="font-bold">{t.name}</p>
-                                            <p className="text-xs text-muted-foreground">{t.role}</p>
+                                            <p className="text-lg font-black tracking-tight">{t.name}</p>
+                                            <p className="text-xs font-bold text-primary uppercase tracking-widest">{t.role}</p>
                                         </div>
                                     </div>
                                 </div>
                             ))}
                         </div>
                     </div>
+                    
                     <div className="relative">
-                        <div className="aspect-square rounded-3xl overflow-hidden shadow-2xl rotate-3">
+                        <div className="aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl border-8 border-white/5 relative group">
                             <img 
                                 src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=2070&auto=format&fit=crop" 
-                                className="w-full h-full object-cover" 
+                                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" 
                                 alt="Chef cooking" 
                             />
-                        </div>
-                        <div className="absolute -bottom-8 -left-8 bg-background p-6 rounded-2xl shadow-xl border max-w-[200px] -rotate-6 hidden md:block">
-                            <div className="flex text-yellow-400 mb-2">
-                                {[1, 2, 3, 4, 5].map(n => <Star key={n} className="w-4 h-4 fill-current" />)}
+                            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-60" />
+                            
+                            <div className="absolute bottom-10 left-10 right-10 p-8 bg-white/10 backdrop-blur-2xl rounded-3xl border border-white/10 shadow-2xl translate-y-4 group-hover:translate-y-0 transition-transform duration-700">
+                                <div className="flex text-yellow-400 mb-4 gap-1">
+                                    {[1, 2, 3, 4, 5].map(n => <Star key={n} className="w-5 h-5 fill-current" />)}
+                                </div>
+                                <p className="text-xl font-black text-white leading-tight mb-2">"Signature Culinary Excellence"</p>
+                                <p className="text-slate-400 text-sm font-medium">Join 50,000+ happy food lovers who trust Dinewise.</p>
                             </div>
-                            <p className="text-sm font-bold">"Best food delivery service I've ever used!"</p>
                         </div>
                     </div>
                 </div>
