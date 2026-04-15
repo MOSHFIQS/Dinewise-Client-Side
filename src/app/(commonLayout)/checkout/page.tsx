@@ -7,10 +7,11 @@ import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { createOrderAction } from "@/actions/order.action";
 import { validateCouponAction } from "@/actions/coupon.action";
+import { getMyAddressesAction, createAddressAction } from "@/actions/address.action";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useAuth } from "@/context/AuthProvider";
-import { ShoppingBag, CreditCard, MapPin, Phone, User, Tag, ArrowRight, Loader2, ShieldCheck, Truck, CheckCircle2 } from "lucide-react";
+import { ShoppingBag, CreditCard, MapPin, Phone, User, Tag, ArrowRight, Loader2, ShieldCheck, Truck, CheckCircle2, Star, PlusCircle } from "lucide-react";
 import Image from "next/image";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
@@ -32,10 +33,23 @@ export default function CheckoutPage() {
     const [clientSecret, setClientSecret] = useState<string | null>(null);
     const [orderId, setOrderId] = useState<string | null>(null);
 
+    // Addresses mapping
+    const [addresses, setAddresses] = useState<any[]>([]);
+    const [selectedAddressId, setSelectedAddressId] = useState<string | null>(null);
+    const [useNewAddress, setUseNewAddress] = useState(true);
+    const [saveNewAddress, setSaveNewAddress] = useState(false);
+
     const [formData, setFormData] = useState({
         name: user?.name || "",
         phone: "",
-        address: "",
+    });
+
+    const [newAddress, setNewAddress] = useState({
+        title: "",
+        street: "",
+        city: "",
+        postalCode: "",
+        country: "Bangladesh",
     });
 
     useEffect(() => {
@@ -43,6 +57,23 @@ export default function CheckoutPage() {
             router.push("/cart");
         }
     }, [items, router, clientSecret]);
+
+    useEffect(() => {
+        const fetchAddresses = async () => {
+             const res = await getMyAddressesAction();
+             if (res.success) {
+                  const data = res.data?.data || res.data;
+                  const allAddresses = Array.isArray(data) ? data : [];
+                  setAddresses(allAddresses);
+                  if (allAddresses.length > 0) {
+                       const defaultAddr = allAddresses.find((a: any) => a.isDefault) || allAddresses[0];
+                       setSelectedAddressId(defaultAddr.id);
+                       setUseNewAddress(false);
+                  }
+             }
+        };
+        fetchAddresses();
+    }, []);
 
     const handleValidateCoupon = async () => {
         if (!couponCode) return;
@@ -64,38 +95,74 @@ export default function CheckoutPage() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (!formData.phone || !formData.address) {
-            toast.error("Please provide delivery details");
+        
+        const isUsingNew = useNewAddress || addresses.length === 0;
+
+        if (!formData.name || !formData.phone) {
+            toast.error("Please provide your name and phone number.");
+            return;
+        }
+
+        if (isUsingNew && !newAddress.street.trim()) {
+            toast.error("Please provide a complete street address.");
+            return;
+        }
+
+        if (!isUsingNew && !selectedAddressId) {
+            toast.error("Please select a delivery address");
             return;
         }
 
         setLoading(true);
-        const payload = {
-            items: items.map(i => ({ menuItemId: i.menuItemId, quantity: i.quantity })),
-            addressSnapshot: {
-                name: formData.name,
-                phone: formData.phone,
-                address: formData.address
-            },
-            couponId: discount ? discount.id : undefined,
-        };
 
-        const res = await createOrderAction(payload);
-        if (res.success) {
-            const order = res.data;
-            setOrderId(order.id);
-
-            // Step 2: Create Payment Intent
-            const paymentRes = await createPaymentIntentAction(order.id);
-            if (paymentRes.success) {
-                setClientSecret(paymentRes.data.clientSecret);
-                toast.success("Order registered! Please complete payment. 💳");
-            } else {
-                toast.error("Order created but payment initialization failed. Please contact support.");
-                router.push(`/dashboard/myOrders`);
+        try {
+            if (isUsingNew && saveNewAddress && newAddress.street.trim()) {
+                await createAddressAction({
+                     title: newAddress.title || "Home",
+                     street: newAddress.street,
+                     city: newAddress.city,
+                     postalCode: newAddress.postalCode,
+                     country: newAddress.country,
+                     isDefault: addresses.length === 0,
+                });
             }
-        } else {
-            toast.error(res.error || "Failed to place order");
+
+            const activeSelectedAddress = addresses.find(a => a.id === selectedAddressId);
+            
+            const payload = {
+                items: items.map(i => ({ menuItemId: i.menuItemId, quantity: i.quantity })),
+                addressSnapshot: isUsingNew ? {
+                    name: formData.name,
+                    phone: formData.phone,
+                    address: `${newAddress.street}, ${newAddress.city}, ${newAddress.postalCode}, ${newAddress.country}`,
+                } : {
+                    name: formData.name,
+                    phone: formData.phone,
+                    address: `${activeSelectedAddress?.street}, ${activeSelectedAddress?.city}, ${activeSelectedAddress?.postalCode}, ${activeSelectedAddress?.country}`,
+                },
+                addressId: !isUsingNew ? selectedAddressId : undefined,
+                couponId: discount ? discount.id : undefined,
+            };
+
+            const res = await createOrderAction(payload);
+            if (res.success) {
+                const order = res.data;
+                setOrderId(order.id);
+
+                // Step 2: Create Payment Intent
+                const paymentRes = await createPaymentIntentAction(order.id);
+                if (paymentRes.success) {
+                    setClientSecret(paymentRes.data.clientSecret);
+                    toast.success("Order registered! Please complete payment. 💳");
+                } else {
+                    toast.error("Order created but payment initialization failed. Please contact support.");
+                    router.push(`/dashboard/orders`);
+                }
+            } else {
+                toast.error(res.error || "Failed to place order");
+            }
+        } catch (error: any) {
+            toast.error(error.message || "An error occurred");
         }
         setLoading(false);
     };
@@ -126,14 +193,14 @@ export default function CheckoutPage() {
 
                     {!clientSecret ? (
                         <form onSubmit={handleSubmit} className="space-y-10 group animate-in slide-in-from-left-4 duration-500">
-                            <div className="space-y-6">
+                            
+                            <div className="space-y-6 border-b border-slate-100 pb-10">
                                 <h2 className="text-xl font-black uppercase tracking-tight flex items-center gap-3">
-                                    <div className="h-8 w-8 rounded-xl bg-primary/10 flex items-center justify-center">
-                                        <MapPin className="w-4 h-4 text-primary" />
+                                    <div className="h-8 w-8 rounded-xl bg-orange-100 flex items-center justify-center">
+                                        <User className="w-4 h-4 text-orange-500" />
                                     </div>
-                                    Delivery Information
+                                    Contact Information
                                 </h2>
-
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div className="space-y-2">
                                         <Label className="text-xs font-black uppercase tracking-widest text-slate-400 pl-1">Full Name</Label>
@@ -163,20 +230,141 @@ export default function CheckoutPage() {
                                         </div>
                                     </div>
                                 </div>
-
-                                <div className="space-y-2">
-                                    <Label className="text-xs font-black uppercase tracking-widest text-slate-400 pl-1">Complete Delivery Address</Label>
-                                    <div className="relative">
-                                        <MapPin className="absolute left-4 top-5 w-4 h-4 text-slate-300" />
-                                        <textarea
-                                            placeholder="Flat, Street, Landmark, City..."
-                                            value={formData.address}
-                                            onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                                            className="w-full h-32 rounded-2xl pl-12 pt-4 border-2 border-slate-50 focus:border-primary/20 focus:ring-0 outline-none transition-all group-hover:border-slate-100"
-                                            required
-                                        />
+                            </div>
+                            
+                            <div className="space-y-6">
+                                <h2 className="text-xl font-black uppercase tracking-tight flex items-center gap-3">
+                                    <div className="h-8 w-8 rounded-xl bg-primary/10 flex items-center justify-center">
+                                        <MapPin className="w-4 h-4 text-primary" />
                                     </div>
-                                </div>
+                                    Delivery Address
+                                </h2>
+
+                                {addresses.length > 0 && (
+                                     <div className="space-y-3">
+                                          {addresses.map((addr) => (
+                                               <div
+                                                    key={addr.id}
+                                                    onClick={() => { setSelectedAddressId(addr.id); setUseNewAddress(false); }}
+                                                    className={`flex items-start gap-4 p-4 rounded-2xl border-2 cursor-pointer transition-all
+                                                    ${selectedAddressId === addr.id && !useNewAddress
+                                                                 ? "border-primary bg-primary/5 shadow-md shadow-primary/5 scale-[1.01]"
+                                                                 : "border-slate-100 hover:border-primary/20 bg-white"
+                                                            }`}
+                                               >
+                                                    <div className={`mt-1 h-5 w-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-all ${
+                                                         selectedAddressId === addr.id && !useNewAddress ? "border-primary" : "border-slate-300"
+                                                    }`}>
+                                                         {selectedAddressId === addr.id && !useNewAddress && (
+                                                              <div className="w-2.5 h-2.5 rounded-full bg-primary" />
+                                                         )}
+                                                    </div>
+                                                    <div className="flex-1 min-w-0">
+                                                         <div className="flex items-center gap-2 flex-wrap mb-1">
+                                                              {addr.title && (
+                                                                   <span className="text-xs font-black uppercase tracking-wider bg-slate-900 text-white px-2 py-0.5 rounded-md">
+                                                                        {addr.title}
+                                                                   </span>
+                                                              )}
+                                                              {addr.isDefault && (
+                                                                   <span className="text-xs text-primary font-black uppercase tracking-widest flex items-center gap-1">
+                                                                        <Star className="w-3 h-3 fill-primary text-primary" /> Default
+                                                                   </span>
+                                                              )}
+                                                         </div>
+                                                         <p className="text-sm font-bold text-slate-800">
+                                                              {addr.street}
+                                                         </p>
+                                                         <p className="text-xs text-slate-500 font-medium">
+                                                              {addr.city}, {addr.country} {addr.postalCode ? `- ${addr.postalCode}` : ""}
+                                                         </p>
+                                                    </div>
+                                               </div>
+                                          ))}
+
+                                          <button
+                                               type="button"
+                                               onClick={() => {
+                                                    setUseNewAddress(!useNewAddress);
+                                                    setSelectedAddressId(null);
+                                               }}
+                                               className={`flex items-center gap-2 w-full p-4 rounded-2xl border-2 text-sm font-bold uppercase tracking-widest transition-all
+                                               ${useNewAddress
+                                                         ? "border-primary bg-primary/5 text-primary scale-[1.01]"
+                                                         : "border-dashed border-slate-200 text-slate-400 hover:border-primary/40 hover:text-primary"
+                                                    }`}
+                                          >
+                                               <PlusCircle className="w-4 h-4 flex-shrink-0" />
+                                               Use a different address
+                                          </button>
+                                     </div>
+                                )}
+
+                                {(useNewAddress || addresses.length === 0) && (
+                                    <div className="space-y-4 bg-slate-50 p-6 rounded-3xl border border-slate-100 animate-in zoom-in-95 duration-300">
+                                        <div className="space-y-2">
+                                            <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400 pl-1">Address Label (Home, Office)</Label>
+                                            <Input
+                                                placeholder="Label (optional)"
+                                                value={newAddress.title}
+                                                onChange={(e) => setNewAddress({ ...newAddress, title: e.target.value })}
+                                                className="h-12 rounded-xl border-slate-200 bg-white"
+                                            />
+                                        </div>
+                                        <div className="space-y-2">
+                                            <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400 pl-1">Street Address <span className="text-red-500">*</span></Label>
+                                            <Input
+                                                placeholder="Flat, Street, Landmark..."
+                                                value={newAddress.street}
+                                                onChange={(e) => setNewAddress({ ...newAddress, street: e.target.value })}
+                                                className="h-12 rounded-xl border-slate-200 bg-white"
+                                                required={useNewAddress}
+                                            />
+                                        </div>
+                                        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                                            <div className="space-y-2">
+                                                <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400 pl-1">City</Label>
+                                                <Input
+                                                    placeholder="City"
+                                                    value={newAddress.city}
+                                                    onChange={(e) => setNewAddress({ ...newAddress, city: e.target.value })}
+                                                    className="h-12 rounded-xl border-slate-200 bg-white"
+                                                />
+                                            </div>
+                                            <div className="space-y-2">
+                                                <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400 pl-1">ZIP Code</Label>
+                                                <Input
+                                                    placeholder="Postal Code"
+                                                    value={newAddress.postalCode}
+                                                    onChange={(e) => setNewAddress({ ...newAddress, postalCode: e.target.value })}
+                                                    className="h-12 rounded-xl border-slate-200 bg-white"
+                                                />
+                                            </div>
+                                            <div className="space-y-2 col-span-2 md:col-span-1">
+                                                <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400 pl-1">Country</Label>
+                                                <Input
+                                                    placeholder="Country"
+                                                    value={newAddress.country}
+                                                    onChange={(e) => setNewAddress({ ...newAddress, country: e.target.value })}
+                                                    className="h-12 rounded-xl border-slate-200 bg-white"
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <label className="flex items-center gap-3 text-sm cursor-pointer select-none pt-2">
+                                                <div className={`w-5 h-5 rounded flex items-center justify-center border-2 transition-colors ${saveNewAddress ? 'bg-primary border-primary' : 'bg-white border-slate-300'}`}>
+                                                    <input
+                                                        type="checkbox"
+                                                        checked={saveNewAddress}
+                                                        onChange={(e) => setSaveNewAddress(e.target.checked)}
+                                                        className="hidden"
+                                                    />
+                                                    {saveNewAddress && <CheckCircle2 className="w-3 h-3 text-white" />}
+                                                </div>
+                                                <span className="font-black text-slate-600 tracking-tight">Save this address for future orders</span>
+                                        </label>
+                                    </div>
+                                )}
                             </div>
 
                             <div className="space-y-6">
@@ -226,7 +414,9 @@ export default function CheckoutPage() {
                                 <CheckCircle2 className="w-6 h-6 text-green-500" />
                                 <div>
                                     <p className="font-black uppercase tracking-tight text-slate-800">Delivery Details Saved</p>
-                                    <p className="text-xs text-slate-500 font-bold">{formData.address}</p>
+                                    <p className="text-xs text-slate-500 font-bold">
+                                        {useNewAddress ? newAddress.street : addresses.find(a => a.id === selectedAddressId)?.street}
+                                    </p>
                                 </div>
                             </div>
 
@@ -357,5 +547,3 @@ export default function CheckoutPage() {
         </div>
     );
 }
-
-

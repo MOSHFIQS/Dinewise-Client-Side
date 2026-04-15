@@ -1,10 +1,9 @@
 {
   "/(commonLayout)/cart/page": "app/(commonLayout)/cart/page.js",
-  "/(commonLayout)/page": "app/(commonLayout)/page.js",
-  "/_not-found/page": "app/_not-found/page.js",
+  "/(commonLayout)/checkout/page": "app/(commonLayout)/checkout/page.js",
+  "/(commonLayout)/menu/page": "app/(commonLayout)/menu/page.js",
   "/dashboard/@chef/myOrders/page": "app/dashboard/@chef/myOrders/page.js",
   "/dashboard/@customer/addresses/page": "app/dashboard/@customer/addresses/page.js",
   "/dashboard/@customer/myCart/page": "app/dashboard/@customer/myCart/page.js",
-  "/dashboard/@customer/payment/page": "app/dashboard/@customer/payment/page.js",
-  "/dashboard/page": "app/dashboard/page.js"
+  "/dashboard/@customer/payment/page": "app/dashboard/@customer/payment/page.js"
 }
