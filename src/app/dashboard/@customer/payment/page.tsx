@@ -13,10 +13,26 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { getMyOrdersAction } from "@/actions/order.action";
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+import StripeCheckoutForm from "@/components/shared/StripeCheckoutForm";
+import { createPaymentIntentAction } from "@/actions/payment.action";
+import { envVars } from "@/config/env";
+
+const stripePromise = loadStripe(envVars.STRIPE_PUBLISHABLE_KEY);
 
 export default function OrderHistoryPage() {
     const [orders, setOrders] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
+    
+    // Payment specific states
+    const [payOrderId, setPayOrderId] = useState<string | null>(null);
+    const [clientSecret, setClientSecret] = useState<string | null>(null);
+    const [isInitPayment, setIsInitPayment] = useState(false);
+    const [payAmount, setPayAmount] = useState<number>(0);
+    const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
 
     const fetchOrders = async () => {
         setLoading(true);
@@ -37,6 +53,41 @@ export default function OrderHistoryPage() {
     useEffect(() => {
         fetchOrders();
     }, []);
+
+    const handlePay = async (orderId: string, amount: number) => {
+        setIsInitPayment(true);
+        setPayOrderId(orderId);
+        setPayAmount(amount);
+        try {
+            const res = await createPaymentIntentAction(orderId);
+            if (res.success) {
+                setClientSecret(res.data.clientSecret);
+                setIsPaymentModalOpen(true);
+            } else {
+                toast.error(res.error || "Failed to initialize payment");
+                setPayOrderId(null);
+            }
+        } catch (error) {
+            toast.error("An error occurred");
+            setPayOrderId(null);
+        }
+        setIsInitPayment(false);
+    };
+
+    const handlePaymentSuccess = () => {
+         setIsPaymentModalOpen(false);
+         setPayOrderId(null);
+         setClientSecret(null);
+         fetchOrders(); // Refresh order statuses
+    };
+
+    const handleModalClose = (open: boolean) => {
+         setIsPaymentModalOpen(open);
+         if (!open) {
+              setPayOrderId(null);
+              setClientSecret(null);
+         }
+    };
 
     const getStatusColor = (status: string) => {
          switch (status) {
@@ -63,6 +114,7 @@ export default function OrderHistoryPage() {
                             <TableHead>Total Items</TableHead>
                             <TableHead>Total Amount</TableHead>
                             <TableHead>Status</TableHead>
+                            <TableHead className="text-right">Actions</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -98,11 +150,45 @@ export default function OrderHistoryPage() {
                                          {order.status}
                                     </Badge>
                                 </TableCell>
+                                <TableCell className="text-right whitespace-nowrap">
+                                     {(order.status === "PLACED" || order.status === "PENDING") && order.payment?.status !== "SUCCESS" ? (
+                                         <Button 
+                                             size="sm" 
+                                             onClick={() => handlePay(order.id, order.totalPrice)}
+                                             disabled={isInitPayment && payOrderId === order.id}
+                                             className="rounded-full px-4 h-8"
+                                         >
+                                              {isInitPayment && payOrderId === order.id ? <Loader2 className="w-4 h-4 mr-1 animate-spin" /> : "Pay Now"}
+                                         </Button>
+                                     ) : (
+                                         <span className="text-muted-foreground text-xs">—</span>
+                                     )}
+                                </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
                 </Table>
             </div>
+
+            <Dialog open={isPaymentModalOpen} onOpenChange={handleModalClose}>
+                <DialogContent className="sm:max-w-md">
+                     <DialogHeader>
+                          <DialogTitle className="text-xl font-black uppercase tracking-tight">Complete Payment</DialogTitle>
+                     </DialogHeader>
+                     {clientSecret && envVars.STRIPE_PUBLISHABLE_KEY ? (
+                          <div className="pt-4">
+                               <Elements stripe={stripePromise} options={{ clientSecret }}>
+                                    <StripeCheckoutForm totalAmount={payAmount} onSuccess={handlePaymentSuccess} />
+                               </Elements>
+                          </div>
+                     ) : (
+                          <div className="p-8 text-center">
+                               <Loader2 className="w-6 h-6 animate-spin mx-auto text-primary" />
+                               <p className="text-xs text-muted-foreground mt-2">Initializing...</p>
+                          </div>
+                     )}
+                </DialogContent>
+            </Dialog>
         </div>
     );
 }

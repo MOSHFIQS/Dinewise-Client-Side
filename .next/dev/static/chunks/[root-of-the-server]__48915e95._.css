@@ -927,6 +927,10 @@
     margin-top: auto;
   }
 
+  .mr-1 {
+    margin-right: calc(var(--spacing) * 1);
+  }
+
   .mr-2 {
     margin-right: calc(var(--spacing) * 2);
   }
@@ -1382,10 +1386,6 @@
 
   .max-w-\[700px\] {
     max-width: 700px;
-  }
-
-  .max-w-full {
-    max-width: 100%;
   }
 
   .max-w-lg {
