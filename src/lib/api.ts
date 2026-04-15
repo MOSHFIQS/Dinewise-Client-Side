@@ -28,7 +28,8 @@ export const apiFetchClient = async (endpoint: string, options: FetchOptions = {
         return {
             success: response.ok,
             status: response.status,
-            data: data.data || data,
+            data: data.data || data || null,
+            meta: data.meta || null,
             message: data.message || (response.ok ? "Success" : "API request failed"),
         };
     } catch (error: any) {

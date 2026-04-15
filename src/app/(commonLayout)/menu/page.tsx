@@ -4,12 +4,12 @@ import MenuGrid from "@/components/shared/MenuGrid";
 
 export default async function MenuPage() {
     const [menuRes, categoryRes] = await Promise.all([
-        getAllMenuItems(),
-        getAllCategories()
+        getAllMenuItems({}),
+        getAllCategories({})
     ]);
 
-    const menuItems = menuRes?.success ? menuRes.data.data : [];
-    const categories = categoryRes?.success ? categoryRes.data.data : [];
+    const menuItems = menuRes?.success ? menuRes.data : [];
+    const categories = categoryRes?.success ? categoryRes.data : [];
 
     return (
         <div className="container mx-auto px-4 py-8">

@@ -10,8 +10,8 @@ export default async function UpdateMenuItemPage({ params }: { params: Promise<{
           getAllCategories()
      ]);
 
-     const item = itemRes.success ? (itemRes.data?.data || itemRes.data) : null;
-     const categories = catRes.success ? (catRes.data?.data || catRes.data || []) : [];
+     const item = itemRes.success ? itemRes.data : null;
+     const categories = catRes.success ? (catRes.data || []) : [];
 
      if (!item) {
           return (

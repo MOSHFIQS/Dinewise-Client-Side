@@ -5,7 +5,7 @@ export default async function AddMenuItemPage() {
      const res = await getAllCategories();
      
      // Handle both wrapped and unwrapped data
-     const categories = res.success ? (res.data?.data || res.data || []) : [];
+     const categories = res.success ? (res.data || []) : [];
 
      return <CreateMenuItem categories={categories} />;
 }

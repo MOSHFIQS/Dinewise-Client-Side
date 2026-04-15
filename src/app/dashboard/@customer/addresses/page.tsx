@@ -25,7 +25,9 @@ export default function DeliveryAddressesPage() {
     const fetchAddresses = async () => {
          setLoading(true);
          const res = await getMyAddressesAction();
-         if (res.success) setAddresses(res.data.data);
+         if (res.success) {
+              setAddresses(res.data);
+         }
          setLoading(false);
     };
 

@@ -5,7 +5,7 @@ export default async function UpdateCategoryPage({ params }: { params: Promise<{
      const { id } = await params;
      const catRes = await getCategoryByIdAction(id);
 
-     const category = catRes.success ? (catRes.data?.data || catRes.data) : null;
+     const category = catRes.success ? catRes.data : null;
 
      if (!category) {
           return (

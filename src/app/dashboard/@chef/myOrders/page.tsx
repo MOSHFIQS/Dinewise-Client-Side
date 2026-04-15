@@ -23,11 +23,10 @@ export default function ChefOrdersPage() {
     const fetchOrders = async () => {
         setLoading(true);
         try {
-            const res = await getAllOrdersAction();
+            const res = await getAllOrdersAction({});
             if (res.success && res.data) {
-                // Handle both wrapped and unwrapped data
-                const itemsList = Array.isArray(res.data) ? res.data : (res.data.data || []);
-                setOrders(itemsList);
+                // Now data is returned directly in res.data
+                setOrders(res.data);
             } else {
                  toast.error("Failed to fetch orders");
             }

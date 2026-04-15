@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../../../src/app/dashboard/%40admin/default.tsx"],"sourcesContent":["const AdminDefault = () => {\n     return null\n}\n\nexport default AdminDefault\n"],"names":[],"mappings":"wDAAqB,IACT"}

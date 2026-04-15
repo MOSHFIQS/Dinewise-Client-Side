@@ -65,8 +65,12 @@ __turbopack_context__.s([
 const envVars = {
     FRONTEND_URL: ("TURBOPACK compile-time value", "http://localhost:3000") || "http://localhost:3000",
     BACKEND_URL: ("TURBOPACK compile-time value", "http://localhost:5000") || "http://localhost:5000",
-    JWT_SECRET: process.env.JWT_SECRET
+    JWT_SECRET: process.env.JWT_SECRET,
+    STRIPE_PUBLISHABLE_KEY: ("TURBOPACK compile-time value", "pk_test_51TH6DgDEMXRARX3CChCtDLhfmQ0VNH90xJQsZguNNuQthsyRbCRc9vSHvJ59pR7uoaLPm1ctfdkgE9TcYOkILKsH00HHJFcf9m")
 };
+// Defensive check for critical frontend environment variables
+if ("TURBOPACK compile-time falsy", 0) //TURBOPACK unreachable
+;
 }),
 "[externals]/buffer [external] (buffer, cjs)", ((__turbopack_context__, module, exports) => {
 

@@ -14,9 +14,7 @@ export default function NotificationBell() {
     const fetchNotifications = async () => {
         const res = await getMyNotificationsAction();
         if (res.success && res.data) {
-             // Handle both { data: [...] } and directly [...]
-             const items = Array.isArray(res.data) ? res.data : (res.data.data || []);
-             setNotifications(items);
+             setNotifications(res.data);
         }
     };
 

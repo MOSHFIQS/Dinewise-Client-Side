@@ -15,8 +15,9 @@ import { loadStripe } from '@stripe/stripe-js';
 import StripeCheckoutForm from "@/components/shared/StripeCheckoutForm";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useRouter } from "next/navigation";
+import { envVars } from "@/config/env";
 
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || "pk_test_mock");
+const stripePromise = loadStripe(envVars.STRIPE_PUBLISHABLE_KEY);
 
 export default function MyCartPage() {
     const { items, removeFromCart, updateQuantity, clearCart, totalAmount } = useCartStore();
@@ -38,7 +39,7 @@ export default function MyCartPage() {
         try {
             const res = await validateCouponAction(couponCode, subTotal);
             if (res.success && res.data) {
-                 const couponData = res.data.data || res.data;
+                 const couponData = res.data;
                  setDiscount(couponData.discountAmount);
                  setCouponId(couponData.id);
                  toast.success(`Coupon applied! Saved $${couponData.discountAmount.toFixed(2)}`);
@@ -70,7 +71,7 @@ export default function MyCartPage() {
                   throw new Error(orderRes.message || "Failed to create order");
              }
              
-             const orderData = orderRes.data.data || orderRes.data;
+             const orderData = orderRes.data;
              const orderId = orderData.id;
              
              // 2. Generate Stripe Payment Intent
@@ -80,7 +81,7 @@ export default function MyCartPage() {
                   throw new Error(intentRes.message || "Failed to initialize payment gateway");
              }
              
-             const intentData = intentRes.data.data || intentRes.data;
+             const intentData = intentRes.data;
 
              // 3. Mount Stripe Elements
              setClientSecret(intentData.clientSecret || intentData);

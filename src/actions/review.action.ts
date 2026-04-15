@@ -1,36 +1,33 @@
 "use server";
 
-import { apiFetchServerMain } from "@/lib/apiFetchServer";
+import { buildQueryString, QueryParams } from "@/utils/buildQueryString";
+import { reviewServerService } from "@/service/review.server.service";
+import { revalidatePath } from "next/cache";
 
 export const createReviewAction = async (menuItemId: string, payload: any) => {
     try {
-        const res = await apiFetchServerMain(`/review/${menuItemId}`, {
-            method: "POST",
-            body: JSON.stringify(payload),
-        });
+        const res = await reviewServerService.create(menuItemId, payload);
+        revalidatePath(`/menu/${menuItemId}`);
         return res;
     } catch (error: any) {
         return { success: false, error: error.message };
     }
 };
 
-export const getReviewsAction = async (menuItemId: string, searchParams?: Record<string, string>) => {
+export const getReviewsAction = async (menuItemId: string, params: QueryParams = {}) => {
     try {
-        const res = await apiFetchServerMain(`/review/${menuItemId}`, {
-            method: "GET",
-            params: searchParams,
-        });
+        const query = buildQueryString(params);
+        const res = await reviewServerService.getMenuItemReviews(menuItemId, query);
         return res;
     } catch (error: any) {
         return { success: false, error: error.message };
     }
 };
 
-export const deleteReviewAction = async (id: string) => {
+export const deleteReviewAction = async (id: string, menuItemId?: string) => {
     try {
-        const res = await apiFetchServerMain(`/review/${id}`, {
-            method: "DELETE",
-        });
+        const res = await reviewServerService.delete(id);
+        if (menuItemId) revalidatePath(`/menu/${menuItemId}`);
         return res;
     } catch (error: any) {
         return { success: false, error: error.message };

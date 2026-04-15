@@ -28,11 +28,10 @@ export default function AllUsersPage() {
     const fetchUsers = async () => {
         setLoading(true);
         try {
-            const res = await getAllUsersAction();
+            const res = await getAllUsersAction({});
             if (res.success && res.data) {
-                // Handle both wrapped and unwrapped data
-                const itemsList = Array.isArray(res.data) ? res.data : (res.data.data || []);
-                setUsers(itemsList);
+                // Now data is returned directly in res.data
+                setUsers(res.data);
             } else {
                 toast.error("Failed to fetch users");
             }

@@ -28,15 +28,15 @@ export default function MenuItemDetails({ params }: { params: Promise<{ id: stri
             try {
                 const result = await getMenuItemById(id);
                 if (result.success && result.data) {
-                    const itemData = result.data.data || result.data;
+                    const itemData = result.data;
                     setItem(itemData);
                     
                     // Fetch related items from the same category
                     if (itemData.categoryId) {
                         setLoadingRelated(true);
-                        const relatedResult = await getAllMenuItems({ categoryId: itemData.categoryId });
+                        const relatedResult = await getAllMenuItems(itemData.categoryId);
                         if (relatedResult.success && relatedResult.data) {
-                             const allItems = Array.isArray(relatedResult.data) ? relatedResult.data : (relatedResult.data.data || []);
+                             const allItems = relatedResult.data;
                              setRelatedItems(allItems.filter((i: any) => i.id !== id).slice(0, 4));
                         }
                         setLoadingRelated(false);

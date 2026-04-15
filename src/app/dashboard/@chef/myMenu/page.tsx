@@ -8,7 +8,7 @@ export default async function MyMenuPage({ searchParams }: { searchParams: Promi
      const pageNum = page ? parseInt(page) : 1;
      const limitNum = limit ? parseInt(limit) : 10;
      
-     const res = await getChefMenuItemsAction(pageNum, limitNum, searchTerm);
+     const res = await getChefMenuItemsAction({ page: pageNum.toString(), limit: limitNum.toString(), searchTerm });
 
      if (!res.success) {
           return (
@@ -20,8 +20,8 @@ export default async function MyMenuPage({ searchParams }: { searchParams: Promi
           );
      }
 
-     const items = res.data?.data || res.data || [];
-     const meta = res.data?.meta || { page: pageNum, limit: limitNum, totalPages: 1, total: items.length };
+     const items = res.data || [];
+     const meta = res.meta || { page: pageNum, limit: limitNum, totalPages: 1, total: items.length };
 
      return (
           <div className="space-y-6 h-full flex flex-col justify-between py-2 overflow-hidden">

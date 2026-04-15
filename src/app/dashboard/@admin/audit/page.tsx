@@ -12,8 +12,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { apiFetchClient } from "@/lib/api";
-import Cookies from "js-cookie";
+import { getAuditLogsAction } from "@/actions/admin.action";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
@@ -24,11 +23,9 @@ export default function AuditLogsPage() {
     const fetchLogs = async () => {
         setLoading(true);
         try {
-            const res = await apiFetchClient("/audit");
+            const res = await getAuditLogsAction({});
             if (res.success && res.data) {
-                // Handle both wrapped and unwrapped data
-                const itemsList = Array.isArray(res.data) ? res.data : (res.data.data || []);
-                setLogs(itemsList);
+                setLogs(res.data);
             }
         } catch (error: any) {
              console.error("Audit log fetch error:", error);

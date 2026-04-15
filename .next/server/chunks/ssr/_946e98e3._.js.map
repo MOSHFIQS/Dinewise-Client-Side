@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../../../src/app/dashboard/%40customer/default.tsx"],"sourcesContent":["const CustomerDefault = () => {\n     return null\n}\n\nexport default CustomerDefault\n"],"names":[],"mappings":"ySAAwB,IACZ"}

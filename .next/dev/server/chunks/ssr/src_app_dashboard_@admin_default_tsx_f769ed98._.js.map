@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/moshf/OneDrive/Documents/DINEWISE/Dinewise-Client-Side/src/app/dashboard/%40admin/default.tsx"],"sourcesContent":["const AdminDefault = () => {\n     return null\n}\n\nexport default AdminDefault\n"],"names":[],"mappings":";;;;AAAA,MAAM,eAAe;IAChB,OAAO;AACZ;uCAEe"}}]
-}

@@ -1,5 +1,0 @@
-1:"$Sreact.fragment"
-2:I[70845,["/_next/static/chunks/7a3f0b7788ff65a9.js","/_next/static/chunks/968fbd8996363459.js","/_next/static/chunks/beeac084f314b1fa.js"],"ViewportBoundary"]
-3:I[70845,["/_next/static/chunks/7a3f0b7788ff65a9.js","/_next/static/chunks/968fbd8996363459.js","/_next/static/chunks/beeac084f314b1fa.js"],"MetadataBoundary"]
-4:"$Sreact.suspense"
-0:{"buildId":"GW_qsay6FVFcueM1jIdlv","rsc":["$","$1","h",{"children":[["$","meta",null,{"name":"robots","content":"noindex"}],["$","$L2",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","div",null,{"hidden":true,"children":["$","$L3",null,{"children":["$","$4",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"DineWise - Restaurant Ordering Platform"}],["$","meta","1",{"name":"description","content":"Order food easily and experience luxury dining."}]]}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"loading":null,"isPartial":false}

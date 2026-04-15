@@ -1,10 +1,13 @@
 "use server";
 
-import { apiFetchServerMain } from "@/lib/apiFetchServer";
+import { buildQueryString, QueryParams } from "@/utils/buildQueryString";
+import { notificationServerService } from "@/service/notification.server.service";
+import { revalidatePath } from "next/cache";
 
-export const getMyNotificationsAction = async () => {
+export const getMyNotificationsAction = async (params: QueryParams = {}) => {
     try {
-        const res = await apiFetchServerMain("/notification/me");
+        const query = buildQueryString(params);
+        const res = await notificationServerService.getMyNotifications(query);
         return res;
     } catch (error: any) {
         return { success: false, error: error.message };
@@ -13,9 +16,8 @@ export const getMyNotificationsAction = async () => {
 
 export const markNotificationReadAction = async (id: string) => {
     try {
-        const res = await apiFetchServerMain(`/notification/${id}/read`, {
-            method: "PATCH",
-        });
+        const res = await notificationServerService.markAsRead(id);
+        revalidatePath("/dashboard");
         return res;
     } catch (error: any) {
         return { success: false, error: error.message };

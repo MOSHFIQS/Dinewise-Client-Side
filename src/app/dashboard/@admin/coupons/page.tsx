@@ -39,11 +39,10 @@ export default function AdminCouponsPage() {
     const fetchCoupons = async () => {
         setLoading(true);
         try {
-            const res = await getAllCouponsAction();
+            const res = await getAllCouponsAction({});
             if (res.success && res.data) {
-                // Handle both wrapped and unwrapped data
-                const itemsList = Array.isArray(res.data) ? res.data : (res.data.data || []);
-                setCoupons(itemsList);
+                // Now data is returned directly in res.data
+                setCoupons(res.data);
             } else {
                 toast.error("Failed to fetch coupons");
             }

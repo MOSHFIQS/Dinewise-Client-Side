@@ -1,26 +1,22 @@
 "use server";
 
-import { apiFetchServerMain } from "@/lib/apiFetchServer";
+import { buildQueryString, QueryParams } from "@/utils/buildQueryString";
+import { categoryServerService } from "@/service/category.server.service";
+import { revalidatePath } from "next/cache";
 
-export const getAllCategories = async (page?: number, limit?: number) => {
+export const getAllCategories = async (params: QueryParams = {}) => {
     try {
-         let query = "";
-         if (page || limit) {
-              const params = new URLSearchParams();
-              if (page) params.append("page", String(page));
-              if (limit) params.append("limit", String(limit));
-              query = `?${params.toString()}`;
-         }
-         const res = await apiFetchServerMain(`/category${query}`, { method: "GET" });
-         return res;
+          const query = buildQueryString(params);
+          const res = await categoryServerService.getAll(query);
+          return res;
     } catch (error: any) {
-         return { success: false, error: error.message };
+          return { success: false, error: error.message };
     }
 };
 
 export const getCategoryByIdAction = async (id: string) => {
      try {
-          const res = await apiFetchServerMain(`/category/${id}`, { method: "GET" });
+          const res = await categoryServerService.getById(id);
           return res;
      } catch (error: any) {
           return { success: false, error: error.message };
@@ -29,22 +25,18 @@ export const getCategoryByIdAction = async (id: string) => {
 
 export const createCategoryAction = async (payload: { name: string; description?: string; image?: string }) => {
     try {
-         const res = await apiFetchServerMain("/category", {
-              method: "POST",
-              body: JSON.stringify(payload),
-         });
+         const res = await categoryServerService.create(payload);
+         revalidatePath("/dashboard/admin/category");
          return res;
     } catch (error: any) {
          return { success: false, error: error.message };
     }
 };
 
-export const updateCategoryAction = async (id: string, payload: { name?: string; description?: string; image?: string }) => {
+export const updateCategoryAction = async (id: string, payload: Partial<{ name: string; description: string; image: string }>) => {
      try {
-          const res = await apiFetchServerMain(`/category/${id}`, {
-               method: "PUT",
-               body: JSON.stringify(payload),
-          });
+          const res = await categoryServerService.update(id, payload);
+          revalidatePath("/dashboard/admin/category");
           return res;
      } catch (error: any) {
           return { success: false, error: error.message };
@@ -53,7 +45,8 @@ export const updateCategoryAction = async (id: string, payload: { name?: string;
 
 export const deleteCategoryAction = async (id: string) => {
     try {
-         const res = await apiFetchServerMain(`/category/${id}`, { method: "DELETE" });
+         const res = await categoryServerService.delete(id);
+         revalidatePath("/dashboard/admin/category");
          return res;
     } catch (error: any) {
          return { success: false, error: error.message };

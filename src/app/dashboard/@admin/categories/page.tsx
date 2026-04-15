@@ -8,15 +8,14 @@ export default async function CategoriesPage({ searchParams }: { searchParams: P
      const pageNum = page ? parseInt(page) : 1;
      const limitNum = limit ? parseInt(limit) : 10;
      
-     const res = await getAllCategories(pageNum, limitNum);
+     const res = await getAllCategories({ page: pageNum.toString(), limit: limitNum.toString() });
 
      if (!res.success) {
           return <p className="p-6 text-red-600 font-medium bg-red-50 rounded-xl border border-red-100 m-6">Failed to load categories: {res.error}</p>;
      }
 
-     // Dinewise API might return categories in res.data or res.data.data depending on structure
-     const categories = res.data?.data || res.data || [];
-     const meta = res.data?.meta || { page: pageNum, limit: limitNum, totalPages: 1 };
+     const categories = res.data || [];
+     const meta = res.meta || { page: pageNum, limit: limitNum, totalPages: 1 };
 
      return (
           <div className="space-y-6 h-full flex flex-col justify-between py-2 overflow-hidden">

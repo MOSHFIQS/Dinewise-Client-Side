@@ -1,13 +1,13 @@
 "use server";
 
-import { apiFetchServerMain } from "@/lib/apiFetchServer";
+import { buildQueryString, QueryParams } from "@/utils/buildQueryString";
+import { adminServerService } from "@/service/admin.server.service";
+import { revalidatePath } from "next/cache";
 
-export const getAllUsersAction = async (searchParams?: Record<string, string>) => {
+export const getAllUsersAction = async (params: QueryParams = {}) => {
     try {
-        const res = await apiFetchServerMain("/admin/users", {
-            method: "GET",
-            params: searchParams,
-        });
+        const query = buildQueryString(params);
+        const res = await adminServerService.getAllUsers(query);
         return res;
     } catch (error: any) {
         return { success: false, error: error.message };
@@ -16,10 +16,8 @@ export const getAllUsersAction = async (searchParams?: Record<string, string>) =
 
 export const updateUserStatusAction = async (id: string, status: string) => {
     try {
-        const res = await apiFetchServerMain(`/admin/users/${id}/status`, {
-            method: "PATCH",
-            body: JSON.stringify({ status }),
-        });
+        const res = await adminServerService.updateUserStatus(id, status);
+        revalidatePath("/dashboard/admin/users");
         return res;
     } catch (error: any) {
         return { success: false, error: error.message };
@@ -28,7 +26,17 @@ export const updateUserStatusAction = async (id: string, status: string) => {
 
 export const getDashboardStatsAction = async () => {
     try {
-        const res = await apiFetchServerMain("/admin/stats");
+        const res = await adminServerService.getDashboardStats();
+        return res;
+    } catch (error: any) {
+        return { success: false, error: error.message };
+    }
+};
+
+export const getAuditLogsAction = async (params: QueryParams = {}) => {
+    try {
+        const query = buildQueryString(params);
+        const res = await adminServerService.getAuditLogs(query);
         return res;
     } catch (error: any) {
         return { success: false, error: error.message };

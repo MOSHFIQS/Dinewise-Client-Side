@@ -21,11 +21,10 @@ export default function OrderHistoryPage() {
     const fetchOrders = async () => {
         setLoading(true);
         try {
-            const res = await getMyOrdersAction();
+            const res = await getMyOrdersAction({});
             if (res.success && res.data) {
-                // Handle both wrapped and unwrapped data
-                const itemsList = Array.isArray(res.data) ? res.data : (res.data.data || []);
-                setOrders(itemsList);
+                // Now data is returned directly in res.data
+                setOrders(res.data);
             } else {
                  toast.error(res.message || "Failed to fetch order history");
             }

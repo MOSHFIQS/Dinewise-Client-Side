@@ -65,8 +65,7 @@ export function EditMenuItemModal({ item, isOpen, onClose, onSuccess }: EditMenu
                try {
                     const res = await getAllCategories();
                     if (res.success && res.data) {
-                         // Handle both wrapped and unwrapped data
-                         const itemsList = Array.isArray(res.data) ? res.data : (res.data.data || []);
+                         const itemsList = res.data;
                          setCategories(itemsList);
                     }
                } catch (error) {

@@ -1,35 +1,23 @@
 "use server";
 
-import { apiFetchServerMain } from "@/lib/apiFetchServer";
+import { buildQueryString, QueryParams } from "@/utils/buildQueryString";
+import { menuItemServerService } from "@/service/menuItem.server.service";
+import { revalidatePath } from "next/cache";
 
-export const getAllMenuItems = async (page?: number, limit?: number, searchTerm?: string) => {
+export const getAllMenuItems = async (params: QueryParams = {}) => {
     try {
-        let query = "";
-        const params = new URLSearchParams();
-        if (page) params.append("page", String(page));
-        if (limit) params.append("limit", String(limit));
-        if (searchTerm) params.append("searchTerm", searchTerm);
-        
-        query = params.toString() ? `?${params.toString()}` : "";
-        
-        const res = await apiFetchServerMain(`/menu-item${query}`, { method: "GET" });
+        const query = buildQueryString(params);
+        const res = await menuItemServerService.getAll(query);
         return res;
     } catch (error: any) {
         return { success: false, error: error.message };
     }
 };
 
-export const getChefMenuItemsAction = async (page?: number, limit?: number, searchTerm?: string) => {
+export const getChefMenuItemsAction = async (params: QueryParams = {}) => {
     try {
-        let query = "";
-        const params = new URLSearchParams();
-        if (page) params.append("page", String(page));
-        if (limit) params.append("limit", String(limit));
-        if (searchTerm) params.append("searchTerm", searchTerm);
-        
-        query = params.toString() ? `?${params.toString()}` : "";
-        
-        const res = await apiFetchServerMain(`/menu-item/chef${query}`, { method: "GET" });
+        const query = buildQueryString(params);
+        const res = await menuItemServerService.getChefMenuItems(query);
         return res;
     } catch (error: any) {
         return { success: false, error: error.message };
@@ -38,7 +26,7 @@ export const getChefMenuItemsAction = async (page?: number, limit?: number, sear
 
 export const getMenuItemById = async (id: string) => {
     try {
-        const res = await apiFetchServerMain(`/menu-item/${id}`, { method: "GET" });
+        const res = await menuItemServerService.getById(id);
         return res;
     } catch (error: any) {
         return { success: false, error: error.message };
@@ -47,10 +35,8 @@ export const getMenuItemById = async (id: string) => {
 
 export const createMenuItemAction = async (payload: any) => {
     try {
-        const res = await apiFetchServerMain("/menu-item/chef", {
-            method: "POST",
-            body: JSON.stringify(payload),
-        });
+        const res = await menuItemServerService.create(payload);
+        revalidatePath("/dashboard/chef/myMenu");
         return res;
     } catch (error: any) {
         return { success: false, error: error.message };
@@ -59,10 +45,8 @@ export const createMenuItemAction = async (payload: any) => {
 
 export const updateMenuItemAction = async (id: string, payload: any) => {
     try {
-        const res = await apiFetchServerMain(`/menu-item/chef/${id}`, {
-            method: "PUT",
-            body: JSON.stringify(payload),
-        });
+        const res = await menuItemServerService.update(id, payload);
+        revalidatePath("/dashboard/chef/myMenu");
         return res;
     } catch (error: any) {
         return { success: false, error: error.message };
@@ -71,9 +55,8 @@ export const updateMenuItemAction = async (id: string, payload: any) => {
 
 export const deleteMenuItemAction = async (id: string) => {
     try {
-        const res = await apiFetchServerMain(`/menu-item/chef/${id}`, {
-            method: "DELETE",
-        });
+        const res = await menuItemServerService.delete(id);
+        revalidatePath("/dashboard/chef/myMenu");
         return res;
     } catch (error: any) {
         return { success: false, error: error.message };

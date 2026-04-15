@@ -68,7 +68,7 @@ export function PopularDishesSection() {
             try {
                 const res = await getAllMenuItems({ limit: "4" });
                 if (res.success && res.data) {
-                    const itemsList = Array.isArray(res.data) ? res.data : (res.data.data || []);
+                    const itemsList = res.data;
                     setItems(itemsList);
                 }
             } catch (error) {

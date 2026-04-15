@@ -66,11 +66,11 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$shared$
 ;
 async function MenuPage() {
     const [menuRes, categoryRes] = await Promise.all([
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$actions$2f$menuItem$2e$action$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getAllMenuItems"])(),
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$actions$2f$category$2e$action$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getAllCategories"])()
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$actions$2f$menuItem$2e$action$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getAllMenuItems"])({}),
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$actions$2f$category$2e$action$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getAllCategories"])({})
     ]);
-    const menuItems = menuRes?.success ? menuRes.data.data : [];
-    const categories = categoryRes?.success ? categoryRes.data.data : [];
+    const menuItems = menuRes?.success ? menuRes.data : [];
+    const categories = categoryRes?.success ? categoryRes.data : [];
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$1$2e$4_$40$babel$2b$core$40$7$2e$2_07c7b45b0f83eb8e0c4154f920fd2e73$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "container mx-auto px-4 py-8",
         children: [

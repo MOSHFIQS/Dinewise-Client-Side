@@ -36,7 +36,7 @@ export default function ReviewSection({ menuItemId }: { menuItemId: string }) {
           setLoading(true);
           const result = await getReviewsAction(menuItemId);
           if (result.success) {
-               setReviews(result.data.data);
+               setReviews(result.data);
           }
           setLoading(false);
      };
