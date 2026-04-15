@@ -38,14 +38,12 @@ export default function StripeCheckoutForm({
              redirect: "if_required",
         });
 
-        console.log(error, paymentIntent);
+        const isSucceeded = paymentIntent?.status === "succeeded" || 
+                           (error?.payment_intent?.status === "succeeded");
+        const finalIntentId = paymentIntent?.id || error?.payment_intent?.id;
 
-        if (error) {
-             toast.error(error.message || "An unexpected error occurred during payment.");
-             setErrorMessage(error.message || "Payment failed.");
-             setIsProcessing(false);
-        } else if (paymentIntent && paymentIntent.status === "succeeded") {
-             const res = await verifyPaymentAction(paymentIntent.id);
+        if (isSucceeded && finalIntentId) {
+             const res = await verifyPaymentAction(finalIntentId);
              
              if (res.success) {
                   toast.success("Payment verified! Your order is being processed.");
@@ -54,6 +52,10 @@ export default function StripeCheckoutForm({
                   toast.error(res.error || "Failed to verify payment with our servers.");
                   setIsProcessing(false);
              }
+        } else if (error) {
+             toast.error(error.message || "An unexpected error occurred during payment.");
+             setErrorMessage(error.message || "Payment failed.");
+             setIsProcessing(false);
         } else {
              toast.error("Payment requires further action or is pending.");
              setIsProcessing(false);
@@ -74,9 +76,9 @@ export default function StripeCheckoutForm({
             <div className="min-h-[200px] relative">
                 <PaymentElement 
                     onReady={() => setIsReady(true)} 
-                    onChange={(e) => {
-                        if (e.error) setErrorMessage(e.error.message);
-                        else setErrorMessage(null);
+                    onChange={() => {
+                        // Clear the manual error message when the user interacts with the form
+                        if (errorMessage) setErrorMessage(null);
                     }}
                 />
                 
