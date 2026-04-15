@@ -1,12 +1,11 @@
 {
   "/(commonLayout)/login/page": "app/(commonLayout)/login/page.js",
-  "/(commonLayout)/menu/page": "app/(commonLayout)/menu/page.js",
-  "/(commonLayout)/page": "app/(commonLayout)/page.js",
-  "/(commonLayout)/register/page": "app/(commonLayout)/register/page.js",
-  "/_not-found/page": "app/_not-found/page.js",
   "/dashboard/@admin/allOrders/page": "app/dashboard/@admin/allOrders/page.js",
+  "/dashboard/@admin/categories/create/page": "app/dashboard/@admin/categories/create/page.js",
+  "/dashboard/@admin/categories/page": "app/dashboard/@admin/categories/page.js",
+  "/dashboard/@admin/categories/update/[id]/page": "app/dashboard/@admin/categories/update/[id]/page.js",
   "/dashboard/@chef/addItems/page": "app/dashboard/@chef/addItems/page.js",
-  "/dashboard/@chef/myOrders/page": "app/dashboard/@chef/myOrders/page.js",
-  "/dashboard/@customer/settings/page": "app/dashboard/@customer/settings/page.js",
+  "/dashboard/@chef/myMenu/page": "app/dashboard/@chef/myMenu/page.js",
+  "/dashboard/@chef/myMenu/update/[id]/page": "app/dashboard/@chef/myMenu/update/[id]/page.js",
   "/dashboard/page": "app/dashboard/page.js"
 }

@@ -44,18 +44,18 @@ export default async function DashboardLayout({
 
      return (
           <SidebarProvider>
-               <AppSidebar />
-               <SidebarInset>
-                    <header className="flex h-16 shrink-0 items-center gap-2 border-b">
-                         <div className="flex items-center gap-2 px-3">
-                              <SidebarTrigger />
-                              <Separator orientation="vertical" className="mr-2 h-4" />
-                         </div>
+               <AppSidebar user={userInfo} />
+               <SidebarInset className="bg-[#EFE9E3]/30">
+                    <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4 bg-white/50 backdrop-blur-md sticky top-0 z-10 transition-colors">
+                         <SidebarTrigger className="hover:bg-primary/10 hover:text-primary transition-colors h-9 w-9" />
+                         <Separator orientation="vertical" className="mr-2 h-4 bg-gray-200" />
+                         <div className="flex-1" />
                     </header>
-                    <div className="flex flex-1 flex-col gap-4 p-4 lg:p-8">
+                    <div className="flex flex-1 flex-col gap-4 p-4 lg:p-6 bg-transparent">
                          {content}
                     </div>
                </SidebarInset>
           </SidebarProvider>
      )
 }
+

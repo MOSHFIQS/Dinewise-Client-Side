@@ -1,19 +1,124 @@
 {
   "node": {
-    "0015fdae16684464bd6f2b4d8a1cf98a222cf92fd9": {
+    "40818a7c6562709774079bcf26cf28e48b7cadf07d": {
       "workers": {
         "app/dashboard/@chef/addItems/page": {
-          "moduleId": "[project]/.next-internal/server/app/dashboard/@chef/addItems/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/actions/category.action.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "moduleId": "[project]/.next-internal/server/app/dashboard/@chef/addItems/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/actions/category.action.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/actions/menuItem.action.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE2 => \"[project]/src/actions/file.action.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "createCategoryAction",
+          "filename": "src/actions/category.action.ts"
+        }
+      },
+      "layer": {
+        "app/dashboard/@chef/addItems/page": "rsc"
+      },
+      "exportedName": "createCategoryAction",
+      "filename": "src/actions/category.action.ts"
+    },
+    "409a4459d8b99a2b975a34d99edc26f6926aef7430": {
+      "workers": {
+        "app/dashboard/@chef/addItems/page": {
+          "moduleId": "[project]/.next-internal/server/app/dashboard/@chef/addItems/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/actions/category.action.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/actions/menuItem.action.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE2 => \"[project]/src/actions/file.action.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "getCategoryByIdAction",
+          "filename": "src/actions/category.action.ts"
+        }
+      },
+      "layer": {
+        "app/dashboard/@chef/addItems/page": "rsc"
+      },
+      "exportedName": "getCategoryByIdAction",
+      "filename": "src/actions/category.action.ts"
+    },
+    "40a994e725519ece85dbe5ea49b4e8c3ad4124b396": {
+      "workers": {
+        "app/dashboard/@chef/addItems/page": {
+          "moduleId": "[project]/.next-internal/server/app/dashboard/@chef/addItems/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/actions/category.action.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/actions/menuItem.action.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE2 => \"[project]/src/actions/file.action.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "deleteCategoryAction",
+          "filename": "src/actions/category.action.ts"
+        }
+      },
+      "layer": {
+        "app/dashboard/@chef/addItems/page": "rsc"
+      },
+      "exportedName": "deleteCategoryAction",
+      "filename": "src/actions/category.action.ts"
+    },
+    "6015fdae16684464bd6f2b4d8a1cf98a222cf92fd9": {
+      "workers": {
+        "app/dashboard/@chef/addItems/page": {
+          "moduleId": "[project]/.next-internal/server/app/dashboard/@chef/addItems/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/actions/category.action.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/actions/menuItem.action.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE2 => \"[project]/src/actions/file.action.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
           "async": false,
           "exportedName": "getAllCategories",
           "filename": "src/actions/category.action.ts"
         }
       },
       "layer": {
-        "app/dashboard/@chef/addItems/page": "action-browser"
+        "app/dashboard/@chef/addItems/page": "rsc"
       },
       "exportedName": "getAllCategories",
       "filename": "src/actions/category.action.ts"
+    },
+    "601ea5b650c89e7e93964c82579ad696a10b5094bc": {
+      "workers": {
+        "app/dashboard/@chef/addItems/page": {
+          "moduleId": "[project]/.next-internal/server/app/dashboard/@chef/addItems/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/actions/category.action.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/actions/menuItem.action.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE2 => \"[project]/src/actions/file.action.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "updateCategoryAction",
+          "filename": "src/actions/category.action.ts"
+        }
+      },
+      "layer": {
+        "app/dashboard/@chef/addItems/page": "rsc"
+      },
+      "exportedName": "updateCategoryAction",
+      "filename": "src/actions/category.action.ts"
+    },
+    "40056afaf8039547c35523eda37d7ba07a33118447": {
+      "workers": {
+        "app/dashboard/@chef/addItems/page": {
+          "moduleId": "[project]/.next-internal/server/app/dashboard/@chef/addItems/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/actions/category.action.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/actions/menuItem.action.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE2 => \"[project]/src/actions/file.action.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "createMenuItemAction",
+          "filename": "src/actions/menuItem.action.ts"
+        }
+      },
+      "layer": {
+        "app/dashboard/@chef/addItems/page": "action-browser"
+      },
+      "exportedName": "createMenuItemAction",
+      "filename": "src/actions/menuItem.action.ts"
+    },
+    "4096c1e65a55e45c584383e7a2a5c048558a17cf9f": {
+      "workers": {
+        "app/dashboard/@chef/addItems/page": {
+          "moduleId": "[project]/.next-internal/server/app/dashboard/@chef/addItems/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/actions/category.action.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/actions/menuItem.action.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE2 => \"[project]/src/actions/file.action.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "deleteImagesAction",
+          "filename": "src/actions/file.action.ts"
+        }
+      },
+      "layer": {
+        "app/dashboard/@chef/addItems/page": "action-browser"
+      },
+      "exportedName": "deleteImagesAction",
+      "filename": "src/actions/file.action.ts"
+    },
+    "40497737e0e03664b90945bad86de835f188feafd2": {
+      "workers": {
+        "app/dashboard/@chef/addItems/page": {
+          "moduleId": "[project]/.next-internal/server/app/dashboard/@chef/addItems/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/actions/category.action.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/actions/menuItem.action.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE2 => \"[project]/src/actions/file.action.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "uploadImagesAction",
+          "filename": "src/actions/file.action.ts"
+        }
+      },
+      "layer": {
+        "app/dashboard/@chef/addItems/page": "action-browser"
+      },
+      "exportedName": "uploadImagesAction",
+      "filename": "src/actions/file.action.ts"
     }
   },
   "edge": {}

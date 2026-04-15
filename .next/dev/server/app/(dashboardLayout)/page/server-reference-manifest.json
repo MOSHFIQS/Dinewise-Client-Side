@@ -30,7 +30,7 @@
       "exportedName": "markNotificationReadAction",
       "filename": "src/actions/notification.action.ts"
     },
-    "40b97850b209dbd801928d7c0664694743db6fdaf4": {
+    "70b97850b209dbd801928d7c0664694743db6fdaf4": {
       "workers": {
         "app/(dashboardLayout)/page": {
           "moduleId": "[project]/.next-internal/server/app/(dashboardLayout)/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/actions/notification.action.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/actions/menuItem.action.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
