@@ -47,13 +47,17 @@ export default function AdminCouponsView({ initialCoupons }: { initialCoupons: a
     const handleCreate = async (e: React.FormEvent) => {
          e.preventDefault();
          setIsCreating(true);
+
+         const expiryDate = new Date(validUntil);
+         expiryDate.setHours(23, 59, 59, 999);
+
          const payload = {
               code: code.toUpperCase(),
               discountType,
               discountValue: parseFloat(discountValue),
               minOrderValue: minOrderValue ? parseFloat(minOrderValue) : null,
               validFrom: new Date(validFrom).toISOString(),
-              validUntil: new Date(validUntil).toISOString()
+              validUntil: expiryDate.toISOString()
          };
          
          const res = await createCouponAction(payload);

@@ -3,7 +3,9 @@
   "/(commonLayout)/checkout/page": "app/(commonLayout)/checkout/page.js",
   "/(commonLayout)/login/page": "app/(commonLayout)/login/page.js",
   "/(commonLayout)/page": "app/(commonLayout)/page.js",
-  "/dashboard/@admin/audit/page": "app/dashboard/@admin/audit/page.js",
   "/dashboard/@admin/coupons/page": "app/dashboard/@admin/coupons/page.js",
+  "/dashboard/@customer/cart/page": "app/dashboard/@customer/cart/page.js",
+  "/dashboard/@customer/checkout/page": "app/dashboard/@customer/checkout/page.js",
+  "/dashboard/@customer/payment/page": "app/dashboard/@customer/payment/page.js",
   "/dashboard/page": "app/dashboard/page.js"
 }
