@@ -1,4 +1,4 @@
-import CreateCategory from "@/components/createCategory/CreateCategory";
+import CreateCategory from "@/components/dashboard/admin/CreateCategory";
 
 export default function CreateCategoryPage() {
      return <CreateCategory />;

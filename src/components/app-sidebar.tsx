@@ -43,7 +43,7 @@ const chefNav = [
 
 const customerNav = [
   { title: "Overview", url: "/dashboard", icon: LayoutDashboard },
-  { title: "My Cart", url: "/dashboard/myCart", icon: ShoppingCart },
+  { title: "My Cart", url: "/dashboard/cart", icon: ShoppingCart },
   { title: "Order History", url: "/dashboard/payment", icon: History },
   { title: "Settings", url: "/dashboard/settings", icon: Settings },
 ]

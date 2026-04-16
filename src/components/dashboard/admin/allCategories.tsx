@@ -11,10 +11,10 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import Loading from "../Loading";
+import Loading from "../../Loading";
 import { toast } from "sonner";
 import { deleteCategoryAction } from "@/actions/category.action";
-import { AppImage } from "../shared/image/AppImage";
+import { AppImage } from "../../shared/image/AppImage";
 import {
      Dialog,
      DialogContent,
@@ -55,7 +55,7 @@ export default function AllCategories({ initialCategories }: Props) {
                if (!res.success) throw new Error(res.error || "Failed to delete category");
                toast.success("Category deleted successfully");
                // In a real app, you might want to refresh the page or update state
-               window.location.reload(); 
+               window.location.reload();
           } catch (err: any) {
                toast.error(err?.message || "Failed to delete category");
           } finally {

@@ -1,13 +1,13 @@
 import { getAllCategories } from "@/actions/category.action";
-import AllCategories from "@/components/allCategories/allCategories";
+import AllCategories from "@/components/dashboard/admin/allCategories";
 import GlobalPagination from "@/components/shared/pagination/GlobalPagination";
 
 export default async function CategoriesPage({ searchParams }: { searchParams: Promise<{ page?: string; limit?: string }> }) {
      const { page, limit } = await searchParams;
-     
+
      const pageNum = page ? parseInt(page) : 1;
      const limitNum = limit ? parseInt(limit) : 10;
-     
+
      const res = await getAllCategories({ page: pageNum.toString(), limit: limitNum.toString() });
 
      if (!res.success) {

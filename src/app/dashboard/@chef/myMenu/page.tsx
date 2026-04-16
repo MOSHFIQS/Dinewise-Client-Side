@@ -1,13 +1,13 @@
 import { getChefMenuItemsAction } from "@/actions/menuItem.action";
-import ChefMenuItems from "@/components/chef/ChefMenuItems";
+import ChefMenuItems from "@/components/dashboard/chef/ChefMenuItems";
 import GlobalPagination from "@/components/shared/pagination/GlobalPagination";
 
 export default async function MyMenuPage({ searchParams }: { searchParams: Promise<{ page?: string; limit?: string; searchTerm?: string }> }) {
      const { page, limit, searchTerm } = await searchParams;
-     
+
      const pageNum = page ? parseInt(page) : 1;
      const limitNum = limit ? parseInt(limit) : 10;
-     
+
      const res = await getChefMenuItemsAction({ page: pageNum.toString(), limit: limitNum.toString(), searchTerm });
 
      if (!res.success) {

@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { getAllMenuItems } from "@/actions/menuItem.action";
-import MenuGrid from "@/components/shared/MenuGrid";
+import MenuGrid from "@/components/menu/MenuGrid";
 
 export function FeaturesSection() {
     const features = [
@@ -95,7 +95,7 @@ export function PopularDishesSection() {
                         <Button variant="outline" className="rounded-full h-12 px-8 font-bold border-2 hover:bg-primary hover:text-white transition-all transform hover:scale-105 active:scale-95">View Full Menu</Button>
                     </Link>
                 </div>
-                
+
                 {loading ? (
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-pulse">
                         {[1, 2, 3].map(n => <div key={n} className="h-96 bg-muted rounded-2xl" />)}
@@ -138,10 +138,10 @@ export function TestimonialsSection() {
                             Community Voice
                         </div>
                         <h2 className="text-4xl md:text-6xl font-black mb-10 leading-tight tracking-tight">
-                            What Our <br /> 
+                            What Our <br />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-orange-400 italic">Customers Say</span>
                         </h2>
-                        
+
                         <div className="space-y-8">
                             {testimonials.map((t, i) => (
                                 <div key={i} className="group bg-white/5 backdrop-blur-xl p-10 rounded-[2.5rem] border border-white/10 relative transition-all duration-500 hover:bg-white/[0.08] hover:border-white/20">
@@ -161,16 +161,16 @@ export function TestimonialsSection() {
                             ))}
                         </div>
                     </div>
-                    
+
                     <div className="relative">
                         <div className="aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl border-8 border-white/5 relative group">
-                            <img 
-                                src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=2070&auto=format&fit=crop" 
-                                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" 
-                                alt="Chef cooking" 
+                            <img
+                                src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=2070&auto=format&fit=crop"
+                                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                                alt="Chef cooking"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-60" />
-                            
+
                             <div className="absolute bottom-10 left-10 right-10 p-8 bg-white/10 backdrop-blur-2xl rounded-3xl border border-white/10 shadow-2xl translate-y-4 group-hover:translate-y-0 transition-transform duration-700">
                                 <div className="flex text-yellow-400 mb-4 gap-1">
                                     {[1, 2, 3, 4, 5].map(n => <Star key={n} className="w-5 h-5 fill-current" />)}

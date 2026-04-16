@@ -11,10 +11,10 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import Loading from "../Loading";
+import Loading from "../../Loading";
 import { toast } from "sonner";
 import { deleteMenuItemAction } from "@/actions/menuItem.action";
-import { AppImage } from "../shared/image/AppImage";
+import { AppImage } from "../../shared/image/AppImage";
 import {
      Dialog,
      DialogContent,
@@ -48,7 +48,7 @@ export default function ChefMenuItems({ initialItems, totalCount }: Props) {
      const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
      const [isDialogOpen, setIsDialogOpen] = useState(false);
      const [searchTerm, setSearchTerm] = useState("");
-     
+
      const router = useRouter();
      const searchParams = useSearchParams();
 
@@ -189,13 +189,13 @@ export default function ChefMenuItems({ initialItems, totalCount }: Props) {
                                                        <div className="flex items-center gap-2">
                                                             <div className={cn(
                                                                  "w-1.5 h-1.5 rounded-full shadow-sm",
-                                                                 item.stock > 10 ? "bg-green-500 shadow-green-200" : 
-                                                                 item.stock > 0 ? "bg-amber-500 shadow-amber-200" : "bg-red-500 shadow-red-200"
+                                                                 item.stock > 10 ? "bg-green-500 shadow-green-200" :
+                                                                      item.stock > 0 ? "bg-amber-500 shadow-amber-200" : "bg-red-500 shadow-red-200"
                                                             )} />
                                                             <span className={cn(
                                                                  "text-[11px] font-bold uppercase tracking-wider",
-                                                                 item.stock > 10 ? "text-green-600" : 
-                                                                 item.stock > 0 ? "text-amber-600" : "text-red-600"
+                                                                 item.stock > 10 ? "text-green-600" :
+                                                                      item.stock > 0 ? "text-amber-600" : "text-red-600"
                                                             )}>
                                                                  {item.stock > 0 ? `${item.stock} left` : "Out of stock"}
                                                             </span>
@@ -244,7 +244,7 @@ export default function ChefMenuItems({ initialItems, totalCount }: Props) {
                                    </DialogHeader>
                               </div>
                               <p className="text-sm text-gray-600 bg-gray-50 rounded-xl px-4 py-3 border border-gray-100 leading-relaxed">
-                                   You are about to retire <span className="font-bold text-gray-900">{selectedItem?.name}</span> from your menu. 
+                                   You are about to retire <span className="font-bold text-gray-900">{selectedItem?.name}</span> from your menu.
                                    Customers will no longer be able to order this dish.
                               </p>
                          </div>

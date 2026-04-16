@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { createCategoryAction } from "@/actions/category.action";
 import { usePremiumImageUpload } from "@/hooks/usePremiumImageUpload";
-import ImageUploader from "../shared/image/ImageUploader";
+import ImageUploader from "../../shared/image/ImageUploader";
 import { useRouter } from "next/navigation";
 import { Tag, ArrowLeft } from "lucide-react";
 import Link from "next/link";

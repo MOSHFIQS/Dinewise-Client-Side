@@ -1,10 +1,10 @@
 import { getMenuItemById } from "@/actions/menuItem.action";
 import { getAllCategories } from "@/actions/category.action";
-import UpdateMenuItem from "@/components/chef/UpdateMenuItem";
+import UpdateMenuItem from "@/components/dashboard/chef/UpdateMenuItem";
 
 export default async function UpdateMenuItemPage({ params }: { params: Promise<{ id: string }> }) {
      const { id } = await params;
-     
+
      const [itemRes, catRes] = await Promise.all([
           getMenuItemById(id),
           getAllCategories()

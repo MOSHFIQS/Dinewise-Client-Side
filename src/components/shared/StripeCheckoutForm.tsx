@@ -7,12 +7,12 @@ import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 import { verifyPaymentAction } from "@/actions/payment.action";
 
-export default function StripeCheckoutForm({ 
-     totalAmount, 
-     onSuccess 
-}: { 
-     totalAmount: number, 
-     onSuccess: () => void 
+export default function StripeCheckoutForm({
+    totalAmount,
+    onSuccess
+}: {
+    totalAmount: number,
+    onSuccess: () => void
 }) {
     const stripe = useStripe();
     const elements = useElements();
@@ -31,34 +31,34 @@ export default function StripeCheckoutForm({
         setErrorMessage(null);
 
         const { error, paymentIntent } = await stripe.confirmPayment({
-             elements,
-             confirmParams: {
-                  return_url: `${window.location.origin}/dashboard/payment`,
-             },
-             redirect: "if_required",
+            elements,
+            confirmParams: {
+                return_url: `${window.location.origin}/dashboard/payment`,
+            },
+            redirect: "if_required",
         });
 
-        const isSucceeded = paymentIntent?.status === "succeeded" || 
-                           (error?.payment_intent?.status === "succeeded");
+        const isSucceeded = paymentIntent?.status === "succeeded" ||
+            (error?.payment_intent?.status === "succeeded");
         const finalIntentId = paymentIntent?.id || error?.payment_intent?.id;
 
         if (isSucceeded && finalIntentId) {
-             const res = await verifyPaymentAction(finalIntentId);
-             
-             if (res.success) {
-                  toast.success("Payment verified! Your order is being processed.");
-                  onSuccess();
-             } else {
-                  toast.error(res.error || "Failed to verify payment with our servers.");
-                  setIsProcessing(false);
-             }
+            const res = await verifyPaymentAction(finalIntentId);
+
+            if (res.success) {
+                toast.success("Payment verified! Your order is being processed.");
+                onSuccess();
+            } else {
+                toast.error(res.error || "Failed to verify payment with our servers.");
+                setIsProcessing(false);
+            }
         } else if (error) {
-             toast.error(error.message || "An unexpected error occurred during payment.");
-             setErrorMessage(error.message || "Payment failed.");
-             setIsProcessing(false);
+            toast.error(error.message || "An unexpected error occurred during payment.");
+            setErrorMessage(error.message || "Payment failed.");
+            setIsProcessing(false);
         } else {
-             toast.error("Payment requires further action or is pending.");
-             setIsProcessing(false);
+            toast.error("Payment requires further action or is pending.");
+            setIsProcessing(false);
         }
     };
 
@@ -74,14 +74,14 @@ export default function StripeCheckoutForm({
     return (
         <form onSubmit={handleSubmit} className="space-y-6">
             <div className="min-h-[200px] relative">
-                <PaymentElement 
-                    onReady={() => setIsReady(true)} 
+                <PaymentElement
+                    onReady={() => setIsReady(true)}
                     onChange={() => {
                         // Clear the manual error message when the user interacts with the form
                         if (errorMessage) setErrorMessage(null);
                     }}
                 />
-                
+
                 {!isReady && (
                     <div className="absolute inset-0 flex flex-col items-center justify-center bg-white/80 backdrop-blur-sm rounded-xl z-20 gap-4">
                         <Loader2 className="w-8 h-8 text-primary animate-spin" />
@@ -96,18 +96,18 @@ export default function StripeCheckoutForm({
                 </p>
             )}
 
-            <Button 
-                 type="submit" 
-                 disabled={!stripe || isProcessing || !isReady} 
-                 className="w-full h-14 text-lg font-black uppercase tracking-widest shadow-xl mt-4"
+            <Button
+                type="submit"
+                disabled={!stripe || isProcessing || !isReady}
+                className="w-full h-14 text-lg font-black uppercase tracking-widest shadow-xl mt-4"
             >
-                 {isProcessing ? (
-                      <><Loader2 className="w-5 h-5 mr-2 animate-spin" /> Finalizing...</>
-                 ) : !isReady ? (
-                      "Initializing..."
-                 ) : (
-                      `Pay $${totalAmount.toFixed(2)}`
-                 )}
+                {isProcessing ? (
+                    <><Loader2 className="w-5 h-5 mr-2 animate-spin" /> Finalizing...</>
+                ) : !isReady ? (
+                    "Initializing..."
+                ) : (
+                    `Pay $${totalAmount.toFixed(2)}`
+                )}
             </Button>
             <p className="text-[10px] text-center text-slate-400 font-bold uppercase tracking-widest">
                 Payments are securely processed by Stripe.

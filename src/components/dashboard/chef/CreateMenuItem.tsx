@@ -9,7 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { createMenuItemAction } from "@/actions/menuItem.action";
 import { usePremiumImageUpload } from "@/hooks/usePremiumImageUpload";
-import ImageUploader from "../shared/image/ImageUploader";
+import ImageUploader from "../../shared/image/ImageUploader";
 import { useRouter } from "next/navigation";
 import { Utensils, ArrowLeft, Tag } from "lucide-react";
 import Link from "next/link";
@@ -44,7 +44,7 @@ export default function CreateMenuItem({ categories }: { categories: any[] }) {
 
                try {
                     setLoading(true);
-                    
+
                     const payload = {
                          name: value.name,
                          description: value.description,
@@ -61,7 +61,7 @@ export default function CreateMenuItem({ categories }: { categories: any[] }) {
                          toast.error(res?.error || "Failed to create item");
                          return;
                     }
-                    
+
                     toast.success("Dish added to your menu!");
                     router.push("/dashboard/myMenu");
                } catch (err: any) {
@@ -107,7 +107,7 @@ export default function CreateMenuItem({ categories }: { categories: any[] }) {
                          <div className="lg:col-span-2 space-y-6">
                               <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden p-6 space-y-5">
                                    <h2 className="text-sm font-bold uppercase tracking-widest text-gray-400 mb-2">Basic Information</h2>
-                                   
+
                                    <form.Field name="name" validators={{ onChange: ({ value }) => !value ? "Name is required" : undefined }}>
                                         {(field) => (
                                              <div className="space-y-1.5">
@@ -178,7 +178,7 @@ export default function CreateMenuItem({ categories }: { categories: any[] }) {
                          <div className="space-y-6">
                               <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden p-6 space-y-5">
                                    <h2 className="text-sm font-bold uppercase tracking-widest text-gray-400 mb-2">Inventory & Category</h2>
-                                   
+
                                    <form.Field name="categoryId" validators={{ onChange: ({ value }) => !value ? "Category is required" : undefined }}>
                                         {(field) => (
                                              <div className="space-y-1.5">
@@ -219,7 +219,7 @@ export default function CreateMenuItem({ categories }: { categories: any[] }) {
 
                               <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden p-6 space-y-5">
                                    <h2 className="text-sm font-bold uppercase tracking-widest text-gray-400 mb-2">Pricing</h2>
-                                   
+
                                    <form.Field name="price" validators={{ onChange: ({ value }) => !value ? "Price is required" : undefined }}>
                                         {(field) => (
                                              <div className="space-y-1.5">
