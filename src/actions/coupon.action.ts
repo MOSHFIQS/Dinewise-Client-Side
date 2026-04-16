@@ -27,6 +27,7 @@ export const getAllCouponsAction = async (params: QueryParams = {}) => {
 export const validateCouponAction = async (code: string, cartTotal: number) => {
     try {
         const res = await couponServerService.validate(code, cartTotal);
+        console.log("res", res)
         return res;
     } catch (error: any) {
         return { success: false, error: error.message };

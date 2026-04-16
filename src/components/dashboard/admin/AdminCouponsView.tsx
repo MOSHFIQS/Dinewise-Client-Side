@@ -21,6 +21,13 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+  } from "@/components/ui/select";
 import { createCouponAction, deleteCouponAction } from "@/actions/coupon.action";
 import { Label } from "@/components/ui/label";
 
@@ -31,18 +38,22 @@ export default function AdminCouponsView({ initialCoupons }: { initialCoupons: a
     
     // Form state
     const [code, setCode] = useState("");
-    const [discountAmount, setDiscountAmount] = useState("");
+    const [discountType, setDiscountType] = useState("FIXED");
+    const [discountValue, setDiscountValue] = useState("");
     const [minOrderValue, setMinOrderValue] = useState("");
-    const [expiresAt, setExpiresAt] = useState("");
+    const [validFrom, setValidFrom] = useState(new Date().toISOString().split('T')[0]);
+    const [validUntil, setValidUntil] = useState("");
 
     const handleCreate = async (e: React.FormEvent) => {
          e.preventDefault();
          setIsCreating(true);
          const payload = {
               code: code.toUpperCase(),
-              discountAmount: parseFloat(discountAmount),
+              discountType,
+              discountValue: parseFloat(discountValue),
               minOrderValue: minOrderValue ? parseFloat(minOrderValue) : null,
-              expiresAt: new Date(expiresAt).toISOString()
+              validFrom: new Date(validFrom).toISOString(),
+              validUntil: new Date(validUntil).toISOString()
          };
          
          const res = await createCouponAction(payload);
@@ -53,9 +64,9 @@ export default function AdminCouponsView({ initialCoupons }: { initialCoupons: a
               setCoupons([res.data, ...coupons]);
               // Reset form
               setCode("");
-              setDiscountAmount("");
+              setDiscountValue("");
               setMinOrderValue("");
-              setExpiresAt("");
+              setValidUntil("");
          } else {
               toast.error(res.error || "Failed to create coupon");
          }
@@ -100,17 +111,35 @@ export default function AdminCouponsView({ initialCoupons }: { initialCoupons: a
                                </div>
                                <div className="grid grid-cols-2 gap-4">
                                     <div className="space-y-2">
-                                         <Label>Flat Discount ($)</Label>
-                                         <Input type="number" required step="0.01" value={discountAmount} onChange={e => setDiscountAmount(e.target.value)} />
+                                         <Label>Discount Type</Label>
+                                         <Select value={discountType} onValueChange={setDiscountType}>
+                                              <SelectTrigger>
+                                                   <SelectValue placeholder="Type" />
+                                              </SelectTrigger>
+                                              <SelectContent>
+                                                   <SelectItem value="FIXED">Flat ($)</SelectItem>
+                                                   <SelectItem value="PERCENTAGE">Percent (%)</SelectItem>
+                                              </SelectContent>
+                                         </Select>
                                     </div>
                                     <div className="space-y-2">
-                                         <Label>Min Order Value</Label>
-                                         <Input type="number" step="0.01" value={minOrderValue} onChange={e => setMinOrderValue(e.target.value)} placeholder="0.00" />
+                                         <Label>Discount Value</Label>
+                                         <Input type="number" required step="0.01" value={discountValue} onChange={e => setDiscountValue(e.target.value)} />
                                     </div>
                                </div>
                                <div className="space-y-2">
-                                    <Label>Expiry Date</Label>
-                                    <Input type="datetime-local" required value={expiresAt} onChange={e => setExpiresAt(e.target.value)} />
+                                    <Label>Min Order Value (Optional)</Label>
+                                    <Input type="number" step="0.01" value={minOrderValue} onChange={e => setMinOrderValue(e.target.value)} placeholder="0.00" />
+                               </div>
+                               <div className="grid grid-cols-2 gap-4">
+                                    <div className="space-y-2">
+                                         <Label>Valid From</Label>
+                                         <Input type="date" required value={validFrom} onChange={e => setValidFrom(e.target.value)} />
+                                    </div>
+                                    <div className="space-y-2">
+                                         <Label>Expiry Date</Label>
+                                         <Input type="date" required value={validUntil} onChange={e => setValidUntil(e.target.value)} />
+                                    </div>
                                </div>
                                <Button type="submit" className="w-full" disabled={isCreating}>
                                     {isCreating ? "Generating..." : "Issue Coupon"}
@@ -141,20 +170,20 @@ export default function AdminCouponsView({ initialCoupons }: { initialCoupons: a
                             </TableRow>
                         )}
                         {coupons.map((c, idx) => {
-                             const isExpired = new Date(c.expiresAt) < new Date();
+                             const isExpired = new Date(c.validUntil) < new Date();
                              return (
                             <TableRow key={c.id}>
                                 <TableCell className="font-bold tracking-wider">
                                     {c.code}
                                 </TableCell>
                                 <TableCell className="font-semibold text-primary">
-                                    ${c.discountAmount?.toFixed(2)}
+                                    {c.discountType === "PERCENTAGE" ? `${c.discountValue}%` : `$${c.discountValue.toFixed(2)}`}
                                 </TableCell>
                                 <TableCell>
                                     {c.minOrderValue ? `$${c.minOrderValue.toFixed(2)}` : "None"}
                                 </TableCell>
                                 <TableCell>
-                                     {new Date(c.expiresAt).toLocaleDateString()}
+                                     {new Date(c.validUntil).toLocaleDateString()}
                                 </TableCell>
                                 <TableCell>
                                      <Badge variant={isExpired ? "destructive" : "default"} className={!isExpired ? "bg-green-500 hover:bg-green-600" : ""}>

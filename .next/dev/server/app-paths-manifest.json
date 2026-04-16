@@ -2,14 +2,8 @@
   "/(commonLayout)/cart/page": "app/(commonLayout)/cart/page.js",
   "/(commonLayout)/checkout/page": "app/(commonLayout)/checkout/page.js",
   "/(commonLayout)/login/page": "app/(commonLayout)/login/page.js",
-  "/(commonLayout)/menu/page": "app/(commonLayout)/menu/page.js",
   "/(commonLayout)/page": "app/(commonLayout)/page.js",
-  "/(commonLayout)/register/page": "app/(commonLayout)/register/page.js",
-  "/dashboard/@chef/myMenu/page": "app/dashboard/@chef/myMenu/page.js",
-  "/dashboard/@chef/myMenu/update/[id]/page": "app/dashboard/@chef/myMenu/update/[id]/page.js",
-  "/dashboard/@chef/myOrders/page": "app/dashboard/@chef/myOrders/page.js",
-  "/dashboard/@customer/cart/page": "app/dashboard/@customer/cart/page.js",
-  "/dashboard/@customer/checkout/page": "app/dashboard/@customer/checkout/page.js",
-  "/dashboard/@customer/payment/page": "app/dashboard/@customer/payment/page.js",
+  "/dashboard/@admin/audit/page": "app/dashboard/@admin/audit/page.js",
+  "/dashboard/@admin/coupons/page": "app/dashboard/@admin/coupons/page.js",
   "/dashboard/page": "app/dashboard/page.js"
 }

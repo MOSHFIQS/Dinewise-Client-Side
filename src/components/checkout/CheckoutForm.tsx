@@ -80,6 +80,7 @@ export default function CheckoutForm() {
         if (!couponCode) return;
         setValidatingCoupon(true);
         const res = await validateCouponAction(couponCode, totalAmount());
+        console.log(res)
         if (res.success) {
             setDiscount(res.data);
             toast.success("Coupon applied! 🎉");
