@@ -21,7 +21,8 @@ import {
   Users,
   Settings,
   History,
-  FileBox
+  FileBox,
+  Undo2
 } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -32,6 +33,7 @@ const adminNav = [
   { title: "All Orders", url: "/dashboard/allOrders", icon: ShoppingCart },
   { title: "All Menu Items", url: "/dashboard/allMenu", icon: UtensilsCrossed },
   { title: "Audit Logs", url: "/dashboard/audit", icon: History },
+  { title: "Refunds", url: "/dashboard/refunds", icon: Undo2 },
 ]
 
 const chefNav = [
@@ -39,6 +41,7 @@ const chefNav = [
   { title: "My Menu Items", url: "/dashboard/myMenu", icon: UtensilsCrossed },
   { title: "Add Menu Item", url: "/dashboard/addItems", icon: FileBox },
   { title: "My Orders", url: "/dashboard/myOrders", icon: ShoppingCart },
+  { title: "Refunds", url: "/dashboard/refunds", icon: Undo2 },
 ]
 
 const customerNav = [

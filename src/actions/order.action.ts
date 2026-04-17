@@ -35,8 +35,8 @@ export const getOrderByIdAction = async (id: string) => {
 export const updateOrderStatusAction = async (id: string, actionStatus: string) => {
     try {
         const res = await orderServerService.updateStatus(id, actionStatus);
-        revalidatePath("/dashboard/chef/myOrders");
-        revalidatePath("/dashboard/allOrders");
+        // Clear entire dashboard cache to sync the Status across Admin, Chef, and Customer views
+        revalidatePath("/dashboard", "layout");
         return res;
     } catch (error: any) {
         return { success: false, error: error.message };

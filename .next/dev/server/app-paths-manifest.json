@@ -1,4 +1,12 @@
 {
+  "/(commonLayout)/login/page": "app/(commonLayout)/login/page.js",
+  "/(commonLayout)/page": "app/(commonLayout)/page.js",
+  "/dashboard/@admin/allMenu/page": "app/dashboard/@admin/allMenu/page.js",
   "/dashboard/@admin/allOrders/page": "app/dashboard/@admin/allOrders/page.js",
-  "/dashboard/@admin/audit/page": "app/dashboard/@admin/audit/page.js"
+  "/dashboard/@admin/allUsers/page": "app/dashboard/@admin/allUsers/page.js",
+  "/dashboard/@chef/myOrders/page": "app/dashboard/@chef/myOrders/page.js",
+  "/dashboard/@chef/refunds/page": "app/dashboard/@chef/refunds/page.js",
+  "/dashboard/@customer/cart/page": "app/dashboard/@customer/cart/page.js",
+  "/dashboard/@customer/payment/page": "app/dashboard/@customer/payment/page.js",
+  "/dashboard/page": "app/dashboard/page.js"
 }
