@@ -12,35 +12,19 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { updateOrderStatusAction, getAllOrdersAction } from "@/actions/order.action";
+import { updateOrderStatusAction } from "@/actions/order.action";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Button } from "@/components/ui/button";
 
 export default function AdminOrdersView({ initialOrders }: { initialOrders: any[] }) {
-    const [orders, setOrders] = useState<any[]>(initialOrders);
-    const [loading, setLoading] = useState(false);
+   
 
-    const handleRefresh = async () => {
-         setLoading(true);
-         try {
-             const res = await getAllOrdersAction({});
-             if (res.success && res.data) {
-                 setOrders(res.data);
-                 toast.success("Orders refreshed");
-             } else {
-                 toast.error("Failed to refresh orders");
-             }
-         } catch (error: any) {
-             toast.error("An error occurred while refreshing");
-         }
-         setLoading(false);
-    };
+
 
     const handleStatusUpdate = async (id: string, newStatus: string) => {
          const res = await updateOrderStatusAction(id, newStatus);
          if (res.success) {
               toast.success(`Order status updated to ${newStatus}`);
-              setOrders(prev => prev.map(o => o.id === id ? { ...o, status: newStatus } : o));
+              
          } else {
               toast.error(res.error || "Failed to update status");
          }
@@ -63,9 +47,7 @@ export default function AdminOrdersView({ initialOrders }: { initialOrders: any[
                     <h1 className="text-3xl font-bold tracking-tight">System Orders</h1>
                     <p className="text-muted-foreground">Monitor and manage all customer orders.</p>
                 </div>
-                <Button variant="outline" size="icon" onClick={handleRefresh} disabled={loading}>
-                     <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
-                </Button>
+                
             </div>
 
             <div className="border rounded-xl bg-card overflow-hidden">
@@ -81,14 +63,14 @@ export default function AdminOrdersView({ initialOrders }: { initialOrders: any[
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {orders.length === 0 && (
+                        {initialOrders.length === 0 && (
                              <TableRow>
                                 <TableCell colSpan={6} className="text-center py-10 text-muted-foreground">
                                     No orders found.
                                 </TableCell>
                             </TableRow>
                         )}
-                        {orders.map((order) => (
+                        {initialOrders.map((order) => (
                             <TableRow key={order.id}>
                                 <TableCell className="font-mono text-xs">
                                     #{order.id.slice(-6).toUpperCase()}

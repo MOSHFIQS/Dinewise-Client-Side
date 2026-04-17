@@ -1,5 +1,4 @@
 {
-  "/dashboard/@customer/cart/page": "app/dashboard/@customer/cart/page.js",
-  "/dashboard/@customer/payment/page": "app/dashboard/@customer/payment/page.js",
-  "/dashboard/@customer/settings/page": "app/dashboard/@customer/settings/page.js"
+  "/dashboard/@admin/allOrders/page": "app/dashboard/@admin/allOrders/page.js",
+  "/dashboard/@admin/audit/page": "app/dashboard/@admin/audit/page.js"
 }

@@ -1,12 +1,9 @@
 {
   "app": {
-    "[project]/src/app/dashboard/@customer/cart/page": [
+    "[project]/src/app/dashboard/@admin/allOrders/page": [
       "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2"
     ],
-    "[project]/src/app/dashboard/@customer/payment/page": [
-      "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2"
-    ],
-    "[project]/src/app/dashboard/@customer/settings/page": [
+    "[project]/src/app/dashboard/@admin/audit/page": [
       "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2"
     ]
   },

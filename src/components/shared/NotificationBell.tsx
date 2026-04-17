@@ -1,3 +1,4 @@
+"use client"
 import { useEffect, useState, useRef } from "react";
 import { Bell, Check, Trash2, BellRing, Settings, MoreVertical, CheckCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -17,6 +18,7 @@ export default function NotificationBell() {
 
     const fetchNotifications = async () => {
         const res = await getMyNotificationsAction();
+        console.log(res)
         if (res.success && res.data) {
              setNotifications(res.data);
              const countRes = await getUnreadNotificationsCountAction();
@@ -49,6 +51,7 @@ export default function NotificationBell() {
 
     const handleMarkRead = async (id: string) => {
           const res = await markNotificationReadAction(id);
+          console.log(res)
           if (res.success) {
                setNotifications(prev => prev.map(n => n.id === id ? { ...n, isRead: true } : n));
                setUnreadCount(prev => Math.max(0, prev - 1));
@@ -137,7 +140,7 @@ export default function NotificationBell() {
                                                      <Button 
                                                           variant="ghost" 
                                                           size="icon" 
-                                                          className="h-8 w-8 text-primary/40 hover:text-primary hover:bg-primary/10 rounded-full opacity-0 group-hover:opacity-100 transition-all" 
+                                                          className="h-8 w-8 text-primary/40 hover:text-primary hover:bg-primary/10 rounded-full opacity-0 group-hover:opacity-100 transition-all hover:border-primary border" 
                                                           onClick={() => handleMarkRead(n.id)}
                                                      >
                                                           <Check className="w-4 h-4" />

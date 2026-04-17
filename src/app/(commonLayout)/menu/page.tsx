@@ -12,7 +12,7 @@ export default async function MenuPage({ searchParams }: { searchParams: Promise
 
     const menuItems = menuRes?.success ? menuRes.data : [];
     const categories = categoryRes?.success ? categoryRes.data : [];
-    const meta = menuRes?.meta || { page: 1, limit: 12, totalPage: 1 };
+    const meta = menuRes?.meta || { page: 1, limit: 10, totalPages: 1 };
 
     return (
         <div className="container mx-auto px-4 py-8">
@@ -29,7 +29,7 @@ export default async function MenuPage({ searchParams }: { searchParams: Promise
             <div className="mt-12 flex justify-end">
                  <GlobalPagination
                       page={meta.page}
-                      totalPages={meta.totalPage}
+                      totalPages={meta.totalPages}
                       limit={meta.limit}
                  />
             </div>

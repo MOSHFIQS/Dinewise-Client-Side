@@ -34,6 +34,8 @@ export default function GlobalPagination({
   const router = useRouter();
   const searchParams = useSearchParams();
 
+  console.log(page,totalPages,limit)
+
   // 👉 PAGE CHANGE
   const handlePageChange = (type: "next" | "prev") => {
     const params = new URLSearchParams(searchParams.toString());
@@ -47,6 +49,7 @@ export default function GlobalPagination({
     if (type === "prev" && page > 1) {
       newPage = page - 1;
     }
+    console.log(newPage)
 
     params.set("page", String(newPage));
 
@@ -68,7 +71,7 @@ export default function GlobalPagination({
       {/* LIMIT */}
       <Field
         orientation="horizontal"
-        className="w-fit items-center gap-2 px-2 py-1 rounded-lg border bg-[#ebd6fb]/20 dark:bg-white/5 backdrop-blur-sm"
+        className="w-fit items-center gap-2 px-2 py-1 rounded-lg border bg-[#ebd6fb] dark:bg-white/5 backdrop-blur-sm"
       >
         <FieldLabel
           htmlFor="select-rows-per-page"
@@ -80,12 +83,12 @@ export default function GlobalPagination({
         <Select value={String(limit)} onValueChange={handleLimitChange}>
           <SelectTrigger
             id="select-rows-per-page"
-            className="h-7 w-[70px] text-xs rounded-md border border-purple-200 bg-white/50 shadow  dark:bg-[#1f1f23] focus:ring-1 focus:ring-violet-500"
+            className="h-7 w-[70px] text-xs rounded-md border border-purple-200 bg-[#eef0ff] shadow  dark:bg-[#1f1f23] focus:ring-1 focus:ring-violet-500"
           >
             <SelectValue placeholder="10" />
           </SelectTrigger>
 
-          <SelectContent align="end" className="rounded-md text-xs bg-white dark:bg-[#1f1f23]">
+          <SelectContent align="end" className="rounded-md text-xs bg-[#eef0ff] dark:bg-[#1f1f23]">
             <SelectGroup>
               <SelectItem value="5">5</SelectItem>
               <SelectItem value="10">10</SelectItem>
@@ -98,7 +101,7 @@ export default function GlobalPagination({
 
       {/* PAGINATION */}
       <Pagination className="mx-0 w-auto">
-        <PaginationContent className="flex items-center gap-2 px-2 py-1 rounded-lg border bg-[#ebd6fb]/20 dark:bg-white/5 backdrop-blur-sm">
+        <PaginationContent className="flex items-center gap-2 px-2 py-1 rounded-lg border bg-[#ebd6fb] dark:bg-white/5 backdrop-blur-sm">
 
           <PaginationItem>
             <PaginationPrevious
@@ -110,7 +113,7 @@ export default function GlobalPagination({
             />
           </PaginationItem>
 
-          <span className="px-2 text-xs text-gray-500 dark:text-gray-400 font-medium">
+          <span className="px-2 text-xs text-gray-500 dark:text-gray-400">
             {page} / {totalPages}
           </span>
 

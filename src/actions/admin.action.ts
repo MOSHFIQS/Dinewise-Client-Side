@@ -33,9 +33,9 @@ export const getDashboardStatsAction = async () => {
     }
 };
 
-export const getAuditLogsAction = async (params: QueryParams = {}) => {
+export const getAuditLogsAction = async (page?: number, limit?: number) => {
     try {
-        const query = buildQueryString(params);
+        const query = buildQueryString({page, limit});
         const res = await adminServerService.getAuditLogs(query);
         return res;
     } catch (error: any) {

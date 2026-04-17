@@ -7,7 +7,7 @@ export default async function ChefOrdersPage({ searchParams }: { searchParams: P
     const res = await getAllOrdersAction({ page, limit });
     
     const initialOrders = res.success && res.data ? res.data : [];
-    const meta = res.meta || { page: 1, limit: 10, totalPage: 1 };
+    const meta = res.meta || { page: 1, limit: 10, totalPages: 1 };
     
     return (
         <div className="space-y-6 h-full flex flex-col justify-between overflow-hidden pb-2">
@@ -17,7 +17,7 @@ export default async function ChefOrdersPage({ searchParams }: { searchParams: P
             <div className="px-6 py-4 bg-white/50 border-t border-gray-100 backdrop-blur-sm rounded-b-2xl">
                  <GlobalPagination
                       page={meta.page}
-                      totalPages={meta.totalPage}
+                      totalPages={meta.totalPages}
                       limit={meta.limit}
                  />
             </div>

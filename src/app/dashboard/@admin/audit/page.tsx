@@ -3,12 +3,15 @@ import AdminAuditView from "@/components/dashboard/admin/AdminAuditView";
 import GlobalPagination from "@/components/shared/pagination/GlobalPagination";
 import { Terminal } from "lucide-react";
 
-export default async function AuditLogsPage({ searchParams }: { searchParams: Promise<{ page?: string; limit?: string }> }) {
+export default async function AuditLogsPage({ searchParams }: { searchParams: Promise<{ page?: number; limit?: number }> }) {
     const { page, limit } = await searchParams;
-    const res = await getAuditLogsAction({ page, limit });
+    console.log(page,limit)
+    const res = await getAuditLogsAction(page, limit );
     
     const logs = res.success && res.data ? res.data : [];
-    const meta = res.meta || { page: 1, limit: 10, totalPage: 1 };
+    const meta = res.meta || { page: 1, limit: 10, totalPages: 1 };
+
+    // console.log(meta)
 
     return (
         <div className="space-y-8 animate-in fade-in duration-500 h-full flex flex-col">
@@ -30,7 +33,7 @@ export default async function AuditLogsPage({ searchParams }: { searchParams: Pr
             <div className="px-6 py-4 bg-white/50 border-t border-gray-100 backdrop-blur-sm rounded-b-2xl">
                  <GlobalPagination
                       page={meta.page}
-                      totalPages={meta.totalPage}
+                      totalPages={meta.totalPages}
                       limit={meta.limit}
                  />
             </div>

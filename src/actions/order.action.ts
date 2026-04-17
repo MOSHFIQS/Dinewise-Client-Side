@@ -36,7 +36,7 @@ export const updateOrderStatusAction = async (id: string, actionStatus: string) 
     try {
         const res = await orderServerService.updateStatus(id, actionStatus);
         revalidatePath("/dashboard/chef/myOrders");
-        revalidatePath("/dashboard/admin/orders");
+        revalidatePath("/dashboard/allOrders");
         return res;
     } catch (error: any) {
         return { success: false, error: error.message };

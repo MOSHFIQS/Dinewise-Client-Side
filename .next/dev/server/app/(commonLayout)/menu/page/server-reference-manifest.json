@@ -30,6 +30,36 @@
       "exportedName": "markNotificationReadAction",
       "filename": "src/actions/notification.action.ts"
     },
+    "00a345e4d4488762f829cffc00aff8029941979cf8": {
+      "workers": {
+        "app/(commonLayout)/menu/page": {
+          "moduleId": "[project]/.next-internal/server/app/(commonLayout)/menu/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/actions/notification.action.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/actions/menuItem.action.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE2 => \"[project]/src/actions/category.action.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "markAllNotificationsReadAction",
+          "filename": "src/actions/notification.action.ts"
+        }
+      },
+      "layer": {
+        "app/(commonLayout)/menu/page": "action-browser"
+      },
+      "exportedName": "markAllNotificationsReadAction",
+      "filename": "src/actions/notification.action.ts"
+    },
+    "00c4c47258437f07cdd41d8f7ec35ac83125f1621e": {
+      "workers": {
+        "app/(commonLayout)/menu/page": {
+          "moduleId": "[project]/.next-internal/server/app/(commonLayout)/menu/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/actions/notification.action.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/actions/menuItem.action.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE2 => \"[project]/src/actions/category.action.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "getUnreadNotificationsCountAction",
+          "filename": "src/actions/notification.action.ts"
+        }
+      },
+      "layer": {
+        "app/(commonLayout)/menu/page": "action-browser"
+      },
+      "exportedName": "getUnreadNotificationsCountAction",
+      "filename": "src/actions/notification.action.ts"
+    },
     "400123fc3c98f619528365dbbfaf87d09580f995ab": {
       "workers": {
         "app/(commonLayout)/menu/page": {
