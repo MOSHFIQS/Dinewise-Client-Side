@@ -12,7 +12,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { getRefundsAction, adminReviewRefundAction } from "@/actions/refund.action";
+import {  adminReviewRefundAction } from "@/actions/refund.action";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -24,28 +24,13 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 
 export default function AdminRefundsView({ initialRefunds }: { initialRefunds: any[] }) {
-    const [refunds, setRefunds] = useState<any[]>(initialRefunds);
-    const [loading, setLoading] = useState(false);
+   
     const [selectedRefund, setSelectedRefund] = useState<any | null>(null);
     const [actionType, setActionType] = useState<"APPROVE" | "REJECT" | null>(null);
     const [note, setNote] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const handleRefresh = async () => {
-        setLoading(true);
-        try {
-            const res = await getRefundsAction({});
-            if (res.success && res.data) {
-                setRefunds(res.data);
-                toast.success("Refunds refreshed");
-            } else {
-                toast.error("Failed to refresh refunds");
-            }
-        } catch {
-            toast.error("An error occurred while refreshing refunds");
-        }
-        setLoading(false);
-    };
+ 
 
     const openActionDialog = (refund: any, action: "APPROVE" | "REJECT") => {
         setSelectedRefund(refund);
@@ -64,15 +49,9 @@ export default function AdminRefundsView({ initialRefunds }: { initialRefunds: a
         try {
              // Admin approves to trigger Stripe refund and PROCESSED status
              const res = await adminReviewRefundAction(selectedRefund.id, { action: actionType, note });
+             console.log(res)
              if (res.success) {
                   toast.success(`Refund successfully ${actionType === "APPROVE" ? "processed" : "rejected"}`);
-                  
-                  // Refresh list so we get fresh data from DB including stripe ID if applicable
-                  const freshRes = await getRefundsAction({});
-                  if (freshRes.success && freshRes.data) {
-                       setRefunds(freshRes.data);
-                  }
-                  
                   setSelectedRefund(null);
              } else {
                   toast.error(res.error || `Failed to ${actionType.toLowerCase()} refund`);
@@ -105,9 +84,6 @@ export default function AdminRefundsView({ initialRefunds }: { initialRefunds: a
                     <h1 className="text-3xl font-bold tracking-tight">System Refunds</h1>
                     <p className="text-muted-foreground">Manage and dispatch chef-approved refund requests via Stripe integrations.</p>
                 </div>
-                <Button variant="outline" size="icon" onClick={handleRefresh} disabled={loading}>
-                     <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
-                </Button>
             </div>
 
             <div className="border rounded-xl bg-card overflow-hidden shadow-sm">
@@ -123,14 +99,14 @@ export default function AdminRefundsView({ initialRefunds }: { initialRefunds: a
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {refunds.length === 0 && (
+                        {initialRefunds.length === 0 && (
                              <TableRow>
                                 <TableCell colSpan={6} className="text-center py-10 text-muted-foreground">
                                     No refund requests found across the system.
                                 </TableCell>
                             </TableRow>
                         )}
-                        {refunds.map((refund) => (
+                        {initialRefunds.map((refund) => (
                             <TableRow key={refund.id}>
                                 <TableCell>
                                      <div className="font-mono text-xs font-semibold text-primary">REF: {refund.id.slice(-6).toUpperCase()}</div>

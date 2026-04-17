@@ -36,6 +36,7 @@ export const chefReviewRefundAction = async (id: string, payload: { action: stri
 export const adminReviewRefundAction = async (id: string, payload: { action: string, note?: string }) => {
     try {
         const res = await refundServerService.adminReviewRefund(id, payload);
+        console.log(res)
         revalidatePath("/dashboard/refunds");
         return res;
     } catch (error: any) {
