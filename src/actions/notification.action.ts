@@ -23,3 +23,22 @@ export const markNotificationReadAction = async (id: string) => {
         return { success: false, error: error.message };
     }
 };
+
+export const markAllNotificationsReadAction = async () => {
+    try {
+        const res = await notificationServerService.markAllAsRead();
+        revalidatePath("/dashboard");
+        return res;
+    } catch (error: any) {
+        return { success: false, error: error.message };
+    }
+};
+
+export const getUnreadNotificationsCountAction = async () => {
+    try {
+        const res = await notificationServerService.getUnreadCount();
+        return res;
+    } catch (error: any) {
+        return { success: false, error: error.message };
+    }
+};

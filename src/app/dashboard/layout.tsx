@@ -9,6 +9,7 @@ import { Roles } from "@/constants/roles"
 import { sessionService } from "@/service/token.service"
 import { ReactNode } from "react"
 import { redirect } from "next/navigation"
+import NotificationBell from "@/components/shared/NotificationBell"
 
 export default async function DashboardLayout({
      admin,
@@ -50,6 +51,7 @@ export default async function DashboardLayout({
                          <SidebarTrigger className="hover:bg-primary/10 hover:text-primary transition-colors h-9 w-9" />
                          <Separator orientation="vertical" className="mr-2 h-4 bg-gray-200" />
                          <div className="flex-1" />
+                         <NotificationBell />
                     </header>
                     <div className="flex flex-1 flex-col gap-4 p-4 lg:p-6 bg-transparent">
                          {content}

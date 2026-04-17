@@ -18,7 +18,7 @@ export const adminServerService = {
           }),
 
      getAuditLogs: (query?: string) =>
-          apiFetchServerMain(`/admin/audit-logs?${query || ""}`, {
+          apiFetchServerMain(`/audit?${query || ""}`, {
                method: "GET",
           }),
 };

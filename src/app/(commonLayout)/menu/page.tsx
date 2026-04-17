@@ -1,15 +1,18 @@
 import { getAllMenuItems } from "@/actions/menuItem.action";
 import { getAllCategories } from "@/actions/category.action";
 import MenuGrid from "@/components/menu/MenuGrid";
+import GlobalPagination from "@/components/shared/pagination/GlobalPagination";
 
-export default async function MenuPage() {
+export default async function MenuPage({ searchParams }: { searchParams: Promise<{ page?: string; limit?: string }> }) {
+    const { page, limit } = await searchParams;
     const [menuRes, categoryRes] = await Promise.all([
-        getAllMenuItems({}),
+        getAllMenuItems({ page, limit }),
         getAllCategories({})
     ]);
 
     const menuItems = menuRes?.success ? menuRes.data : [];
     const categories = categoryRes?.success ? categoryRes.data : [];
+    const meta = menuRes?.meta || { page: 1, limit: 12, totalPage: 1 };
 
     return (
         <div className="container mx-auto px-4 py-8">
@@ -22,6 +25,14 @@ export default async function MenuPage() {
             </div>
 
             <MenuGrid initialItems={menuItems} categories={categories} />
+            
+            <div className="mt-12 flex justify-end">
+                 <GlobalPagination
+                      page={meta.page}
+                      totalPages={meta.totalPage}
+                      limit={meta.limit}
+                 />
+            </div>
         </div>
     );
 }

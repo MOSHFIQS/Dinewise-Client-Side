@@ -10,4 +10,14 @@ export const notificationServerService = {
           apiFetchServerMain(`/notification/${id}/read`, {
                method: "PATCH",
           }),
+
+     markAllAsRead: () =>
+          apiFetchServerMain(`/notification/mark-all-read`, {
+               method: "PATCH",
+          }),
+
+     getUnreadCount: () =>
+          apiFetchServerMain(`/notification/unread-count`, {
+               method: "GET",
+          }),
 };
