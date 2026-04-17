@@ -75,7 +75,11 @@ export function AppSidebar({ user }: { user: { role: string } }) {
       <SidebarContent className="px-2 pt-4 bg-white/50 backdrop-blur-sm">
         <SidebarMenu>
           {navItems.map((item) => {
-            const isActive = pathname === item.url || pathname?.startsWith(`${item.url}/`);
+            const isDashboardRoot = item.url === "/dashboard";
+
+            const isActive = isDashboardRoot
+              ? pathname === "/dashboard"
+              : pathname === item.url || pathname?.startsWith(`${item.url}/`);
 
             return (
               <SidebarMenuItem key={item.title}>
@@ -89,7 +93,10 @@ export function AppSidebar({ user }: { user: { role: string } }) {
                     }`}
                 >
                   <Link href={item.url} className="flex items-center gap-3">
-                    <item.icon className={`h-4 w-4 shrink-0 ${isActive ? "text-primary scale-110" : "text-gray-400"} transition-transform`} />
+                    <item.icon
+                      className={`h-4 w-4 shrink-0 ${isActive ? "text-primary scale-110" : "text-gray-400"
+                        } transition-transform`}
+                    />
                     <span className="text-sm">{item.title}</span>
                   </Link>
                 </SidebarMenuButton>

@@ -24,28 +24,12 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 
 export default function ChefRefundsView({ initialRefunds }: { initialRefunds: any[] }) {
-    const [refunds, setRefunds] = useState<any[]>(initialRefunds);
-    const [loading, setLoading] = useState(false);
+   
+ 
     const [selectedRefund, setSelectedRefund] = useState<any | null>(null);
     const [actionType, setActionType] = useState<"APPROVE" | "REJECT" | null>(null);
     const [note, setNote] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
-
-    const handleRefresh = async () => {
-        setLoading(true);
-        try {
-            const res = await getRefundsAction({});
-            if (res.success && res.data) {
-                setRefunds(res.data);
-                toast.success("Refunds refreshed");
-            } else {
-                toast.error("Failed to refresh refunds");
-            }
-        } catch {
-            toast.error("An error occurred while refreshing refunds");
-        }
-        setLoading(false);
-    };
 
     const openActionDialog = (refund: any, action: "APPROVE" | "REJECT") => {
         setSelectedRefund(refund);
@@ -65,12 +49,6 @@ export default function ChefRefundsView({ initialRefunds }: { initialRefunds: an
              const res = await chefReviewRefundAction(selectedRefund.id, { action: actionType, note });
              if (res.success) {
                   toast.success(`Refund successfully ${actionType.toLowerCase()}d`);
-                  // Refresh the list locally
-                  setRefunds(prev => prev.map(r => r.id === selectedRefund.id ? { 
-                      ...r, 
-                      status: actionType === "APPROVE" ? "CHEF_APPROVED" : "CHEF_REJECTED",
-                      chefNote: note
-                  } : r));
                   setSelectedRefund(null);
              } else {
                   toast.error(res.error || `Failed to ${actionType.toLowerCase()} refund`);
@@ -100,9 +78,6 @@ export default function ChefRefundsView({ initialRefunds }: { initialRefunds: an
                     <h1 className="text-3xl font-bold tracking-tight">Refund Requests</h1>
                     <p className="text-muted-foreground">Review and moderate refund requests for your menu items.</p>
                 </div>
-                <Button variant="outline" size="icon" onClick={handleRefresh} disabled={loading}>
-                     <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
-                </Button>
             </div>
 
             <div className="border rounded-xl bg-card overflow-hidden">
@@ -118,14 +93,14 @@ export default function ChefRefundsView({ initialRefunds }: { initialRefunds: an
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {refunds.length === 0 && (
+                        {initialRefunds.length === 0 && (
                              <TableRow>
                                 <TableCell colSpan={6} className="text-center py-10 text-muted-foreground">
                                     No refund requests found.
                                 </TableCell>
                             </TableRow>
                         )}
-                        {refunds.map((refund) => (
+                        {initialRefunds.map((refund) => (
                             <TableRow key={refund.id}>
                                 <TableCell>
                                      <div className="font-mono text-xs font-semibold">Refund: #{refund.id.slice(-6).toUpperCase()}</div>
