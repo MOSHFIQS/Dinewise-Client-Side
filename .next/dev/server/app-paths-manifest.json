@@ -1,10 +1,5 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
-  "/dashboard/@admin/allOrders/page": "app/dashboard/@admin/allOrders/page.js",
-  "/dashboard/@chef/addItems/page": "app/dashboard/@chef/addItems/page.js",
+  "/(commonLayout)/login/page": "app/(commonLayout)/login/page.js",
   "/dashboard/@chef/myMenu/page": "app/dashboard/@chef/myMenu/page.js",
-  "/dashboard/@chef/myMenu/update/[id]/page": "app/dashboard/@chef/myMenu/update/[id]/page.js",
-  "/dashboard/@chef/myOrders/page": "app/dashboard/@chef/myOrders/page.js",
-  "/dashboard/@chef/refunds/page": "app/dashboard/@chef/refunds/page.js",
   "/dashboard/page": "app/dashboard/page.js"
 }
