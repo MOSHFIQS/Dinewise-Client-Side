@@ -170,14 +170,17 @@ export default function MenuItemView({ item, relatedItems }: MenuItemViewProps) 
                     </div>
 
                     {/* Ingredients List */}
-                    {item.ingredients && item.ingredients.length > 0 && (
+                    {item.ingredients && (
                         <div className="mb-10">
                             <h3 className="font-black mb-4 text-lg flex items-center gap-2">
                                 <span className="w-2 h-2 bg-primary rounded-full" />
                                 Fresh Ingredients
                             </h3>
                             <div className="flex flex-wrap gap-2">
-                                {item.ingredients.map((ing: string, i: number) => (
+                                { (typeof item.ingredients === 'string' 
+                                    ? item.ingredients.split(',').map((s: string) => s.trim()).filter(Boolean)
+                                    : Array.isArray(item.ingredients) ? item.ingredients : []
+                                  ).map((ing: string, i: number) => (
                                     <span key={i} className="px-5 py-2.5 bg-white border border-slate-200 rounded-2xl text-sm font-semibold hover:border-primary hover:text-primary transition-all cursor-default">
                                         {ing}
                                     </span>

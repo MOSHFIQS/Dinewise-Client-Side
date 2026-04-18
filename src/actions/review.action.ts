@@ -71,3 +71,12 @@ export const checkReviewEligibilityAction = async (menuItemId: string) => {
           return { success: false, message: error.message || "Failed to check eligibility" };
      }
 };
+
+export const getMenuItemReviewsAction = async (menuItemId: string, query?: string) => {
+     try {
+          const res = await reviewServerService.getMenuItemReviews(menuItemId, query);
+          return { success: true, data: res.data };
+     } catch (error: any) {
+          return { success: false, message: error.message || "Failed to fetch reviews" };
+     }
+};

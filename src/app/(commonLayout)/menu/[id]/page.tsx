@@ -6,6 +6,7 @@ export default async function MenuItemDetailsPage({ params }: { params: Promise<
     const { id } = await params;
 
     const result = await getMenuItemById(id);
+    console.log(result.data)
 
     if (!result.success || !result.data) {
         notFound();

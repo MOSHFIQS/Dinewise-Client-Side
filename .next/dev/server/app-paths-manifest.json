@@ -1,9 +1,5 @@
 {
-  "/(commonLayout)/login/page": "app/(commonLayout)/login/page.js",
-  "/dashboard/@admin/audit/page": "app/dashboard/@admin/audit/page.js",
-  "/dashboard/@chef/myOrders/page": "app/dashboard/@chef/myOrders/page.js",
-  "/dashboard/@chef/refunds/page": "app/dashboard/@chef/refunds/page.js",
-  "/dashboard/@customer/payment/page": "app/dashboard/@customer/payment/page.js",
-  "/dashboard/@customer/reviews/page": "app/dashboard/@customer/reviews/page.js",
-  "/dashboard/page": "app/dashboard/page.js"
+  "/(commonLayout)/menu/[id]/page": "app/(commonLayout)/menu/[id]/page.js",
+  "/(commonLayout)/menu/page": "app/(commonLayout)/menu/page.js",
+  "/(commonLayout)/page": "app/(commonLayout)/page.js"
 }

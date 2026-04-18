@@ -2,8 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useAuth } from "@/context/AuthProvider";
-import { reviewServerService } from "@/service/review.server.service";
-import { checkReviewEligibilityAction } from "@/actions/review.action";
+import { checkReviewEligibilityAction, getMenuItemReviewsAction } from "@/actions/review.action";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Star, MessageSquare, Heart, Lock } from "lucide-react";
@@ -23,7 +22,7 @@ export default function ReviewSection({ menuItemId }: { menuItemId: string }) {
      const fetchReviews = async () => {
           setLoading(true);
           try {
-               const res = await reviewServerService.getMenuItemReviews(menuItemId);
+               const res = await getMenuItemReviewsAction(menuItemId);
                if (res.success) {
                     setReviews(res.data);
                }
