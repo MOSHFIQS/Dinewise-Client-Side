@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -12,7 +12,11 @@ import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
 export default function MenuGrid({ initialItems, categories, isHome = false, hideFilters = false }: { initialItems: any[], categories?: any[], isHome?: boolean, hideFilters?: boolean }) {
-    const [selectedCat, setSelectedCat] = useState<string>("ALL");
+    const router = useRouter();
+    const searchParams = useSearchParams();
+    const pathname = usePathname();
+    const selectedCat = searchParams.get("categoryId") || "ALL";
+
     const addToCart = useCartStore((state) => state.addToCart);
 
     const handleAdd = (item: any) => {
@@ -25,9 +29,16 @@ export default function MenuGrid({ initialItems, categories, isHome = false, hid
          toast.success(`${item.name} added! 🍴`);
     };
 
-    const filtered = selectedCat === "ALL" 
-         ? initialItems 
-         : initialItems.filter(i => i.categoryId === selectedCat);
+    const handleCategoryChange = (categoryId: string) => {
+        const params = new URLSearchParams(searchParams.toString());
+        if (categoryId === "ALL") {
+            params.delete("categoryId");
+        } else {
+            params.set("categoryId", categoryId);
+        }
+        params.set("page", "1"); // Reset to first page on filter change
+        router.push(`${pathname}?${params.toString()}`);
+    };
 
     return (
         <div className="w-full">
@@ -40,7 +51,7 @@ export default function MenuGrid({ initialItems, categories, isHome = false, hid
                                 ? "bg-primary text-white border-primary shadow-lg shadow-primary/20 scale-105" 
                                 : "bg-white text-slate-400 border-slate-100 hover:border-primary/20 hover:text-primary"
                         )}
-                        onClick={() => setSelectedCat("ALL")}
+                        onClick={() => handleCategoryChange("ALL")}
                      >
                          All
                      </button>
@@ -53,7 +64,7 @@ export default function MenuGrid({ initialItems, categories, isHome = false, hid
                                     ? "bg-primary text-white border-primary shadow-lg shadow-primary/20 scale-105" 
                                     : "bg-white text-slate-400 border-slate-100 hover:border-primary/20 hover:text-primary"
                             )}
-                              onClick={() => setSelectedCat(c.id)}
+                              onClick={() => handleCategoryChange(c.id)}
                           >
                               {c.name}
                           </button>
@@ -62,7 +73,7 @@ export default function MenuGrid({ initialItems, categories, isHome = false, hid
             )}
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                {filtered?.map((item: any) => (
+                {initialItems?.map((item: any) => (
                     <div key={item.id} className="group relative bg-white rounded-[2.5rem] border border-slate-100 p-2 shadow-sm hover:shadow-2xl hover:shadow-primary/5 hover:-translate-y-2 transition-all duration-500">
                         {/* Image Wrapper */}
                         <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden bg-slate-50 ring-1 ring-slate-100/50">
@@ -133,7 +144,7 @@ export default function MenuGrid({ initialItems, categories, isHome = false, hid
                 ))}
             </div>
             
-            {(filtered?.length === 0 || initialItems?.length === 0) && (
+            {initialItems?.length === 0 && (
                  <div className="flex flex-col items-center justify-center py-32 bg-slate-50 rounded-[3rem] border-4 border-dashed border-white shadow-inner">
                       <div className="bg-white p-6 rounded-full shadow-lg mb-6">
                            <Utensils className="w-12 h-12 text-slate-200" />

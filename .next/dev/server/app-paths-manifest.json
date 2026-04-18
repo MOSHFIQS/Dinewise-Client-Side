@@ -1,5 +1,3 @@
 {
-  "/(commonLayout)/menu/[id]/page": "app/(commonLayout)/menu/[id]/page.js",
-  "/(commonLayout)/menu/page": "app/(commonLayout)/menu/page.js",
-  "/(commonLayout)/page": "app/(commonLayout)/page.js"
+  "/(commonLayout)/menu/page": "app/(commonLayout)/menu/page.js"
 }

@@ -3,10 +3,10 @@ import { getAllCategories } from "@/actions/category.action";
 import MenuGrid from "@/components/menu/MenuGrid";
 import GlobalPagination from "@/components/shared/pagination/GlobalPagination";
 
-export default async function MenuPage({ searchParams }: { searchParams: Promise<{ page?: string; limit?: string }> }) {
-    const { page, limit } = await searchParams;
+export default async function MenuPage({ searchParams }: { searchParams: Promise<{ page?: string; limit?: string; categoryId?: string; searchTerm?: string }> }) {
+    const { page, limit, categoryId, searchTerm } = await searchParams;
     const [menuRes, categoryRes] = await Promise.all([
-        getAllMenuItems({ page, limit }),
+        getAllMenuItems({ page, limit, categoryId, searchTerm }),
         getAllCategories({})
     ]);
 
