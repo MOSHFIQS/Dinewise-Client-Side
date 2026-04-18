@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
-import { Loader2, History, Undo2 } from "lucide-react";
+import { Loader2, History, Undo2, Star } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -12,7 +12,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { getMyOrdersAction } from "@/actions/order.action";
 import { requestRefundAction } from "@/actions/refund.action";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
@@ -24,11 +23,12 @@ import { Elements } from "@stripe/react-stripe-js";
 import StripeCheckoutForm from "@/components/shared/StripeCheckoutForm";
 import { createPaymentIntentAction } from "@/actions/payment.action";
 import { envVars } from "@/config/env";
+import { ReviewDialog } from "../reviews/ReviewDialog";
 
 const stripePromise = loadStripe(envVars.STRIPE_PUBLISHABLE_KEY);
 
 export default function CustomerOrderHistoryView({ initialOrders }: { initialOrders: any[] }) {
-    const [orders, setOrders] = useState<any[]>(initialOrders);
+    
     
     // Payment State
     const [payOrderId, setPayOrderId] = useState<string | null>(null);
@@ -44,6 +44,12 @@ export default function CustomerOrderHistoryView({ initialOrders }: { initialOrd
     const [refundReason, setRefundReason] = useState("");
     const [isSubmittingRefund, setIsSubmittingRefund] = useState(false);
     const [maxRefundAmount, setMaxRefundAmount] = useState<number>(0);
+
+    // Review State
+    const [isReviewItemsModalOpen, setIsReviewItemsModalOpen] = useState(false);
+    const [selectedOrder, setSelectedOrder] = useState<any | null>(null);
+    const [isReviewDialogOpen, setIsReviewDialogOpen] = useState(false);
+    const [reviewMenuItemId, setReviewMenuItemId] = useState<string | null>(null);
 
     const handlePay = async (orderId: string, amount: number) => {
         setIsInitPayment(true);
@@ -69,8 +75,6 @@ export default function CustomerOrderHistoryView({ initialOrders }: { initialOrd
          setIsPaymentModalOpen(false);
          setPayOrderId(null);
          setClientSecret(null);
-         const res = await getMyOrdersAction({});
-         if (res.success && res.data) setOrders(res.data);
     };
 
     const handlePaymentModalClose = (open: boolean) => {
@@ -106,9 +110,6 @@ export default function CustomerOrderHistoryView({ initialOrders }: { initialOrd
              if (res.success) {
                  toast.success("Refund requested successfully");
                  setIsRefundModalOpen(false);
-                 // Refresh orders to fetch newly created refund relation if included, or just refresh to be safe
-                 const updated = await getMyOrdersAction({});
-                 if (updated.success && updated.data) setOrders(updated.data);
              } else {
                  toast.error(res.error || "Failed to request refund");
              }
@@ -116,6 +117,16 @@ export default function CustomerOrderHistoryView({ initialOrders }: { initialOrd
              toast.error("An error occurred");
          }
          setIsSubmittingRefund(false);
+    };
+
+    const openReviewItemsModal = (order: any) => {
+         setSelectedOrder(order);
+         setIsReviewItemsModalOpen(true);
+    };
+
+    const openReviewDialog = (menuItemId: string) => {
+         setReviewMenuItemId(menuItemId);
+         setIsReviewDialogOpen(true);
     };
 
     const getStatusColor = (status: string) => {
@@ -186,7 +197,7 @@ export default function CustomerOrderHistoryView({ initialOrders }: { initialOrd
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {orders.length === 0 && (
+                        {initialOrders.length === 0 && (
                              <TableRow>
                                 <TableCell colSpan={6} className="text-center py-10 text-muted-foreground">
                                     <div className="flex flex-col items-center gap-2">
@@ -196,7 +207,7 @@ export default function CustomerOrderHistoryView({ initialOrders }: { initialOrd
                                 </TableCell>
                             </TableRow>
                         )}
-                        {orders.map((order) => {
+                        {initialOrders.map((order) => {
                             const activeRefundStatus = getActiveRefundStatus(order);
                             return (
                                 <TableRow key={order.id}>
@@ -246,7 +257,18 @@ export default function CustomerOrderHistoryView({ initialOrders }: { initialOrd
                                                 </Button>
                                             )}
 
-                                            {!((order.status === "PLACED" || order.status === "PENDING") && order.payment?.status !== "SUCCESS") && !isRefundEligible(order) && (
+                                            {order.status === "DELIVERED" && (
+                                                <Button 
+                                                    size="sm" 
+                                                    variant="secondary"
+                                                    onClick={() => openReviewItemsModal(order)}
+                                                    className="rounded-full px-4 h-8 bg-amber-50 text-amber-600 hover:bg-amber-100 border-none"
+                                                >
+                                                    <Star className="w-3.5 h-3.5 mr-1.5 fill-amber-600" /> Review Items
+                                                </Button>
+                                            )}
+
+                                            {!((order.status === "PLACED" || order.status === "PENDING") && order.payment?.status !== "SUCCESS") && !isRefundEligible(order) && order.status !== "DELIVERED" && (
                                                 <span className="text-muted-foreground text-xs">—</span>
                                             )}
                                         </div>
@@ -317,6 +339,51 @@ export default function CustomerOrderHistoryView({ initialOrders }: { initialOrd
                      </DialogFooter>
                 </DialogContent>
             </Dialog>
+
+            {/* Review Items Selection Modal */}
+            <Dialog open={isReviewItemsModalOpen} onOpenChange={setIsReviewItemsModalOpen}>
+                <DialogContent className="sm:max-w-md rounded-[2rem]">
+                    <DialogHeader>
+                        <DialogTitle className="text-xl font-black uppercase tracking-tight">Review Items</DialogTitle>
+                    </DialogHeader>
+                    <div className="space-y-4 pt-4">
+                        <p className="text-sm text-slate-500">Select an item from your order to review.</p>
+                        <div className="space-y-3">
+                            {selectedOrder?.items?.map((item: any) => (
+                                <div key={item.id} className="flex items-center justify-between p-4 rounded-2xl bg-slate-50 border border-slate-100">
+                                    <div className="flex items-center gap-3">
+                                        {item.menuItemImage && (
+                                            <div className="h-10 w-10 rounded-xl overflow-hidden border border-white shadow-sm">
+                                                <img src={item.menuItemImage} alt={item.menuItemName} className="h-full w-full object-cover" />
+                                            </div>
+                                        )}
+                                        <div>
+                                            <p className="text-sm font-black text-slate-900 line-clamp-1">{item.menuItemName}</p>
+                                            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">${item.unitPrice.toFixed(2)}</p>
+                                        </div>
+                                    </div>
+                                    <Button 
+                                        size="sm" 
+                                        onClick={() => openReviewDialog(item.menuItemId)}
+                                        className="h-9 rounded-xl px-4 text-xs font-black uppercase tracking-widest bg-primary hover:bg-primary/90"
+                                    >
+                                        Review
+                                    </Button>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </DialogContent>
+            </Dialog>
+
+            {/* Individual Item Review Dialog */}
+            {reviewMenuItemId && (
+                <ReviewDialog 
+                    isOpen={isReviewDialogOpen}
+                    onClose={() => setIsReviewDialogOpen(false)}
+                    menuItemId={reviewMenuItemId}
+                />
+            )}
         </div>
     );
 }

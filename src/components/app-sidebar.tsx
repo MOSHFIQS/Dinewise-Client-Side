@@ -22,7 +22,8 @@ import {
   Settings,
   History,
   FileBox,
-  Undo2
+  Undo2,
+  Star
 } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -32,6 +33,7 @@ const adminNav = [
   { title: "Manage Users", url: "/dashboard/allUsers", icon: Users },
   { title: "All Orders", url: "/dashboard/allOrders", icon: ShoppingCart },
   { title: "All Menu Items", url: "/dashboard/allMenu", icon: UtensilsCrossed },
+  { title: "Reviews", url: "/dashboard/reviews", icon: Star },
   { title: "Audit Logs", url: "/dashboard/audit", icon: History },
   { title: "Refunds", url: "/dashboard/refunds", icon: Undo2 },
 ]
@@ -41,11 +43,13 @@ const chefNav = [
   { title: "My Menu Items", url: "/dashboard/myMenu", icon: UtensilsCrossed },
   { title: "Add Menu Item", url: "/dashboard/addItems", icon: FileBox },
   { title: "My Orders", url: "/dashboard/myOrders", icon: ShoppingCart },
+  { title: "Reviews", url: "/dashboard/reviews", icon: Star },
   { title: "Refunds", url: "/dashboard/refunds", icon: Undo2 },
 ]
 
 const customerNav = [
   { title: "Overview", url: "/dashboard", icon: LayoutDashboard },
+  { title: "My Reviews", url: "/dashboard/reviews", icon: Star },
   { title: "My Cart", url: "/dashboard/cart", icon: ShoppingCart },
   { title: "Order History", url: "/dashboard/payment", icon: History },
   { title: "Settings", url: "/dashboard/settings", icon: Settings },
