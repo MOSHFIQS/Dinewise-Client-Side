@@ -78,7 +78,7 @@ const Navbar = () => {
           <NavLink to={"/dashboard"}>Dashboard</NavLink>
           <NavLink to={"/menu"}>Our Menu</NavLink>
           <NavLink to={"/ourShop"}>Our Shop</NavLink>
-          <NavLink to={"/dashboard/myCart"} className="indicator">
+          <NavLink to={"/dashboard/cart"} className="indicator">
             <span className="indicator-item badge-sm text-rose-400 font-extrabold ">
               {cart.length}
             </span>
