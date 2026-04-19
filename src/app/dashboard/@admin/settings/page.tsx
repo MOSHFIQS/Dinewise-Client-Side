@@ -36,17 +36,15 @@ export default function SettingsPage() {
         <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
             <div className="space-y-2">
                 <h1 className="text-4xl font-extrabold tracking-tight bg-gradient-to-br from-foreground to-foreground/60 bg-clip-text text-transparent">
-                    Account Settings
+                    Admin Profile Settings
                 </h1>
                 <p className="text-lg text-muted-foreground max-w-2xl">
-                    Manage your personal information, contact details, and platform preferences.
+                    Manage your administrative profile and platform control settings.
                 </p>
             </div>
 
             <div className="grid gap-8">
                 <ProfileForm user={user} />
-                
-                {/* Additional sections can be added here in the future e.g. Privacy, Security */}
             </div>
         </div>
     );
