@@ -1,4 +1,6 @@
 {
-  "/(commonLayout)/page": "app/(commonLayout)/page.js",
-  "/dashboard/page": "app/dashboard/page.js"
+  "/(commonLayout)/cart/page": "app/(commonLayout)/cart/page.js",
+  "/(commonLayout)/checkout/page": "app/(commonLayout)/checkout/page.js",
+  "/(commonLayout)/menu/[id]/page": "app/(commonLayout)/menu/[id]/page.js",
+  "/(commonLayout)/page": "app/(commonLayout)/page.js"
 }

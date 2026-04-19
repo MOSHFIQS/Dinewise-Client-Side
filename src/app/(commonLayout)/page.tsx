@@ -1,11 +1,11 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ArrowRight, Utensils } from "lucide-react";
-import { FeaturesSection, PopularDishesSection, TestimonialsSection } from "@/components/home/HomeSections";
+import { FeaturesSection, PopularDishesSection, TestimonialsSection, HowItWorksSection, ServicesSection, StatisticsSection, NewsletterSection } from "@/components/home/HomeSections";
 
 export default function Home() {
     return (
-        <div className="flex flex-col w-full">
+        <div className="flex flex-col w-full space-y-20">
             {/* Hero Section */}
             <section className="relative w-full py-20 lg:py-32 xl:py-48 overflow-hidden bg-gradient-to-b from-primary/5 to-transparent">
                 <div className="container mx-auto px-4 md:px-6 relative z-10 flex flex-col items-center text-center space-y-8">
@@ -41,12 +41,16 @@ export default function Home() {
             </section>
 
             {/* Content Sections */}
+            <HowItWorksSection />
             <FeaturesSection />
+            <ServicesSection />
             <PopularDishesSection />
+            <StatisticsSection />
             <TestimonialsSection />
+            <NewsletterSection />
             
             {/* CTA Section */}
-            <section className="py-20 border-t">
+            <section className="pb-20 ">
                 <div className="container px-4 mx-auto text-center">
                     <div className="max-w-3xl mx-auto space-y-6">
                         <h2 className="text-3xl md:text-4xl font-bold">Ready to Taste Perfection?</h2>

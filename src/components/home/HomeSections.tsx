@@ -1,7 +1,8 @@
 "use client";
 
-import { Utensils, Clock, Zap, ShieldCheck, Star, Quote } from "lucide-react";
+import { Utensils, Clock, Zap, ShieldCheck, Star, Quote, Truck, Calendar, ShoppingBag, ChefHat, Trophy, Users as UsersIcon, Heart, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { getAllMenuItems } from "@/actions/menuItem.action";
@@ -10,29 +11,29 @@ import MenuGrid from "@/components/menu/MenuGrid";
 export function FeaturesSection() {
     const features = [
         {
-            icon: <Utensils className="h-6 w-6 text-primary" />,
+            icon: <Utensils className="h-6 w-6 text-white" />,
             title: "Chef Crafted",
             description: "Every dish is prepared by world-class professional chefs."
         },
         {
-            icon: <Clock className="h-6 w-6 text-primary" />,
+            icon: <Clock className="h-6 w-6 text-white" />,
             title: "Fast Delivery",
             description: "Fresh, hot meals delivered to your doorstep in 30 minutes."
         },
         {
-            icon: <Zap className="h-6 w-6 text-primary" />,
+            icon: <Zap className="h-6 w-6 text-white" />,
             title: "Easy Ordering",
             description: "Seamless checkout process with just a few clicks."
         },
         {
-            icon: <ShieldCheck className="h-6 w-6 text-primary" />,
+            icon: <ShieldCheck className="h-6 w-6 text-white" />,
             title: "Quality Assured",
             description: "We use only the finest, freshest, and organic ingredients."
         }
     ];
 
     return (
-        <section className="py-24 bg-slate-50/50">
+        <section className="py-24">
             <div className="container px-4 mx-auto">
                 <div className="text-center max-w-3xl mx-auto mb-20">
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/5 text-primary text-[10px] font-black uppercase tracking-widest mb-4">
@@ -44,8 +45,8 @@ export function FeaturesSection() {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     {features.map((f, i) => (
-                        <div key={i} className="group p-10 rounded-[2.5rem] bg-white border border-slate-100 hover:border-primary/20 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 hover:-translate-y-2">
-                            <div className="bg-primary/5 w-16 h-16 rounded-[1.5rem] flex items-center justify-center mb-8 group-hover:bg-primary group-hover:text-white transition-colors duration-500 shadow-inner">
+                        <div key={i} className="group p-10 rounded-[2.5rem] bg-slate-100 border border-slate-100 hover:border-primary/20 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 hover:-translate-y-2">
+                            <div className="w-16 h-16 rounded-[1.5rem] flex items-center justify-center mb-8 bg-primary transition-colors duration-500 shadow-inner">
                                 {f.icon}
                             </div>
                             <h3 className="text-2xl font-black mb-4 tracking-tight uppercase text-slate-800">{f.title}</h3>
@@ -179,6 +180,112 @@ export function TestimonialsSection() {
                                 <p className="text-slate-400 text-sm font-medium">Join 50,000+ happy food lovers who trust Dinewise.</p>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+}
+
+export function HowItWorksSection() {
+    const steps = [
+        { icon: <Utensils className="h-8 w-8 text-white" />, title: "Choose Your Meal", desc: "Select from our vast menu of chef-crafted dishes." },
+        { icon: <ChefHat className="h-8 w-8 text-white" />, title: "Chef Prepares", desc: "Our expert chefs cook your meal with fresh ingredients." },
+        { icon: <Truck className="h-8 w-8 text-white" />, title: "Fast Delivery", desc: "It arrives at your door hot and ready to eat." },
+    ];
+    return (
+        <section className="relative">
+            <div className="container px-4 mx-auto">
+                <div className="text-center max-w-2xl mx-auto mb-16">
+                    <h2 className="text-4xl md:text-5xl font-black mb-4 text-slate-900">How It Works</h2>
+                    <p className="text-lg text-muted-foreground">From our kitchen to your dining table in three simple steps.</p>
+                </div>
+                <div className="grid md:grid-cols-3 gap-12 text-center relative">
+                    {steps.map((step, i) => (
+                        <div key={i} className="flex flex-col items-center relative z-10">
+                            <div className="w-20 h-20 bg-primary shadow-xl shadow-primary/20 rounded-2xl flex items-center justify-center mb-6 transform transition-transform hover:-translate-y-2">
+                                {step.icon}
+                            </div>
+                            <h3 className="text-2xl font-bold text-slate-800 mb-3">{step.title}</h3>
+                            <p className="text-slate-500 font-medium">{step.desc}</p>
+                        </div>
+                    ))}
+                    <div className="hidden md:block absolute top-[2.5rem] left-[16.6%] right-[16.6%] h-1 bg-gradient-to-r from-primary/10 via-primary to-primary/10 -z-0"></div>
+                </div>
+            </div>
+        </section>
+    );
+}
+
+export function ServicesSection() {
+    const services = [
+        { icon: <ShoppingBag className="h-6 w-6 text-primary" />, title: "Daily Delivery", desc: "Hot, ready-to-eat meals delivered to your home or office on demand." },
+        { icon: <Calendar className="h-6 w-6 text-primary" />, title: "Event Catering", desc: "Premium catering services for corporate events, weddings, and parties." },
+        { icon: <ChefHat className="h-6 w-6 text-primary" />, title: "Private Chef", desc: "Hire our top chefs for an exclusive, curated dining experience at your home." },
+    ];
+    return (
+        <section className="">
+            <div className="container px-4 mx-auto">
+                <div className="text-center max-w-2xl mx-auto mb-16">
+                    <h2 className="text-3xl md:text-4xl font-black mb-4 text-slate-900 border-b-4 border-primary/20 inline-block pb-2">Our Premium Services</h2>
+                </div>
+                <div className="grid md:grid-cols-3 gap-8">
+                    {services.map((svc, i) => (
+                        <div key={i} className="bg-slate-100 p-8 rounded-3xl shadow-sm border border-slate-100 flex flex-col items-start gap-4 hover:shadow-xl transition-shadow duration-300">
+                            <div className="p-3 bg-primary/10 rounded-xl">{svc.icon}</div>
+                            <h3 className="text-xl font-bold">{svc.title}</h3>
+                            <p className="text-slate-500">{svc.desc}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+}
+
+export function StatisticsSection() {
+    const stats = [
+        { icon: <Trophy className="h-6 w-6 text-orange-200" />, value: "50+", label: "Award-winning Chefs" },
+        { icon: <UsersIcon className="h-6 w-6 text-orange-200" />, value: "100k+", label: "Happy Customers" },
+        { icon: <ShoppingBag className="h-6 w-6 text-orange-200" />, value: "500k+", label: "Meals Delivered" },
+        { icon: <Heart className="h-6 w-6 text-orange-200" />, value: "4.9/5", label: "Average Rating" },
+    ];
+    return (
+        <section className="py-20 bg-[#0f172b] text-primary-foreground relative overflow-hidden">
+            <div className="absolute inset-0 bg-black/10 mix-blend-multiply"></div>
+            <div className="container px-4 mx-auto relative z-10">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 text-center">
+                    {stats.map((stat, i) => (
+                        <div key={i} className="flex flex-col items-center justify-center p-6 border border-white/10 rounded-3xl bg-white/5 backdrop-blur-sm">
+                            <div className="bg-white/10 p-3 rounded-full mb-4">{stat.icon}</div>
+                            <div className="text-4xl md:text-5xl font-black tracking-tight mb-2">{stat.value}</div>
+                            <div className="text-sm uppercase tracking-widest text-primary-foreground/80 font-semibold">{stat.label}</div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+}
+
+export function NewsletterSection() {
+    return (
+        <section className="bg-white relative">
+            <div className="container px-4 mx-auto">
+                <div className="max-w-4xl mx-auto bg-slate-900 rounded p-10 md:p-16 text-center text-white relative overflow-hidden shadow">
+                    <div className="absolute -top-24 -right-24 w-64 h-64 bg-primary rounded-full blur-[80px] opacity-20"></div>
+                    <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-orange-500 rounded-full blur-[80px] opacity-20"></div>
+
+                    <div className="relative z-10 flex flex-col items-center">
+                        <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mb-6">
+                            <Mail className="w-8 h-8 text-primary" />
+                        </div>
+                        <h2 className="text-3xl md:text-5xl font-black mb-4">Stay Deliciously Updated</h2>
+                        <p className="text-slate-300 text-lg mb-8 max-w-xl mx-auto">Subscribe to our newsletter for exclusive discounts, new menu items, and culinary inspiration straight to your inbox.</p>
+                        <form className="flex w-full max-w-md items-center space-x-2" aria-label="Subscribe">
+                            <Input type="email" placeholder="Enter your email address" className="h-14 rounded-full bg-white/10 border-white/20 text-white placeholder:text-slate-400 px-6" />
+                            <Button type="button" className="h-14 rounded-full px-8 text-base shadow-xl bg-primary hover:bg-primary/90 text-white border-0">Subscribe</Button>
+                        </form>
                     </div>
                 </div>
             </div>
