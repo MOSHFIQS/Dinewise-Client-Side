@@ -36,20 +36,20 @@ export function FeaturesSection() {
         <section className="py-24">
             <div className="container px-4 mx-auto">
                 <div className="text-center max-w-3xl mx-auto mb-20">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/5 text-primary text-[10px] font-black uppercase tracking-widest mb-4">
+                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white text-black border border-black/10 text-[10px] font-black uppercase tracking-widest mb-4 shadow-sm">
                         <Zap className="w-3 h-3 fill-current" />
                         The Dinewise Edge
                     </div>
-                    <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tight text-slate-900 border-b-4 border-primary/10 inline-block">Why Choose Us?</h2>
-                    <p className="text-muted-foreground text-lg italic">We combine culinary excellence with modern technology to bring the restaurant experience to your home.</p>
+                    <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tight text-black inline-block">Why Choose Us?</h2>
+                    <p className="text-black/70 text-lg italic">We combine culinary excellence with modern technology to bring the restaurant experience to your home.</p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     {features.map((f, i) => (
-                        <div key={i} className="group p-10 rounded-[2.5rem] bg-slate-100 border border-slate-100 hover:border-primary/20 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 hover:-translate-y-2">
-                            <div className="w-16 h-16 rounded-[1.5rem] flex items-center justify-center mb-8 bg-primary transition-colors duration-500 shadow-inner">
+                        <div key={i} className="group p-10 rounded-[2.5rem] bg-white border border-black/5 hover:border-black/20 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+                            <div className="w-16 h-16 rounded-[1.5rem] flex items-center justify-center mb-8 bg-black transition-colors duration-500 shadow-inner">
                                 {f.icon}
                             </div>
-                            <h3 className="text-2xl font-black mb-4 tracking-tight uppercase text-slate-800">{f.title}</h3>
+                            <h3 className="text-2xl font-black mb-4 tracking-tight uppercase text-black">{f.title}</h3>
                             <p className="text-slate-500 text-sm leading-relaxed font-medium">{f.description}</p>
                         </div>
                     ))}
@@ -85,15 +85,15 @@ export function PopularDishesSection() {
             <div className="container px-4 mx-auto">
                 <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
                     <div className="max-w-xl text-center md:text-left">
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50 text-orange-600 text-[10px] font-black uppercase tracking-widest mb-4">
+                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white text-black border border-black/10 text-[10px] font-black uppercase tracking-widest mb-4 shadow-sm">
                             <Star className="w-3 h-3 fill-current" />
                             Guest Favorites
                         </div>
-                        <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tight text-slate-900 leading-tight">Our Signature Dishes</h2>
-                        <p className="text-muted-foreground text-lg">Most loved creations by our community. Try them once and you'll be hooked.</p>
+                        <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tight text-black leading-tight">Our Signature Dishes</h2>
+                        <p className="text-black/70 text-lg">Most loved creations by our community. Try them once and you'll be hooked.</p>
                     </div>
                     <Link href="/menu">
-                        <Button variant="outline" className="rounded-full h-12 px-8 font-bold border-2 hover:bg-primary hover:text-white transition-all transform hover:scale-105 active:scale-95">View Full Menu</Button>
+                        <Button variant="outline" className="rounded-full h-12 px-8 font-bold border-2 text-black border-black/20 hover:bg-black hover:text-white transition-all transform hover:scale-105 active:scale-95 bg-white/50 backdrop-blur-sm">View Full Menu</Button>
                     </Link>
                 </div>
 
@@ -126,36 +126,32 @@ export function TestimonialsSection() {
     ];
 
     return (
-        <section className="py-32 bg-slate-900 text-white overflow-hidden relative">
-            {/* Background Decor */}
-            <div className="absolute top-0 right-0 w-96 h-96 bg-primary/20 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2" />
-            <div className="absolute bottom-0 left-0 w-96 h-96 bg-orange-500/10 blur-[120px] rounded-full translate-y-1/2 -translate-x-1/2" />
-
+        <section className="py-32 overflow-hidden relative">
             <div className="container px-4 mx-auto relative z-10">
                 <div className="grid lg:grid-cols-2 gap-24 items-center">
                     <div>
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 text-primary text-[10px] font-black uppercase tracking-widest mb-6 border border-white/10">
+                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white text-black border border-black/10 text-[10px] font-black uppercase tracking-widest mb-6 shadow-sm">
                             <Utensils className="w-3 h-3" />
                             Community Voice
                         </div>
-                        <h2 className="text-4xl md:text-6xl font-black mb-10 leading-tight tracking-tight">
+                        <h2 className="text-4xl md:text-6xl font-black mb-10 leading-tight tracking-tight text-black">
                             What Our <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-orange-400 italic">Customers Say</span>
+                            <span className="italic font-light">Customers Say</span>
                         </h2>
 
                         <div className="space-y-8">
                             {testimonials.map((t, i) => (
-                                <div key={i} className="group bg-white/5 backdrop-blur-xl p-10 rounded-[2.5rem] border border-white/10 relative transition-all duration-500 hover:bg-white/[0.08] hover:border-white/20">
-                                    <Quote className="absolute top-8 right-10 h-10 w-10 text-primary/10 group-hover:text-primary/20 transition-colors" />
-                                    <p className="text-xl mb-8 italic text-slate-300 font-medium leading-relaxed">"{t.text}"</p>
+                                <div key={i} className="group bg-white p-10 rounded-[2.5rem] border border-black/5 relative shadow-xl shadow-black/5 transition-all duration-500 hover:border-black/10">
+                                    <Quote className="absolute top-8 right-10 h-10 w-10 text-black/5 group-hover:text-black/10 transition-colors" />
+                                    <p className="text-xl mb-8 italic text-black/80 font-medium leading-relaxed">"{t.text}"</p>
                                     <div className="flex items-center gap-5">
                                         <div className="relative">
-                                            <img src={t.avatar} className="w-16 h-16 rounded-2xl object-cover border-2 border-primary/20 shadow-xl" alt={t.name} />
-                                            <div className="absolute -bottom-1 -right-1 bg-green-500 w-4 h-4 rounded-full border-2 border-slate-900" />
+                                            <img src={t.avatar} className="w-16 h-16 rounded-2xl object-cover border border-black/10 shadow-sm" alt={t.name} />
+                                            <div className="absolute -bottom-1 -right-1 bg-green-500 w-4 h-4 rounded-full border-2 border-white" />
                                         </div>
                                         <div>
-                                            <p className="text-lg font-black tracking-tight">{t.name}</p>
-                                            <p className="text-xs font-bold text-primary uppercase tracking-widest">{t.role}</p>
+                                            <p className="text-lg font-black tracking-tight text-black">{t.name}</p>
+                                            <p className="text-xs font-bold text-black/50 uppercase tracking-widest">{t.role}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -164,20 +160,20 @@ export function TestimonialsSection() {
                     </div>
 
                     <div className="relative">
-                        <div className="aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl border-8 border-white/5 relative group">
+                        <div className="aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl border-[12px] border-white relative group">
                             <img
                                 src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=2070&auto=format&fit=crop"
                                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                                 alt="Chef cooking"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-60" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
 
-                            <div className="absolute bottom-10 left-10 right-10 p-8 bg-white/10 backdrop-blur-2xl rounded-3xl border border-white/10 shadow-2xl translate-y-4 group-hover:translate-y-0 transition-transform duration-700">
-                                <div className="flex text-yellow-400 mb-4 gap-1">
+                            <div className="absolute bottom-10 left-10 right-10 p-8 bg-white/10 backdrop-blur-2xl rounded-3xl border border-white/20 shadow-2xl translate-y-4 group-hover:translate-y-0 transition-transform duration-700 text-center">
+                                <div className="flex justify-center text-white mb-4 gap-1">
                                     {[1, 2, 3, 4, 5].map(n => <Star key={n} className="w-5 h-5 fill-current" />)}
                                 </div>
                                 <p className="text-xl font-black text-white leading-tight mb-2">"Signature Culinary Excellence"</p>
-                                <p className="text-slate-400 text-sm font-medium">Join 50,000+ happy food lovers who trust Dinewise.</p>
+                                <p className="text-white/80 text-sm font-medium">Join 50,000+ happy food lovers who trust Dinewise.</p>
                             </div>
                         </div>
                     </div>
@@ -219,22 +215,22 @@ export function HowItWorksSection() {
 
 export function ServicesSection() {
     const services = [
-        { icon: <ShoppingBag className="h-6 w-6 text-primary" />, title: "Daily Delivery", desc: "Hot, ready-to-eat meals delivered to your home or office on demand." },
-        { icon: <Calendar className="h-6 w-6 text-primary" />, title: "Event Catering", desc: "Premium catering services for corporate events, weddings, and parties." },
-        { icon: <ChefHat className="h-6 w-6 text-primary" />, title: "Private Chef", desc: "Hire our top chefs for an exclusive, curated dining experience at your home." },
+        { icon: <ShoppingBag className="h-6 w-6 text-black" />, title: "Daily Delivery", desc: "Hot, ready-to-eat meals delivered to your home or office on demand." },
+        { icon: <Calendar className="h-6 w-6 text-black" />, title: "Event Catering", desc: "Premium catering services for corporate events, weddings, and parties." },
+        { icon: <ChefHat className="h-6 w-6 text-black" />, title: "Private Chef", desc: "Hire our top chefs for an exclusive, curated dining experience at your home." },
     ];
     return (
-        <section className="">
+        <section className="py-24 border-y border-black/5  backdrop-blur-sm">
             <div className="container px-4 mx-auto">
                 <div className="text-center max-w-2xl mx-auto mb-16">
-                    <h2 className="text-3xl md:text-4xl font-black mb-4 text-slate-900 border-b-4 border-primary/20 inline-block pb-2">Our Premium Services</h2>
+                    <h2 className="text-3xl md:text-4xl font-black mb-4 text-black inline-block pb-2">Our Premium Services</h2>
                 </div>
                 <div className="grid md:grid-cols-3 gap-8">
                     {services.map((svc, i) => (
-                        <div key={i} className="bg-slate-100 p-8 rounded-3xl shadow-sm border border-slate-100 flex flex-col items-start gap-4 hover:shadow-xl transition-shadow duration-300">
-                            <div className="p-3 bg-primary/10 rounded-xl">{svc.icon}</div>
-                            <h3 className="text-xl font-bold">{svc.title}</h3>
-                            <p className="text-slate-500">{svc.desc}</p>
+                        <div key={i} className="bg-white p-8 rounded-3xl shadow-lg shadow-black/5 flex flex-col items-start gap-4 hover:-translate-y-1 transition-all duration-300">
+                            <div className="p-4 bg-black/5 rounded-2xl">{svc.icon}</div>
+                            <h3 className="text-xl font-bold text-black">{svc.title}</h3>
+                            <p className="text-black/60 font-medium leading-relaxed">{svc.desc}</p>
                         </div>
                     ))}
                 </div>
@@ -245,21 +241,20 @@ export function ServicesSection() {
 
 export function StatisticsSection() {
     const stats = [
-        { icon: <Trophy className="h-6 w-6 text-orange-200" />, value: "50+", label: "Award-winning Chefs" },
-        { icon: <UsersIcon className="h-6 w-6 text-orange-200" />, value: "100k+", label: "Happy Customers" },
-        { icon: <ShoppingBag className="h-6 w-6 text-orange-200" />, value: "500k+", label: "Meals Delivered" },
-        { icon: <Heart className="h-6 w-6 text-orange-200" />, value: "4.9/5", label: "Average Rating" },
+        { icon: <Trophy className="h-6 w-6 text-black" />, value: "50+", label: "Award-winning Chefs" },
+        { icon: <UsersIcon className="h-6 w-6 text-black" />, value: "100k+", label: "Happy Customers" },
+        { icon: <ShoppingBag className="h-6 w-6 text-black" />, value: "500k+", label: "Meals Delivered" },
+        { icon: <Heart className="h-6 w-6 text-black" />, value: "4.9/5", label: "Average Rating" },
     ];
     return (
-        <section className="py-20 bg-[#0f172b] text-primary-foreground relative overflow-hidden">
-            <div className="absolute inset-0 bg-black/10 mix-blend-multiply"></div>
+        <section className="py-20 relative overflow-hidden">
             <div className="container px-4 mx-auto relative z-10">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 text-center">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 text-center border-y border-black/10 py-16">
                     {stats.map((stat, i) => (
-                        <div key={i} className="flex flex-col items-center justify-center p-6 border border-white/10 rounded-3xl bg-white/5 backdrop-blur-sm">
-                            <div className="bg-white/10 p-3 rounded-full mb-4">{stat.icon}</div>
-                            <div className="text-4xl md:text-5xl font-black tracking-tight mb-2">{stat.value}</div>
-                            <div className="text-sm uppercase tracking-widest text-primary-foreground/80 font-semibold">{stat.label}</div>
+                        <div key={i} className="flex flex-col items-center justify-center p-6 transparent">
+                            <div className="bg-black/5 p-4 rounded-full mb-6">{stat.icon}</div>
+                            <div className="text-4xl md:text-5xl font-black tracking-tight mb-2 text-black">{stat.value}</div>
+                            <div className="text-xs uppercase tracking-widest text-black/60 font-bold">{stat.label}</div>
                         </div>
                     ))}
                 </div>
@@ -270,21 +265,18 @@ export function StatisticsSection() {
 
 export function NewsletterSection() {
     return (
-        <section className="bg-white relative">
+        <section className="py-12 relative">
             <div className="container px-4 mx-auto">
-                <div className="max-w-4xl mx-auto bg-slate-900 rounded p-10 md:p-16 text-center text-white relative overflow-hidden shadow">
-                    <div className="absolute -top-24 -right-24 w-64 h-64 bg-primary rounded-full blur-[80px] opacity-20"></div>
-                    <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-orange-500 rounded-full blur-[80px] opacity-20"></div>
-
+                <div className="max-w-4xl mx-auto bg-black rounded-[3rem] p-10 md:p-16 text-center text-white relative overflow-hidden shadow-2xl shadow-black/20">
                     <div className="relative z-10 flex flex-col items-center">
                         <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mb-6">
-                            <Mail className="w-8 h-8 text-primary" />
+                            <Mail className="w-8 h-8 text-white" />
                         </div>
                         <h2 className="text-3xl md:text-5xl font-black mb-4">Stay Deliciously Updated</h2>
-                        <p className="text-slate-300 text-lg mb-8 max-w-xl mx-auto">Subscribe to our newsletter for exclusive discounts, new menu items, and culinary inspiration straight to your inbox.</p>
+                        <p className="text-white/70 text-lg mb-8 max-w-xl mx-auto">Subscribe to our newsletter for exclusive discounts, new menu items, and culinary inspiration straight to your inbox.</p>
                         <form className="flex w-full max-w-md items-center space-x-2" aria-label="Subscribe">
-                            <Input type="email" placeholder="Enter your email address" className="h-14 rounded-full bg-white/10 border-white/20 text-white placeholder:text-slate-400 px-6" />
-                            <Button type="button" className="h-14 rounded-full px-8 text-base shadow-xl bg-primary hover:bg-primary/90 text-white border-0">Subscribe</Button>
+                            <Input type="email" placeholder="Enter your email address" className="h-14 rounded-full bg-white/10 border-white/10 text-white placeholder:text-white/40 px-6 focus-visible:ring-1 focus-visible:ring-white/30" />
+                            <Button type="button" className="h-14 rounded-full px-8 text-base shadow-xl bg-white hover:bg-white/90 text-black border-0">Subscribe</Button>
                         </form>
                     </div>
                 </div>

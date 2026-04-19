@@ -1,6 +1,5 @@
 {
-  "/(commonLayout)/cart/page": "app/(commonLayout)/cart/page.js",
-  "/(commonLayout)/checkout/page": "app/(commonLayout)/checkout/page.js",
-  "/(commonLayout)/menu/[id]/page": "app/(commonLayout)/menu/[id]/page.js",
-  "/(commonLayout)/page": "app/(commonLayout)/page.js"
+  "/(commonLayout)/page": "app/(commonLayout)/page.js",
+  "/dashboard/@admin/categories/page": "app/dashboard/@admin/categories/page.js",
+  "/dashboard/page": "app/dashboard/page.js"
 }

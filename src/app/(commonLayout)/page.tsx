@@ -5,9 +5,9 @@ import { FeaturesSection, PopularDishesSection, TestimonialsSection, HowItWorksS
 
 export default function Home() {
     return (
-        <div className="flex flex-col w-full space-y-20">
+        <div className="flex flex-col w-full bg-gradient-to-br from-[#eff3e3] via-[#faede0] to-[#fadcc6] min-h-screen text-slate-900 pb-20">
             {/* Hero Section */}
-            <section className="relative w-full py-20 lg:py-32 xl:py-48 overflow-hidden bg-gradient-to-b from-primary/5 to-transparent">
+            <section className="relative w-full py-20 lg:py-32 xl:py-48 pb-10 overflow-hidden">
                 <div className="container mx-auto px-4 md:px-6 relative z-10 flex flex-col items-center text-center space-y-8">
                     <div className="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-sm font-medium text-primary shadow-sm space-x-2 animate-in fade-in slide-in-from-bottom-4 duration-1000">
                         <Utensils className="h-4 w-4" />
@@ -50,13 +50,13 @@ export default function Home() {
             <NewsletterSection />
             
             {/* CTA Section */}
-            <section className="pb-20 ">
+            <section className="pt-20 pb-10">
                 <div className="container px-4 mx-auto text-center">
                     <div className="max-w-3xl mx-auto space-y-6">
                         <h2 className="text-3xl md:text-4xl font-bold">Ready to Taste Perfection?</h2>
                         <p className="text-muted-foreground text-lg">Join thousands of food lovers who enjoy the DineWise experience every single day.</p>
                         <Link href="/register">
-                            <Button size="lg" className="rounded-full h-14 px-10 text-lg shadow-xl shadow-primary/20 mt-4">
+                            <Button size="lg" className="rounded-full h-14 px-10 text-lg shadow-xl shadow-black/10 mt-4 text-white">
                                 Join Now — It's Free
                             </Button>
                         </Link>
