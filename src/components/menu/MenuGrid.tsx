@@ -72,72 +72,82 @@ export default function MenuGrid({ initialItems, categories, isHome = false, hid
                 </div>
             )}
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {initialItems?.map((item: any) => (
-                    <div key={item.id} className="group relative bg-white/90 backdrop-blur-xl rounded-[2.5rem] border border-white p-2 shadow-sm hover:shadow-2xl hover:shadow-black/10 hover:-translate-y-2 transition-all duration-500">
+                    <div key={item.id} className="group relative bg-white/90 backdrop-blur-xl rounded-[2rem] border border-white overflow-hidden shadow-sm hover:shadow-xl hover:shadow-black/10 hover:-translate-y-1 transition-all duration-300">
                         {/* Image Wrapper */}
-                        <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden bg-slate-50">
+                        <div className="relative aspect-square overflow-hidden bg-black/5">
                             <Image 
                                 src={item.images[0] || "/placeholder-food.jpg"} 
                                 alt={item.name} 
                                 fill 
-                                className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                className="object-cover transition-transform duration-700 group-hover:scale-105"
                             />
                             
                             {/* Overlay Badges */}
-                            <div className="absolute top-4 left-4 flex flex-col gap-2">
+                            <div className="absolute top-3 left-3 flex flex-col gap-1.5">
                                 {item.discountPrice && (
-                                     <Badge className="bg-red-500 hover:bg-red-600 text-white font-bold px-3 py-1 rounded-full border-none shadow-lg">
+                                     <Badge className="bg-red-500 hover:bg-red-600 text-white font-bold px-2.5 py-0.5 rounded-full border-none shadow-md text-[10px]">
                                          -{Math.round((1 - item.discountPrice/item.price) * 100)}%
                                      </Badge>
                                 )}
-                                <Badge variant="secondary" className="bg-white/80 backdrop-blur-md text-black font-bold px-3 py-1 rounded-full border border-white/50 shadow-sm">
+                                <Badge variant="secondary" className="bg-white/90 backdrop-blur-md text-black font-bold px-2.5 py-0.5 rounded-full border border-white/50 shadow-sm text-[10px]">
                                     {item.category?.name || "Premium"}
                                 </Badge>
                             </div>
 
-                            {/* Hover Actions */}
-                            <div className="absolute inset-x-0 bottom-4 flex justify-center gap-3 translate-y-20 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 delay-75">
-                                 <Link href={`/menu/${item.id}`}>
-                                     <Button variant="secondary" size="icon" className="h-12 w-12 rounded-2xl bg-white shadow-xl hover:bg-black hover:text-white transition-all border border-black/10">
-                                          <Eye className="w-5 h-5" />
-                                     </Button>
-                                 </Link>
-                                 <Button size="icon" className="h-12 w-12 rounded-2xl bg-black text-white shadow-xl hover:scale-110 transition-all" onClick={() => handleAdd(item)}>
-                                      <ShoppingCart className="w-5 h-5" />
-                                 </Button>
-                            </div>
+                            {/* Desktop hover overlay — View Details shortcut */}
+                            <Link href={`/menu/${item.id}`} className="absolute inset-0 hidden md:flex items-center justify-center bg-black/0 group-hover:bg-black/20 transition-all duration-300">
+                                <span className="opacity-0 group-hover:opacity-100 bg-white text-black font-black text-xs uppercase tracking-widest px-5 py-2.5 rounded-full shadow-xl transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+                                    View Details
+                                </span>
+                            </Link>
                         </div>
 
                         {/* Content */}
-                        <div className="p-6 pt-5">
-                            <div className="flex items-center gap-1 text-yellow-500 mb-2">
-                                <Star className="w-3.5 h-3.5 fill-current" />
-                                <span className="text-xs font-black tracking-tight text-slate-800">4.9 (120)</span>
+                        <div className="p-4">
+                            <div className="flex items-center gap-1 text-yellow-500 mb-1.5">
+                                <Star className="w-3 h-3 fill-current" />
+                                <span className="text-[10px] font-black tracking-tight text-black/60">4.9 (120)</span>
                             </div>
                             
-                            <h3 className="font-black text-xl text-black line-clamp-1 mb-1 lowercase first-letter:uppercase">
-                                <Link href={`/menu/${item.id}`}>{item.name}</Link>
+                            <h3 className="font-black text-base text-black line-clamp-1 mb-1 lowercase first-letter:uppercase leading-tight">
+                                {item.name}
                             </h3>
                             
-                            <p className="text-sm text-black/50 font-medium line-clamp-2 mb-6">
+                            <p className="text-xs text-black/50 font-medium line-clamp-2 mb-4 leading-relaxed">
                                 {item.description}
                             </p>
                             
-                            <div className="flex items-center justify-between mt-auto bg-black/5 p-3 rounded-2xl">
+                            {/* Price row */}
+                            <div className="flex items-center justify-between mb-3">
                                 <div className="flex flex-col">
                                      {item.discountPrice ? (
-                                         <div className="flex items-end gap-2">
-                                            <span className="font-black text-xl tracking-tight text-black">${item.discountPrice.toFixed(2)}</span>
-                                            <span className="text-[10px] text-black/40 line-through font-bold mb-1">${item.price.toFixed(2)}</span>
+                                         <div className="flex items-end gap-1.5">
+                                            <span className="font-black text-lg tracking-tight text-black">${item.discountPrice.toFixed(2)}</span>
+                                            <span className="text-[10px] text-black/40 line-through font-bold mb-0.5">${item.price.toFixed(2)}</span>
                                          </div>
                                      ) : (
-                                         <span className="font-black text-xl tracking-tight text-black">${item.price.toFixed(2)}</span>
+                                         <span className="font-black text-lg tracking-tight text-black">${item.price.toFixed(2)}</span>
                                      )}
                                 </div>
-                                <Button size="sm" className="h-10 px-5 rounded-xl bg-white text-black border border-black/10 hover:bg-black hover:text-white transition-all font-black text-xs gap-2 group/btn shadow-sm" onClick={() => handleAdd(item)}>
-                                    ADD <Plus className="w-3.5 h-3.5 group-hover/btn:rotate-90 transition-transform" />
-                                </Button>
+                            </div>
+
+                            {/* Always-visible action buttons — mobile + desktop */}
+                            <div className="flex items-center gap-2">
+                                <Link href={`/menu/${item.id}`} className="flex-1">
+                                    <button className="w-full h-10 rounded-xl bg-black/5 hover:bg-black hover:text-white text-black font-black text-xs uppercase tracking-widest transition-all duration-200 flex items-center justify-center gap-2 border border-black/10 hover:border-transparent">
+                                        <Eye className="w-3.5 h-3.5" /> View
+                                    </button>
+                                </Link>
+                                <button
+                                    onClick={() => handleAdd(item)}
+                                    disabled={item.stock === 0}
+                                    className="flex-1 h-10 rounded-xl bg-black text-white font-black text-xs uppercase tracking-widest transition-all duration-200 flex items-center justify-center gap-2 hover:bg-black/80 disabled:opacity-40 disabled:pointer-events-none"
+                                >
+                                    <ShoppingCart className="w-3.5 h-3.5" />
+                                    {item.stock === 0 ? "Sold" : "Add"}
+                                </button>
                             </div>
                         </div>
                     </div>

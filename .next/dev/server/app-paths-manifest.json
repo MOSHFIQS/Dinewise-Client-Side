@@ -1,17 +1,9 @@
 {
   "/(commonLayout)/cart/page": "app/(commonLayout)/cart/page.js",
   "/(commonLayout)/checkout/page": "app/(commonLayout)/checkout/page.js",
-  "/(commonLayout)/contact/page": "app/(commonLayout)/contact/page.js",
-  "/(commonLayout)/login/page": "app/(commonLayout)/login/page.js",
-  "/(commonLayout)/menu/[id]/page": "app/(commonLayout)/menu/[id]/page.js",
   "/(commonLayout)/menu/page": "app/(commonLayout)/menu/page.js",
   "/(commonLayout)/page": "app/(commonLayout)/page.js",
-  "/dashboard/@chef/menu/create/page": "app/dashboard/@chef/menu/create/page.js",
-  "/dashboard/@chef/menu/page": "app/dashboard/@chef/menu/page.js",
   "/dashboard/@chef/myOrders/page": "app/dashboard/@chef/myOrders/page.js",
-  "/dashboard/@customer/addresses/page": "app/dashboard/@customer/addresses/page.js",
   "/dashboard/@customer/cart/page": "app/dashboard/@customer/cart/page.js",
-  "/dashboard/@customer/checkout/page": "app/dashboard/@customer/checkout/page.js",
-  "/dashboard/@customer/payment/page": "app/dashboard/@customer/payment/page.js",
-  "/dashboard/page": "app/dashboard/page.js"
+  "/dashboard/@customer/checkout/page": "app/dashboard/@customer/checkout/page.js"
 }
