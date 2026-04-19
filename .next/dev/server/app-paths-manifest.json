@@ -1,9 +1,0 @@
-{
-  "/(commonLayout)/cart/page": "app/(commonLayout)/cart/page.js",
-  "/(commonLayout)/checkout/page": "app/(commonLayout)/checkout/page.js",
-  "/(commonLayout)/menu/page": "app/(commonLayout)/menu/page.js",
-  "/(commonLayout)/page": "app/(commonLayout)/page.js",
-  "/dashboard/@chef/myOrders/page": "app/dashboard/@chef/myOrders/page.js",
-  "/dashboard/@customer/cart/page": "app/dashboard/@customer/cart/page.js",
-  "/dashboard/@customer/checkout/page": "app/dashboard/@customer/checkout/page.js"
-}
