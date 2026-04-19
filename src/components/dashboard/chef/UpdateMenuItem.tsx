@@ -57,14 +57,14 @@ export default function UpdateMenuItem({ item, categories }: { item: any; catego
           if (isDirty) {
                setShowLeaveDialog(true);
           } else {
-               router.push("/dashboard/myMenu");
+               router.push("/dashboard/menu");
           }
      };
 
      const handleConfirmLeave = () => {
           itemImages.discardDeletes();
           setShowLeaveDialog(false);
-          router.push("/dashboard/myMenu");
+          router.push("/dashboard/menu");
      };
 
      const form = useForm({
@@ -96,7 +96,7 @@ export default function UpdateMenuItem({ item, categories }: { item: any; catego
                     }
                     await itemImages.commitDeletes();
                     toast.success("Dish updated successfully");
-                    router.push("/dashboard/myMenu");
+                    router.push("/dashboard/menu");
                } catch (err: any) {
                     toast.error(err.message || "Failed to update item");
                } finally {

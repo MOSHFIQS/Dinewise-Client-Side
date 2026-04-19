@@ -59,8 +59,8 @@ export default function AdminMenuItemsView({ initialItems, totalCount }: Props) 
       {/* Page Header */}
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="h-10 w-10 rounded-xl bg-purple-100 flex items-center justify-center">
-            <Utensils className="h-5 w-5 text-purple-600" />
+          <div className="h-10 w-10 rounded-xl bg-orange-100 flex items-center justify-center">
+            <Utensils className="h-5 w-5 text-orange-600" />
           </div>
           <div>
             <h1 className="text-xl font-semibold text-gray-900">All Menu Items</h1>
@@ -74,7 +74,7 @@ export default function AdminMenuItemsView({ initialItems, totalCount }: Props) 
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
         <Input
           placeholder="Search items by name..."
-          className="pl-10 h-10 rounded-xl border-gray-200 focus:ring-purple-500/20 focus:border-purple-500"
+          className="pl-10 h-10 rounded-xl border-gray-200 focus:ring-orange-500/20 focus:border-orange-500"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
@@ -115,7 +115,7 @@ export default function AdminMenuItemsView({ initialItems, totalCount }: Props) 
                 initialItems.map((item) => (
                   <TableRow
                     key={item.id}
-                    className="hover:bg-purple-50/30 transition-colors border-gray-50 group"
+                    className="hover:bg-orange-50/30 transition-colors border-gray-50 group"
                   >
                     <TableCell className="pl-6">
                       <div className="h-12 w-12 rounded-xl overflow-hidden border border-gray-100 group-hover:scale-105 transition-transform duration-300 bg-gray-50">
@@ -142,7 +142,7 @@ export default function AdminMenuItemsView({ initialItems, totalCount }: Props) 
                     </TableCell>
                     <TableCell>
                       <div className="flex flex-col">
-                        <span className="text-sm font-bold text-purple-600">
+                        <span className="text-sm font-bold text-orange-600">
                           ${(item.discountPrice || item.price).toFixed(2)}
                         </span>
                         {item.discountPrice && (

@@ -50,121 +50,131 @@ export default function AdminUsersView({ initialUsers }: { initialUsers: any[] }
     );
 
     return (
-        <div className="space-y-8 animate-in fade-in duration-500">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
-                <div>
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-black uppercase tracking-widest mb-3">
-                        <Shield className="w-3 h-3" />
-                        System Administration
+        <div className="h-full bg-gray-50/50 p-6 space-y-6 rounded-2xl border border-gray-100 shadow-sm">
+            {/* Page Header */}
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                <div className="flex items-center gap-3">
+                    <div className="h-10 w-10 rounded-xl bg-orange-100 flex items-center justify-center">
+                        <Users className="h-5 w-5 text-orange-600" />
                     </div>
-                    <h1 className="text-4xl font-black tracking-tight text-slate-900">User Governance</h1>
-                    <p className="text-muted-foreground text-lg">Monitor, manage, and moderate all platform accounts.</p>
+                    <div>
+                        <h1 className="text-xl font-semibold text-gray-900">User Governance</h1>
+                        <p className="text-sm text-gray-500">Monitor and moderate all platform accounts</p>
+                    </div>
                 </div>
             </div>
 
-            <div className="flex items-center gap-4 bg-white p-2 rounded-2xl border shadow-sm">
-                <div className="relative flex-1">
-                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
-                    <Input 
-                        placeholder="Filter by name, email or role..." 
-                        className="pl-11 h-12 border-none focus-visible:ring-0 text-base"
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                    />
-                </div>
-                <div className="hidden sm:flex items-center gap-2 px-6 border-l border-slate-100">
-                     <Users className="w-4 h-4 text-slate-400" />
-                     <span className="text-sm font-bold text-slate-500">{filteredUsers.length} total</span>
-                </div>
+            {/* Existing Search Bar Styling Updated */}
+            <div className="relative max-w-md">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                <Input 
+                    placeholder="Filter by name, email or role..." 
+                    className="pl-10 h-10 rounded-xl border-gray-200 focus:ring-orange-500/20 focus:border-orange-500 bg-white"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                />
             </div>
 
-            <div className="border border-slate-100 rounded-[2rem] bg-white overflow-hidden shadow-xl shadow-slate-100/50">
-                <Table>
-                    <TableHeader className="bg-slate-50/50">
-                        <TableRow className="hover:bg-transparent border-slate-100">
-                            <TableHead className="py-6 font-black uppercase text-[10px] tracking-widest pl-8">Identity</TableHead>
-                            <TableHead className="py-6 font-black uppercase text-[10px] tracking-widest">Platform Role</TableHead>
-                            <TableHead className="py-6 font-black uppercase text-[10px] tracking-widest">Account Status</TableHead>
-                            <TableHead className="py-6 font-black uppercase text-[10px] tracking-widest">Registered</TableHead>
-                            <TableHead className="text-right py-6 font-black uppercase text-[10px] tracking-widest pr-8">Governance</TableHead>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        {filteredUsers.length === 0 ? (
-                            <TableRow>
-                                <TableCell colSpan={5} className="text-center py-24">
-                                    <div className="flex flex-col items-center gap-4 opacity-40">
-                                        <UserX className="w-16 h-16 text-slate-400" />
-                                        <p className="font-black text-xl text-slate-900 uppercase">Registry Empty</p>
-                                        <p className="text-sm italic">No users found matching your search criteria.</p>
-                                    </div>
-                                </TableCell>
+            <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+                <div className="px-6 py-4 border-b border-gray-100 flex items-center justify-between bg-gray-50/30">
+                    <h2 className="text-sm font-semibold text-gray-700">Account Registry</h2>
+                    <span className="text-xs text-gray-400 bg-gray-100 rounded-full px-3 py-1">
+                        {filteredUsers.length} total users
+                    </span>
+                </div>
+
+                <div className="overflow-x-auto">
+                    <Table>
+                        <TableHeader>
+                            <TableRow className="bg-gray-50/70 hover:bg-gray-50/70 border-gray-100">
+                                <TableHead className="text-xs font-semibold text-gray-500 uppercase tracking-wide pl-6">Identity</TableHead>
+                                <TableHead className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Platform Role</TableHead>
+                                <TableHead className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Account Status</TableHead>
+                                <TableHead className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Registered</TableHead>
+                                <TableHead className="text-xs font-semibold text-gray-500 uppercase tracking-wide text-right pr-6">Governance</TableHead>
                             </TableRow>
-                        ) : filteredUsers.map((u) => (
-                            <TableRow key={u.id} className="border-slate-50 group transition-colors hover:bg-slate-50/30">
-                                <TableCell className="py-5 pl-8">
-                                    <div className="flex items-center gap-4">
-                                        <Avatar className="h-12 w-12 border-2 border-white shadow-sm ring-1 ring-slate-100">
-                                            <AvatarImage src={`https://ui-avatars.com/api/?name=${u.name}&background=random`} />
-                                            <AvatarFallback className="font-black bg-slate-100">{u.name.charAt(0)}</AvatarFallback>
-                                        </Avatar>
-                                        <div className="flex flex-col">
-                                            <span className="font-black text-slate-800 uppercase tracking-tight text-sm">{u.name}</span>
-                                            <span className="text-xs text-muted-foreground font-medium">{u.email}</span>
+                        </TableHeader>
+                        <TableBody>
+                            {filteredUsers.length === 0 ? (
+                                <TableRow>
+                                    <TableCell colSpan={5}>
+                                        <div className="flex flex-col items-center justify-center py-16 gap-3 text-gray-400">
+                                            <Search className="h-10 w-10 text-gray-300" />
+                                            <p className="text-sm font-medium">No users found</p>
                                         </div>
-                                    </div>
-                                </TableCell>
-                                <TableCell className="py-5">
-                                    <Badge variant="outline" className={cn(
-                                        "font-black uppercase tracking-widest text-[9px] px-3 py-1 rounded-lg",
-                                        u.role === "ADMIN" ? "bg-slate-900 text-white border-slate-900 shadow-lg shadow-slate-200" :
-                                        u.role === "CHEF" ? "bg-primary/5 text-primary border-primary/20" :
-                                        "bg-slate-50 text-slate-500 border-slate-200"
-                                    )}>
-                                        {u.role}
-                                    </Badge>
-                                </TableCell>
-                                <TableCell className="py-5">
-                                    <div className="flex items-center gap-2">
-                                        <div className={`w-2 h-2 rounded-full ${u.status === "ACTIVE" ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.4)]' : 'bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.4)]'}`} />
-                                        <span className="text-[10px] font-black uppercase tracking-widest text-slate-600">
-                                            {u.status}
-                                        </span>
-                                    </div>
-                                </TableCell>
-                                <TableCell className="py-5">
-                                     <span className="text-[11px] font-bold text-slate-400 uppercase">
-                                          {new Date(u.createdAt).toLocaleDateString()}
-                                     </span>
-                                </TableCell>
-                                <TableCell className="text-right py-5 pr-8">
-                                    {u.id !== currentUser?.id && u.role !== "ADMIN" && (
-                                        <Button 
-                                            variant="ghost" 
-                                            size="sm"
-                                            className={cn(
-                                                "h-10 px-4 rounded-xl font-black uppercase tracking-tighter text-[10px] transition-all",
-                                                u.status === "BANNED" 
-                                                    ? "text-green-600 hover:text-green-700 hover:bg-green-50 border border-green-100" 
-                                                    : "text-destructive hover:text-destructive hover:bg-destructive/5 border border-transparent hover:border-destructive/20"
+                                    </TableCell>
+                                </TableRow>
+                            ) : (
+                                filteredUsers.map((u) => (
+                                    <TableRow key={u.id} className="hover:bg-orange-50/30 transition-colors border-gray-50 group">
+                                        <TableCell className="pl-6 py-4">
+                                            <div className="flex items-center gap-3">
+                                                <Avatar className="h-10 w-10 border border-gray-100 shadow-sm">
+                                                    <AvatarImage src={`https://ui-avatars.com/api/?name=${u.name}&background=random`} />
+                                                    <AvatarFallback className="font-bold bg-orange-50 text-orange-600">{u.name.charAt(0)}</AvatarFallback>
+                                                </Avatar>
+                                                <div className="flex flex-col">
+                                                    <span className="text-sm font-semibold text-gray-800">{u.name}</span>
+                                                    <span className="text-[10px] text-gray-400">{u.email}</span>
+                                                </div>
+                                            </div>
+                                        </TableCell>
+                                        <TableCell>
+                                            <Badge variant="outline" className={cn(
+                                                "text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-lg",
+                                                u.role === "ADMIN" ? "bg-slate-900 text-white border-slate-900" :
+                                                u.role === "CHEF" ? "bg-orange-50 text-orange-600 border-orange-100" :
+                                                "bg-gray-50 text-gray-500 border-gray-100"
+                                            )}>
+                                                {u.role}
+                                            </Badge>
+                                        </TableCell>
+                                        <TableCell>
+                                            <div className="flex items-center gap-2">
+                                                <div className={cn(
+                                                    "w-2 h-2 rounded-full",
+                                                    u.status === "ACTIVE" ? "bg-green-500" : "bg-red-500"
+                                                )} />
+                                                <span className="text-[10px] font-bold uppercase tracking-wide text-gray-600">
+                                                    {u.status}
+                                                </span>
+                                            </div>
+                                        </TableCell>
+                                        <TableCell>
+                                             <span className="text-[11px] font-medium text-gray-400">
+                                                  {new Date(u.createdAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}
+                                             </span>
+                                        </TableCell>
+                                        <TableCell className="text-right pr-6">
+                                            {u.id !== currentUser?.id && u.role !== "ADMIN" && (
+                                                <Button 
+                                                    variant="ghost" 
+                                                    size="sm"
+                                                    className={cn(
+                                                        "h-8 px-3 rounded-lg text-[10px] font-bold uppercase tracking-tighter transition-all",
+                                                        u.status === "BANNED" 
+                                                            ? "text-green-600 hover:bg-green-50 border border-green-100" 
+                                                            : "text-red-500 hover:bg-red-50 border border-transparent hover:border-red-100"
+                                                    )}
+                                                    onClick={() => toggleStatus(u.id, u.status)}
+                                                >
+                                                    {u.status === "BANNED" ? (
+                                                        <><ShieldCheck className="w-3.5 h-3.5 mr-1" /> Restore</>
+                                                    ) : (
+                                                        <><ShieldAlert className="w-3.5 h-3.5 mr-1" /> Ban</>
+                                                    )}
+                                                </Button>
                                             )}
-                                            onClick={() => toggleStatus(u.id, u.status)}
-                                        >
-                                            {u.status === "BANNED" ? (
-                                                <><ShieldCheck className="w-3.5 h-3.5 mr-2" /> Restore Access</>
-                                            ) : (
-                                                <><ShieldAlert className="w-3.5 h-3.5 mr-2" /> Revoke Access</>
+                                            {u.id === currentUser?.id && (
+                                                 <Badge variant="outline" className="bg-gray-50 text-gray-400 uppercase text-[9px] font-bold px-2 py-0.5 border-dashed">Self</Badge>
                                             )}
-                                        </Button>
-                                    )}
-                                    {u.id === currentUser?.id && (
-                                         <Badge variant="secondary" className="bg-slate-50 text-slate-400 uppercase text-[9px] tracking-widest">Self</Badge>
-                                    )}
-                                </TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
+                                        </TableCell>
+                                    </TableRow>
+                                ))
+                            )}
+                        </TableBody>
+                    </Table>
+                </div>
             </div>
         </div>
     );

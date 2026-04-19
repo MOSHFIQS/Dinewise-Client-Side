@@ -203,7 +203,7 @@ export default function ChefMenuItems({ initialItems, totalCount }: Props) {
                                                   </TableCell>
                                                   <TableCell className="text-right pr-6">
                                                        <div className="flex items-center justify-end gap-2">
-                                                            <Link href={`/dashboard/myMenu/update/${item.id}`}>
+                                                            <Link href={`/dashboard/menu/update/${item.id}`}>
                                                                  <Button
                                                                       size="sm"
                                                                       variant="outline"

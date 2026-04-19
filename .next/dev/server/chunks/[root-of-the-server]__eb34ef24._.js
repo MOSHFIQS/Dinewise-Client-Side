@@ -168,10 +168,10 @@ async function proxy(request) {
     // Only admins should access /dashboard/allUsers, /dashboard/allOrders etc.
     // (future-proof: those are handled by slot rendering, not URL blocking)
     // If a CUSTOMER tries a chef-only path, redirect to dashboard root
-    if (isCustomer && pathname.startsWith("/dashboard/addItems")) {
+    if (isCustomer && pathname.startsWith("/dashboard/menu/create")) {
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$1$2e$4_$40$babel$2b$core$40$7$2e$2_07c7b45b0f83eb8e0c4154f920fd2e73$2f$node_modules$2f$next$2f$server$2e$js__$5b$middleware$5d$__$28$ecmascript$29$__["NextResponse"].redirect(new URL("/dashboard", request.url));
     }
-    if (isCustomer && pathname.startsWith("/dashboard/myMenu")) {
+    if (isCustomer && pathname.startsWith("/dashboard/menu")) {
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$1$2e$4_$40$babel$2b$core$40$7$2e$2_07c7b45b0f83eb8e0c4154f920fd2e73$2f$node_modules$2f$next$2f$server$2e$js__$5b$middleware$5d$__$28$ecmascript$29$__["NextResponse"].redirect(new URL("/dashboard", request.url));
     }
     if (isCustomer && pathname.startsWith("/dashboard/allUsers")) {

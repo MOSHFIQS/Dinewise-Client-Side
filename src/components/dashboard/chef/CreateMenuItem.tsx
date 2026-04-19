@@ -63,7 +63,7 @@ export default function CreateMenuItem({ categories }: { categories: any[] }) {
                     }
 
                     toast.success("Dish added to your menu!");
-                    router.push("/dashboard/myMenu");
+                    router.push("/dashboard/menu");
                } catch (err: any) {
                     toast.error(err.message || "Failed to create item");
                } finally {
@@ -76,7 +76,7 @@ export default function CreateMenuItem({ categories }: { categories: any[] }) {
           <div className="min-h-screen bg-gray-50/50 p-6 rounded-2xl border border-gray-100 shadow-sm">
                <div className="mb-6">
                     <Link
-                         href="/dashboard/myMenu"
+                         href="/dashboard/menu"
                          className="inline-flex items-center gap-1.5 text-sm text-gray-400 hover:text-gray-700 transition-colors"
                     >
                          <ArrowLeft className="h-3.5 w-3.5" />

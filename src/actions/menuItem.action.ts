@@ -36,7 +36,7 @@ export const getMenuItemById = async (id: string) => {
 export const createMenuItemAction = async (payload: any) => {
     try {
         const res = await menuItemServerService.create(payload);
-        revalidatePath("/dashboard/chef/myMenu");
+        revalidatePath("/dashboard/chef/menu");
         return res;
     } catch (error: any) {
         return { success: false, error: error.message };
@@ -46,7 +46,7 @@ export const createMenuItemAction = async (payload: any) => {
 export const updateMenuItemAction = async (id: string, payload: any) => {
     try {
         const res = await menuItemServerService.update(id, payload);
-        revalidatePath("/dashboard/chef/myMenu");
+        revalidatePath("/dashboard/chef/menu");
         return res;
     } catch (error: any) {
         return { success: false, error: error.message };
@@ -56,7 +56,7 @@ export const updateMenuItemAction = async (id: string, payload: any) => {
 export const deleteMenuItemAction = async (id: string) => {
     try {
         const res = await menuItemServerService.delete(id);
-        revalidatePath("/dashboard/chef/myMenu");
+        revalidatePath("/dashboard/chef/menu");
         return res;
     } catch (error: any) {
         return { success: false, error: error.message };

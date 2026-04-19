@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/table";
 import { updateOrderStatusAction } from "@/actions/order.action";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { cn } from "@/lib/utils";
 
 const OrderStatusOptions = ["PLACED", "CONFIRMED", "PROCESSING", "SHIPPED", "DELIVERED", "CANCELLED", "REFUNDED"];
 
@@ -57,81 +58,100 @@ export default function AdminOrdersView({ initialOrders }: { initialOrders: any[
     };
 
     return (
-        <div className="space-y-6">
-            <div className="flex justify-between items-center">
-                <div>
-                    <h1 className="text-3xl font-bold tracking-tight">System Orders</h1>
-                    <p className="text-muted-foreground">Monitor and manage all customer orders.</p>
+        <div className="h-full bg-gray-50/50 p-6 space-y-6 rounded-2xl border border-gray-100 shadow-sm">
+            {/* Page Header */}
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                <div className="flex items-center gap-3">
+                    <div className="h-10 w-10 rounded-xl bg-orange-100 flex items-center justify-center">
+                        <RefreshCw className="h-5 w-5 text-orange-600" />
+                    </div>
+                    <div>
+                        <h1 className="text-xl font-semibold text-gray-900">System Orders</h1>
+                        <p className="text-sm text-gray-500">Monitor and manage all customer orders</p>
+                    </div>
                 </div>
             </div>
 
-            <div className="border rounded-xl bg-card overflow-hidden">
-                <Table>
-                    <TableHeader>
-                        <TableRow>
-                            <TableHead>Order ID</TableHead>
-                            <TableHead>Customer</TableHead>
-                            <TableHead>Date</TableHead>
-                            <TableHead>Amount</TableHead>
-                            <TableHead>Status</TableHead>
-                            <TableHead className="text-right">Action</TableHead>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        {orders.length === 0 && (
-                             <TableRow>
-                                <TableCell colSpan={6} className="text-center py-10 text-muted-foreground">
-                                    No orders found.
-                                </TableCell>
-                            </TableRow>
-                        )}
-                        {orders.map((order) => {
-                            const nextStatuses = getNextPossibleStatuses(order.status);
-                            const canUpdate = nextStatuses.length > 0;
+            <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+                <div className="px-6 py-4 border-b border-gray-100 flex items-center justify-between bg-gray-50/30">
+                    <h2 className="text-sm font-semibold text-gray-700">Recent Transactions</h2>
+                    <span className="text-xs text-gray-400 bg-gray-100 rounded-full px-3 py-1">
+                        {orders.length} records
+                    </span>
+                </div>
 
-                            return (
-                                <TableRow key={order.id}>
-                                    <TableCell className="font-mono text-xs">
-                                        #{order.id.slice(-6).toUpperCase()}
-                                    </TableCell>
-                                    <TableCell>
-                                         <div className="font-medium">{order.user?.name || "Unknown"}</div>
-                                         <div className="text-xs text-muted-foreground">{order.user?.email}</div>
-                                    </TableCell>
-                                    <TableCell>
-                                        {new Date(order.createdAt).toLocaleString()}
-                                    </TableCell>
-                                    <TableCell className="font-semibold text-primary">
-                                        ${order.totalPrice.toFixed(2)}
-                                    </TableCell>
-                                    <TableCell>
-                                        <Badge variant="outline" className={getStatusColor(order.status)}>
-                                             {order.status}
-                                        </Badge>
-                                    </TableCell>
-                                    <TableCell className="text-right">
-                                        <Select 
-                                             value={order.status} 
-                                             onValueChange={(val) => handleStatusUpdate(order.id, val)}
-                                             disabled={!canUpdate}
-                                        >
-                                             <SelectTrigger className="w-[140px] ml-auto h-8 text-xs">
-                                                  <SelectValue placeholder="Update Status" />
-                                             </SelectTrigger>
-                                             <SelectContent>
-                                                  {/* Always include current status as disabled or visible */}
-                                                  <SelectItem value={order.status} disabled>{order.status}</SelectItem>
-                                                  {nextStatuses.map(status => (
-                                                      <SelectItem key={status} value={status}>{status}</SelectItem>
-                                                  ))}
-                                             </SelectContent>
-                                        </Select>
+                <div className="overflow-x-auto">
+                    <Table>
+                        <TableHeader>
+                            <TableRow className="bg-gray-50/70 hover:bg-gray-50/70 border-gray-100">
+                                <TableHead className="text-xs font-semibold text-gray-500 uppercase tracking-wide pl-6">Order ID</TableHead>
+                                <TableHead className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Customer</TableHead>
+                                <TableHead className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Date</TableHead>
+                                <TableHead className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Amount</TableHead>
+                                <TableHead className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Status</TableHead>
+                                <TableHead className="text-xs font-semibold text-gray-500 uppercase tracking-wide text-right pr-6">Action</TableHead>
+                            </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                            {orders.length === 0 ? (
+                                <TableRow>
+                                    <TableCell colSpan={6} className="text-center py-16 text-gray-400 font-medium">
+                                        No orders found.
                                     </TableCell>
                                 </TableRow>
-                            );
-                        })}
-                    </TableBody>
-                </Table>
+                            ) : (
+                                orders.map((order) => {
+                                    const nextStatuses = getNextPossibleStatuses(order.status);
+                                    const canUpdate = nextStatuses.length > 0;
+
+                                    return (
+                                        <TableRow key={order.id} className="hover:bg-orange-50/30 transition-colors border-gray-50 group">
+                                            <TableCell className="pl-6 py-4 font-mono text-xs font-semibold text-gray-600">
+                                                #{order.id.slice(-6).toUpperCase()}
+                                            </TableCell>
+                                            <TableCell>
+                                                 <div className="text-sm font-semibold text-gray-800">{order.user?.name || "Unknown"}</div>
+                                                 <div className="text-[10px] text-gray-400">{order.user?.email}</div>
+                                            </TableCell>
+                                            <TableCell>
+                                                <span className="text-[11px] font-medium text-gray-500">
+                                                    {new Date(order.createdAt).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' })}
+                                                </span>
+                                            </TableCell>
+                                            <TableCell>
+                                                <span className="text-sm font-bold text-orange-600">
+                                                    ${order.totalPrice.toFixed(2)}
+                                                </span>
+                                            </TableCell>
+                                            <TableCell>
+                                                <Badge variant="outline" className={cn("text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-lg", getStatusColor(order.status))}>
+                                                     {order.status}
+                                                </Badge>
+                                            </TableCell>
+                                            <TableCell className="text-right pr-6">
+                                                <Select 
+                                                     value={order.status} 
+                                                     onValueChange={(val) => handleStatusUpdate(order.id, val)}
+                                                     disabled={!canUpdate}
+                                                >
+                                                     <SelectTrigger className="w-[130px] ml-auto h-8 text-[11px] font-semibold border-gray-200 rounded-lg focus:ring-orange-500/20">
+                                                          <SelectValue placeholder="Update Status" />
+                                                     </SelectTrigger>
+                                                     <SelectContent className="rounded-xl">
+                                                          <SelectItem value={order.status} disabled className="text-[11px] font-semibold">{order.status}</SelectItem>
+                                                          {nextStatuses.map(status => (
+                                                              <SelectItem key={status} value={status} className="text-[11px] font-semibold">{status}</SelectItem>
+                                                          ))}
+                                                     </SelectContent>
+                                                </Select>
+                                            </TableCell>
+                                        </TableRow>
+                                    );
+                                })
+                            )}
+                        </TableBody>
+                    </Table>
+                </div>
             </div>
         </div>
     );

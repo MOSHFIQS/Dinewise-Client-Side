@@ -21,84 +21,107 @@ export default function AdminAuditView({ logs, loading }: { logs: any[]; loading
     };
 
     return (
-        <div className="space-y-8 animate-in fade-in duration-500">
-            <div className="border border-slate-100 rounded-[2rem] bg-white overflow-hidden shadow-xl shadow-slate-100/50">
-                <Table>
-                    <TableHeader className="bg-slate-50/50">
-                        <TableRow className="hover:bg-transparent border-slate-100">
-                            <TableHead className="py-6 font-black uppercase text-[10px] tracking-widest pl-8">Timestamp</TableHead>
-                            <TableHead className="py-6 font-black uppercase text-[10px] tracking-widest">Action Performed</TableHead>
-                            <TableHead className="py-6 font-black uppercase text-[10px] tracking-widest">Resource Type</TableHead>
-                            <TableHead className="py-6 font-black uppercase text-[10px] tracking-widest">Associated ID</TableHead>
-                            <TableHead className="py-6 font-black uppercase text-[10px] tracking-widest text-right pr-8">Initiated By</TableHead>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        {loading ? (
-                            <TableRow>
-                                <TableCell colSpan={5} className="text-center py-24 text-muted-foreground">
-                                    <div className="flex flex-col items-center gap-4">
-                                        <Loader2 className="w-10 h-10 animate-spin text-primary opacity-20" />
-                                        <p className="font-bold uppercase tracking-widest text-[10px]">Processing Log Streams...</p>
-                                    </div>
-                                </TableCell>
+        <div className="h-full bg-gray-50/50 p-6 space-y-6 rounded-2xl border border-gray-100 shadow-sm">
+            {/* Page Header */}
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                <div className="flex items-center gap-3">
+                    <div className="h-10 w-10 rounded-xl bg-orange-100 flex items-center justify-center">
+                        <History className="h-5 w-5 text-orange-600" />
+                    </div>
+                    <div>
+                        <h1 className="text-xl font-semibold text-gray-900">Security Audit Logs</h1>
+                        <p className="text-sm text-gray-500">Track all sensitive system operations and access</p>
+                    </div>
+                </div>
+            </div>
+
+            <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+                <div className="px-6 py-4 border-b border-gray-100 flex items-center justify-between bg-gray-50/30">
+                    <h2 className="text-sm font-semibold text-gray-700">Audit Trail</h2>
+                    <span className="text-xs text-gray-400 bg-gray-100 rounded-full px-3 py-1">
+                        {loading ? "Streaming..." : `${logs.length} events recorded`}
+                    </span>
+                </div>
+
+                <div className="overflow-x-auto">
+                    <Table>
+                        <TableHeader>
+                            <TableRow className="bg-gray-50/70 hover:bg-gray-50/70 border-gray-100">
+                                <TableHead className="text-xs font-semibold text-gray-500 uppercase tracking-wide pl-6">Timestamp</TableHead>
+                                <TableHead className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Action Performed</TableHead>
+                                <TableHead className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Resource</TableHead>
+                                <TableHead className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Associated ID</TableHead>
+                                <TableHead className="text-xs font-semibold text-gray-500 uppercase tracking-wide text-right pr-6">Initiated By</TableHead>
                             </TableRow>
-                        ) : logs.length === 0 ? (
-                             <TableRow>
-                                <TableCell colSpan={5} className="text-center py-24">
-                                    <div className="flex flex-col items-center gap-4 opacity-40">
-                                        <History className="w-16 h-16 text-slate-400" />
-                                        <p className="font-black text-xl text-slate-900 uppercase">Archive Empty</p>
-                                        <p className="text-sm italic">No sensitive actions have been recorded yet.</p>
-                                    </div>
-                                </TableCell>
-                            </TableRow>
-                        ) : logs.map((log) => (
-                            <TableRow key={log.id} className="border-slate-50 group transition-colors hover:bg-slate-50/20">
-                                <TableCell className="py-5 pl-8">
-                                    <div className="flex flex-col">
-                                        <span className="text-xs font-black text-slate-800 uppercase tracking-tight">
-                                            {new Date(log.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
-                                        </span>
-                                        <span className="text-[10px] font-bold text-slate-400">
-                                            {new Date(log.createdAt).toLocaleDateString()}
-                                        </span>
-                                    </div>
-                                </TableCell>
-                                <TableCell className="py-5">
-                                    <Badge variant="outline" className={cn(
-                                        "font-black tracking-tighter text-[9px] px-3 py-1 rounded-lg border-2",
-                                        getActionColor(log.action)
-                                    )}>
-                                        {log.action}
-                                    </Badge>
-                                </TableCell>
-                                <TableCell className="py-5">
-                                     <div className="flex items-center gap-2">
-                                          <Database className="w-3.5 h-3.5 text-slate-300" />
-                                          <span className="font-bold text-slate-600 text-sm">{log.entityType}</span>
-                                     </div>
-                                </TableCell>
-                                <TableCell className="py-5">
-                                    <span className="font-mono text-[10px] text-slate-400 bg-slate-50 px-2 py-1 rounded border border-slate-100">
-                                        {log.entityId}
-                                    </span>
-                                </TableCell>
-                                <TableCell className="py-5 text-right pr-8">
-                                    <div className="flex items-center justify-end gap-2 group/user ring-offset-2">
-                                        <div className="flex flex-col items-end">
-                                            <span className="text-[11px] font-black text-slate-500 uppercase tracking-tighter">System User</span>
-                                            <span className="text-[9px] font-mono text-slate-400">{log.userId?.slice(0, 12)}...</span>
+                        </TableHeader>
+                        <TableBody>
+                            {loading ? (
+                                <TableRow>
+                                    <TableCell colSpan={5}>
+                                        <div className="flex flex-col items-center justify-center py-16 gap-3 text-gray-400">
+                                            <Loader2 className="h-10 w-10 animate-spin text-orange-500/20" />
+                                            <p className="text-sm font-medium">Processing log streams...</p>
                                         </div>
-                                        <div className="h-8 w-8 rounded-full bg-slate-100 flex items-center justify-center border-2 border-white shadow-sm ring-1 ring-slate-100">
-                                            <User className="h-4 w-4 text-slate-400" />
+                                    </TableCell>
+                                </TableRow>
+                            ) : logs.length === 0 ? (
+                                <TableRow>
+                                    <TableCell colSpan={5}>
+                                        <div className="flex flex-col items-center justify-center py-16 gap-3 text-gray-400">
+                                            <History className="h-10 w-10 text-gray-300" />
+                                            <p className="text-sm font-medium">No audit logs found</p>
                                         </div>
-                                    </div>
-                                </TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
+                                    </TableCell>
+                                </TableRow>
+                            ) : (
+                                logs.map((log) => (
+                                    <TableRow key={log.id} className="hover:bg-orange-50/30 transition-colors border-gray-50 group">
+                                        <TableCell className="pl-6 py-4">
+                                            <div className="flex flex-col">
+                                                <span className="text-sm font-semibold text-gray-800">
+                                                    {new Date(log.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                                </span>
+                                                <span className="text-[10px] text-gray-400">
+                                                    {new Date(log.createdAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}
+                                                </span>
+                                            </div>
+                                        </TableCell>
+                                        <TableCell>
+                                            <Badge variant="outline" className={cn(
+                                                "text-[8px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-lg",
+                                                getActionColor(log.action)
+                                            )}>
+                                                {log.action}
+                                            </Badge>
+                                        </TableCell>
+                                        <TableCell>
+                                             <div className="flex items-center gap-2">
+                                                  <Database className="w-3.5 h-3.5 text-gray-300" />
+                                                  <span className="text-[11px] font-bold text-gray-600 uppercase tracking-tight">{log.entityType}</span>
+                                             </div>
+                                        </TableCell>
+                                        <TableCell>
+                                            <span className="font-mono text-[10px] text-gray-400 bg-gray-50 px-2 py-1 rounded border border-gray-100">
+                                                {log.entityId}
+                                            </span>
+                                        </TableCell>
+                                        <TableCell className="text-right pr-6">
+                                            <div className="flex items-center justify-end gap-2">
+                                                <div className="flex flex-col items-end">
+                                                    <span className="text-[10px] font-bold text-gray-700 uppercase">System User</span>
+                                                    <span className="text-[9px] font-mono text-gray-400 leading-none">{log.userId?.slice(-12)}</span>
+                                                </div>
+                                                <div className="h-8 w-8 rounded-full bg-orange-50 flex items-center justify-center border border-orange-100">
+                                                    <User className="h-4 w-4 text-orange-600" />
+                                                </div>
+                                            </div>
+                                        </TableCell>
+                                    </TableRow>
+                                ))
+                            )}
+                        </TableBody>
+                    </Table>
+                </div>
             </div>
         </div>
     );

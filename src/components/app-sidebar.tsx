@@ -23,7 +23,8 @@ import {
   History,
   FileBox,
   Undo2,
-  Star
+  Star,
+  Tag
 } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -31,25 +32,30 @@ import { usePathname } from "next/navigation"
 const adminNav = [
   { title: "Overview", url: "/dashboard", icon: LayoutDashboard },
   { title: "Manage Users", url: "/dashboard/allUsers", icon: Users },
+  { title: "Categories", url: "/dashboard/categories", icon: UtensilsCrossed },
+  { title: "All Menu Items", url: "/dashboard/menu", icon: UtensilsCrossed },
   { title: "All Orders", url: "/dashboard/allOrders", icon: ShoppingCart },
-  { title: "All Menu Items", url: "/dashboard/allMenu", icon: UtensilsCrossed },
+  { title: "Coupons", url: "/dashboard/coupons", icon: Tag },
   { title: "Reviews", url: "/dashboard/reviews", icon: Star },
   { title: "Audit Logs", url: "/dashboard/audit", icon: History },
   { title: "Refunds", url: "/dashboard/refunds", icon: Undo2 },
+  { title: "Settings", url: "/dashboard/settings", icon: Settings },
 ]
 
 const chefNav = [
   { title: "Overview", url: "/dashboard", icon: LayoutDashboard },
-  { title: "My Menu Items", url: "/dashboard/myMenu", icon: UtensilsCrossed },
-  { title: "Add Menu Item", url: "/dashboard/addItems", icon: FileBox },
+  { title: "Add Menu Item", url: "/dashboard/menu/create", icon: FileBox },
+  { title: "My Menu Items", url: "/dashboard/menu", icon: UtensilsCrossed },
   { title: "My Orders", url: "/dashboard/myOrders", icon: ShoppingCart },
   { title: "Reviews", url: "/dashboard/reviews", icon: Star },
   { title: "Refunds", url: "/dashboard/refunds", icon: Undo2 },
+  { title: "Settings", url: "/dashboard/settings", icon: Settings },
 ]
 
 const customerNav = [
   { title: "Overview", url: "/dashboard", icon: LayoutDashboard },
   { title: "My Reviews", url: "/dashboard/reviews", icon: Star },
+  { title: "My Addresses", url: "/dashboard/addresses", icon: Star },
   { title: "My Cart", url: "/dashboard/cart", icon: ShoppingCart },
   { title: "Order History", url: "/dashboard/payment", icon: History },
   { title: "Settings", url: "/dashboard/settings", icon: Settings },

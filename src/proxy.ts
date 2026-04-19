@@ -44,10 +44,10 @@ export async function proxy(request: NextRequest) {
      // (future-proof: those are handled by slot rendering, not URL blocking)
 
      // If a CUSTOMER tries a chef-only path, redirect to dashboard root
-     if (isCustomer && pathname.startsWith("/dashboard/addItems")) {
+     if (isCustomer && pathname.startsWith("/dashboard/menu/create")) {
           return NextResponse.redirect(new URL("/dashboard", request.url))
      }
-     if (isCustomer && pathname.startsWith("/dashboard/myMenu")) {
+     if (isCustomer && pathname.startsWith("/dashboard/menu")) {
           return NextResponse.redirect(new URL("/dashboard", request.url))
      }
      if (isCustomer && pathname.startsWith("/dashboard/allUsers")) {
