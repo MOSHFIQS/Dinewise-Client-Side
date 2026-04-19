@@ -24,6 +24,16 @@ export const updateUserStatusAction = async (id: string, status: string) => {
     }
 };
 
+export const updateUserRoleAction = async (id: string, role: string) => {
+    try {
+        const res = await adminServerService.updateUserRole(id, role);
+        revalidatePath("/dashboard/admin/users");
+        return res;
+    } catch (error: any) {
+        return { success: false, error: error.message };
+    }
+};
+
 export const getDashboardStatsAction = async () => {
     try {
         const res = await adminServerService.getDashboardStats();

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { toast } from "sonner";
-import { updateUserStatusAction } from "@/actions/admin.action";
+import { updateUserStatusAction, updateUserRoleAction } from "@/actions/admin.action";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ShieldAlert, ShieldCheck, Search, Users, Shield, UserX } from "lucide-react";
@@ -18,28 +18,66 @@ import {
 import { useAuth } from "@/context/AuthProvider";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 export default function AdminUsersView({ initialUsers }: { initialUsers: any[] }) {
     const [users, setUsers] = useState<any[]>(initialUsers);
     const [searchTerm, setSearchTerm] = useState("");
     const { user: currentUser } = useAuth();
 
-    const toggleStatus = async (userId: string, currentStatus: string) => {
+    const [actionDialog, setActionDialog] = useState<{
+        isOpen: boolean;
+        type: "ROLE" | "STATUS" | null;
+        userId: string;
+        userName: string;
+        newValue: string;
+        actionText: string;
+    }>({ isOpen: false, type: null, userId: "", userName: "", newValue: "", actionText: "" });
+
+    const openStatusDialog = (userId: string, userName: string, currentStatus: string) => {
         const newStatus = currentStatus === "BANNED" ? "ACTIVE" : "BANNED";
         const actionText = newStatus === "BANNED" ? "BAN" : "ACTIVATE";
-        
-        if (!confirm(`Are you sure you want to ${actionText} this user account?`)) return;
+        setActionDialog({ isOpen: true, type: "STATUS", userId, userName, newValue: newStatus, actionText });
+    };
+
+    const openRoleDialog = (userId: string, userName: string, newRole: string) => {
+        setActionDialog({ isOpen: true, type: "ROLE", userId, userName, newValue: newRole, actionText: "CHANGE ROLE" });
+    };
+
+    const handleConfirmAction = async () => {
+        const { type, userId, newValue } = actionDialog;
+        if (!type || !userId) return;
 
         try {
-            const res = await updateUserStatusAction(userId, newStatus);
-            if (res.success) {
-                toast.success(`User successfully ${newStatus === "BANNED" ? "banned" : "unbanned"}`);
-                setUsers((prev) => prev.map(u => u.id === userId ? { ...u, status: newStatus } : u));
-            } else {
-                toast.error(res.error || "Failed to update user");
+            if (type === "STATUS") {
+                const res = await updateUserStatusAction(userId, newValue);
+                if (res.success) {
+                    toast.success(`User successfully ${newValue === "BANNED" ? "banned" : "unbanned"}`);
+                    setUsers((prev) => prev.map(u => u.id === userId ? { ...u, status: newValue } : u));
+                } else {
+                    toast.error(res.error || "Failed to update user status");
+                }
+            } else if (type === "ROLE") {
+                const res = await updateUserRoleAction(userId, newValue);
+                if (res.success) {
+                    toast.success(`User role successfully changed to ${newValue}`);
+                    setUsers((prev) => prev.map(u => u.id === userId ? { ...u, role: newValue } : u));
+                } else {
+                    toast.error(res.error || "Failed to update user role");
+                }
             }
         } catch (e: any) {
              toast.error(e.message);
+        } finally {
+            setActionDialog(prev => ({ ...prev, isOpen: false }));
         }
     };
 
@@ -120,14 +158,35 @@ export default function AdminUsersView({ initialUsers }: { initialUsers: any[] }
                                             </div>
                                         </TableCell>
                                         <TableCell>
-                                            <Badge variant="outline" className={cn(
-                                                "text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-lg",
-                                                u.role === "ADMIN" ? "bg-slate-900 text-white border-slate-900" :
-                                                u.role === "CHEF" ? "bg-orange-50 text-orange-600 border-orange-100" :
-                                                "bg-gray-50 text-gray-500 border-gray-100"
-                                            )}>
-                                                {u.role}
-                                            </Badge>
+                                            {u.id !== currentUser?.id ? (
+                                                <Select
+                                                    value={u.role}
+                                                    onValueChange={(val) => openRoleDialog(u.id, u.name, val)}
+                                                >
+                                                    <SelectTrigger className={cn(
+                                                        "h-8 text-[10px] font-bold uppercase tracking-wider rounded-lg w-[110px]",
+                                                        u.role === "ADMIN" ? "bg-slate-900 text-white border-slate-900" :
+                                                        u.role === "CHEF" ? "bg-orange-50 text-orange-600 border-orange-100" :
+                                                        "bg-gray-50 text-gray-500 border-gray-100"
+                                                    )}>
+                                                        <SelectValue />
+                                                    </SelectTrigger>
+                                                    <SelectContent>
+                                                        <SelectItem value="CUSTOMER">Customer</SelectItem>
+                                                        <SelectItem value="CHEF">Chef</SelectItem>
+                                                        <SelectItem value="ADMIN">Admin</SelectItem>
+                                                    </SelectContent>
+                                                </Select>
+                                            ) : (
+                                                <Badge variant="outline" className={cn(
+                                                    "text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-lg",
+                                                    u.role === "ADMIN" ? "bg-slate-900 text-white border-slate-900" :
+                                                    u.role === "CHEF" ? "bg-orange-50 text-orange-600 border-orange-100" :
+                                                    "bg-gray-50 text-gray-500 border-gray-100"
+                                                )}>
+                                                    {u.role}
+                                                </Badge>
+                                            )}
                                         </TableCell>
                                         <TableCell>
                                             <div className="flex items-center gap-2">
@@ -156,7 +215,7 @@ export default function AdminUsersView({ initialUsers }: { initialUsers: any[] }
                                                             ? "text-green-600 hover:bg-green-50 border border-green-100" 
                                                             : "text-red-500 hover:bg-red-50 border border-transparent hover:border-red-100"
                                                     )}
-                                                    onClick={() => toggleStatus(u.id, u.status)}
+                                                    onClick={() => openStatusDialog(u.id, u.name, u.status)}
                                                 >
                                                     {u.status === "BANNED" ? (
                                                         <><ShieldCheck className="w-3.5 h-3.5 mr-1" /> Restore</>
@@ -176,6 +235,37 @@ export default function AdminUsersView({ initialUsers }: { initialUsers: any[] }
                     </Table>
                 </div>
             </div>
+
+            <Dialog open={actionDialog.isOpen} onOpenChange={(isOpen) => !isOpen && setActionDialog(prev => ({ ...prev, isOpen: false }))}>
+                <DialogContent className="sm:max-w-[425px]">
+                    <DialogHeader>
+                        <DialogTitle>Confirm Action</DialogTitle>
+                        <DialogDescription>
+                            Are you sure you want to {actionDialog.actionText.toLowerCase()} the account for 
+                            <span className="font-semibold text-gray-900 ml-1">{actionDialog.userName}</span>?
+                            {actionDialog.type === "ROLE" && (
+                                <span> This will update their permissions to <span className="font-semibold text-orange-600">{actionDialog.newValue}</span>.</span>
+                            )}
+                        </DialogDescription>
+                    </DialogHeader>
+                    <DialogFooter className="mt-4">
+                        <Button 
+                            variant="outline" 
+                            onClick={() => setActionDialog(prev => ({ ...prev, isOpen: false }))}
+                        >
+                            Cancel
+                        </Button>
+                        <Button 
+                            variant={actionDialog.actionText === "BAN" ? "destructive" : "default"}
+                            className={actionDialog.actionText !== "BAN" ? "bg-orange-600 hover:bg-orange-700" : ""}
+                            onClick={handleConfirmAction}
+                        >
+                            Confirm {actionDialog.actionText}
+                        </Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
+
         </div>
     );
 }

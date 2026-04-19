@@ -13,6 +13,7 @@ import {
 import { cn } from "@/lib/utils";
 
 export default function AdminAuditView({ logs, loading }: { logs: any[]; loading?: boolean }) {
+    console.log(logs)
     const getActionColor = (action: string) => {
         if (action.includes("CREATE")) return "bg-green-500/10 text-green-600 border-green-500/20";
         if (action.includes("UPDATE") || action.includes("PATCH")) return "bg-blue-500/10 text-blue-600 border-blue-500/20";
@@ -107,9 +108,26 @@ export default function AdminAuditView({ logs, loading }: { logs: any[]; loading
                                         </TableCell>
                                         <TableCell className="text-right pr-6">
                                             <div className="flex items-center justify-end gap-2">
-                                                <div className="flex flex-col items-end">
-                                                    <span className="text-[10px] font-bold text-gray-700 uppercase">System User</span>
-                                                    <span className="text-[9px] font-mono text-gray-400 leading-none">{log.userId?.slice(-12)}</span>
+                                                <div className="flex flex-col items-end gap-1">
+                                                    <span className="text-[10px] font-bold text-gray-700 uppercase">
+                                                        {log.user ? log.user.name : "System / Unknown"}
+                                                    </span>
+                                                    <div className="flex items-center gap-1.5">
+                                                        {log.user && (
+                                                            <Badge variant="outline" className="text-[8px] h-3.5 px-1.5 border-orange-200 text-orange-600 bg-orange-50 uppercase shadow-sm">
+                                                                {log.user.role}
+                                                            </Badge>
+                                                        )}
+                                                        {log.ipAddress ? (
+                                                            <span className="text-[9px] font-mono text-gray-500 leading-none bg-gray-50 px-1.5 py-0.5 rounded border border-gray-100 shadow-sm">
+                                                                {log.ipAddress === "::1" || log.ipAddress === "127.0.0.1" ? "Localhost" : log.ipAddress}
+                                                            </span>
+                                                        ) : (
+                                                            <span className="text-[9px] font-mono text-gray-400 leading-none">
+                                                                {log.userId?.slice(-8) || "N/A"}
+                                                            </span>
+                                                        )}
+                                                    </div>
                                                 </div>
                                                 <div className="h-8 w-8 rounded-full bg-orange-50 flex items-center justify-center border border-orange-100">
                                                     <User className="h-4 w-4 text-orange-600" />

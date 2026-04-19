@@ -35,6 +35,7 @@ export interface MenuItem {
      discountPrice?: number;
      stock: number;
      category?: { name: string };
+     isActive: boolean;
      createdAt: string;
 }
 
@@ -99,7 +100,7 @@ export default function ChefMenuItems({ initialItems, totalCount }: Props) {
                               <p className="text-sm text-gray-500">{totalCount} culinary creations</p>
                          </div>
                     </div>
-                    <Link href="/dashboard/addItems">
+                    <Link href="/dashboard/menu/create">
                          <Button className="bg-orange-500 hover:bg-orange-600 text-white gap-2 rounded-lg px-4 shadow-sm border-0">
                               <Plus className="h-4 w-4" />
                               Add New Item
@@ -212,14 +213,18 @@ export default function ChefMenuItems({ initialItems, totalCount }: Props) {
                                                                       <Pencil className="h-3.5 w-3.5" />
                                                                  </Button>
                                                             </Link>
-                                                            <Button
-                                                                 size="sm"
-                                                                 variant="ghost"
-                                                                 className="h-8 w-8 p-0 border border-transparent rounded-lg text-gray-400 hover:text-red-500 hover:bg-red-50 hover:border-red-100 transition-all"
-                                                                 onClick={() => openDeleteDialog(item)}
-                                                            >
-                                                                 <Trash2 className="h-3.5 w-3.5" />
-                                                            </Button>
+                                                            {
+                                                                 item.isActive && (
+                                                                      <Button
+                                                                           size="sm"
+                                                                           variant="ghost"
+                                                                           className="h-8 w-8 p-0 border border-transparent rounded-lg text-gray-400 hover:text-red-500 hover:bg-red-50 hover:border-red-100 transition-all"
+                                                                           onClick={() => openDeleteDialog(item)}
+                                                                      >
+                                                                           <Trash2 className="h-3.5 w-3.5" />
+                                                                      </Button>
+                                                                 )
+                                                            }
                                                        </div>
                                                   </TableCell>
                                              </TableRow>

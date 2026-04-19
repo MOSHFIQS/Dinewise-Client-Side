@@ -89,7 +89,7 @@ export function AppSidebar({ user }: { user: { role: string } }) {
 
             const isActive = isDashboardRoot
               ? pathname === "/dashboard"
-              : pathname === item.url || pathname?.startsWith(`${item.url}/`);
+              : pathname === item.url;
 
             return (
               <SidebarMenuItem key={item.title}>
@@ -98,8 +98,8 @@ export function AppSidebar({ user }: { user: { role: string } }) {
                   isActive={isActive}
                   tooltip={item.title}
                   className={`transition-all duration-200 ${isActive
-                      ? "bg-primary/10 text-primary font-bold shadow-sm"
-                      : "text-gray-600 hover:bg-gray-100/50"
+                    ? "bg-primary/10 text-primary font-bold shadow-sm"
+                    : "text-gray-600 hover:bg-gray-100/50"
                     }`}
                 >
                   <Link href={item.url} className="flex items-center gap-3">

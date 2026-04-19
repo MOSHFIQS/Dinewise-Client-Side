@@ -7,9 +7,15 @@ export const adminServerService = {
           }),
 
      updateUserStatus: (id: string, status: string) =>
-          apiFetchServerMain(`/admin/users/${id}`, {
+          apiFetchServerMain(`/admin/users/${id}/status`, {
                method: "PATCH",
                body: JSON.stringify({ status }),
+          }),
+
+     updateUserRole: (id: string, role: string) =>
+          apiFetchServerMain(`/admin/users/${id}/role`, {
+               method: "PATCH",
+               body: JSON.stringify({ role }),
           }),
 
      getDashboardStats: () =>
