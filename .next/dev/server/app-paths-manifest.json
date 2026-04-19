@@ -1,5 +1,4 @@
 {
-  "/(commonLayout)/login/page": "app/(commonLayout)/login/page.js",
-  "/dashboard/@customer/settings/page": "app/dashboard/@customer/settings/page.js",
+  "/(commonLayout)/page": "app/(commonLayout)/page.js",
   "/dashboard/page": "app/dashboard/page.js"
 }

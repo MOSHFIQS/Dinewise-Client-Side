@@ -2,14 +2,8 @@
   "node": {
     "40f8ea0c55cab61404caf76598c24957128e184953": {
       "workers": {
-        "app/(commonLayout)/login/page": {
-          "moduleId": "[project]/.next-internal/server/app/(commonLayout)/login/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/actions/notification.action.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
-          "async": false,
-          "exportedName": "getMyNotificationsAction",
-          "filename": "src/actions/notification.action.ts"
-        },
-        "app/dashboard/@customer/settings/page": {
-          "moduleId": "[project]/.next-internal/server/app/dashboard/@customer/settings/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/actions/notification.action.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/actions/user.action.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+        "app/(commonLayout)/page": {
+          "moduleId": "[project]/.next-internal/server/app/(commonLayout)/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/actions/notification.action.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/actions/menuItem.action.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
           "async": false,
           "exportedName": "getMyNotificationsAction",
           "filename": "src/actions/notification.action.ts"
@@ -22,8 +16,7 @@
         }
       },
       "layer": {
-        "app/(commonLayout)/login/page": "action-browser",
-        "app/dashboard/@customer/settings/page": "action-browser",
+        "app/(commonLayout)/page": "action-browser",
         "app/dashboard/page": "action-browser"
       },
       "filename": "src/actions/notification.action.ts",
@@ -31,14 +24,8 @@
     },
     "40bff7aaac4a71469eeddf1aa8e688094a3fcb9b5b": {
       "workers": {
-        "app/(commonLayout)/login/page": {
-          "moduleId": "[project]/.next-internal/server/app/(commonLayout)/login/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/actions/notification.action.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
-          "async": false,
-          "exportedName": "markNotificationReadAction",
-          "filename": "src/actions/notification.action.ts"
-        },
-        "app/dashboard/@customer/settings/page": {
-          "moduleId": "[project]/.next-internal/server/app/dashboard/@customer/settings/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/actions/notification.action.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/actions/user.action.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+        "app/(commonLayout)/page": {
+          "moduleId": "[project]/.next-internal/server/app/(commonLayout)/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/actions/notification.action.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/actions/menuItem.action.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
           "async": false,
           "exportedName": "markNotificationReadAction",
           "filename": "src/actions/notification.action.ts"
@@ -51,8 +38,7 @@
         }
       },
       "layer": {
-        "app/(commonLayout)/login/page": "action-browser",
-        "app/dashboard/@customer/settings/page": "action-browser",
+        "app/(commonLayout)/page": "action-browser",
         "app/dashboard/page": "action-browser"
       },
       "filename": "src/actions/notification.action.ts",
@@ -60,14 +46,8 @@
     },
     "00a345e4d4488762f829cffc00aff8029941979cf8": {
       "workers": {
-        "app/(commonLayout)/login/page": {
-          "moduleId": "[project]/.next-internal/server/app/(commonLayout)/login/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/actions/notification.action.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
-          "async": false,
-          "exportedName": "markAllNotificationsReadAction",
-          "filename": "src/actions/notification.action.ts"
-        },
-        "app/dashboard/@customer/settings/page": {
-          "moduleId": "[project]/.next-internal/server/app/dashboard/@customer/settings/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/actions/notification.action.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/actions/user.action.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+        "app/(commonLayout)/page": {
+          "moduleId": "[project]/.next-internal/server/app/(commonLayout)/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/actions/notification.action.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/actions/menuItem.action.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
           "async": false,
           "exportedName": "markAllNotificationsReadAction",
           "filename": "src/actions/notification.action.ts"
@@ -80,8 +60,7 @@
         }
       },
       "layer": {
-        "app/(commonLayout)/login/page": "action-browser",
-        "app/dashboard/@customer/settings/page": "action-browser",
+        "app/(commonLayout)/page": "action-browser",
         "app/dashboard/page": "action-browser"
       },
       "filename": "src/actions/notification.action.ts",
@@ -89,14 +68,8 @@
     },
     "00c4c47258437f07cdd41d8f7ec35ac83125f1621e": {
       "workers": {
-        "app/(commonLayout)/login/page": {
-          "moduleId": "[project]/.next-internal/server/app/(commonLayout)/login/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/actions/notification.action.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
-          "async": false,
-          "exportedName": "getUnreadNotificationsCountAction",
-          "filename": "src/actions/notification.action.ts"
-        },
-        "app/dashboard/@customer/settings/page": {
-          "moduleId": "[project]/.next-internal/server/app/dashboard/@customer/settings/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/actions/notification.action.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/actions/user.action.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+        "app/(commonLayout)/page": {
+          "moduleId": "[project]/.next-internal/server/app/(commonLayout)/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/actions/notification.action.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/actions/menuItem.action.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
           "async": false,
           "exportedName": "getUnreadNotificationsCountAction",
           "filename": "src/actions/notification.action.ts"
@@ -109,42 +82,11 @@
         }
       },
       "layer": {
-        "app/(commonLayout)/login/page": "action-browser",
-        "app/dashboard/@customer/settings/page": "action-browser",
+        "app/(commonLayout)/page": "action-browser",
         "app/dashboard/page": "action-browser"
       },
       "filename": "src/actions/notification.action.ts",
       "exportedName": "getUnreadNotificationsCountAction"
-    },
-    "005761f5ccf37d3e685109cea8ed51a7013ab055ba": {
-      "workers": {
-        "app/dashboard/@customer/settings/page": {
-          "moduleId": "[project]/.next-internal/server/app/dashboard/@customer/settings/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/actions/notification.action.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/actions/user.action.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
-          "async": false,
-          "exportedName": "getMyProfileAction",
-          "filename": "src/actions/user.action.ts"
-        }
-      },
-      "layer": {
-        "app/dashboard/@customer/settings/page": "action-browser"
-      },
-      "filename": "src/actions/user.action.ts",
-      "exportedName": "getMyProfileAction"
-    },
-    "405fb95792bec0582a2ec4ea48a71d522f512fb976": {
-      "workers": {
-        "app/dashboard/@customer/settings/page": {
-          "moduleId": "[project]/.next-internal/server/app/dashboard/@customer/settings/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/actions/notification.action.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/actions/user.action.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
-          "async": false,
-          "exportedName": "updateMyProfileAction",
-          "filename": "src/actions/user.action.ts"
-        }
-      },
-      "layer": {
-        "app/dashboard/@customer/settings/page": "action-browser"
-      },
-      "filename": "src/actions/user.action.ts",
-      "exportedName": "updateMyProfileAction"
     },
     "00736ff95eadfc47d1fb18a3e8d4305f98039f3fdb": {
       "workers": {
@@ -190,6 +132,21 @@
       },
       "filename": "src/actions/stats.action.ts",
       "exportedName": "getAdminStatsAction"
+    },
+    "4028aa20c7bf4228ecbd45f906d3543a0f45e09cfc": {
+      "workers": {
+        "app/(commonLayout)/page": {
+          "moduleId": "[project]/.next-internal/server/app/(commonLayout)/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/actions/notification.action.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/actions/menuItem.action.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "getAllMenuItems",
+          "filename": "src/actions/menuItem.action.ts"
+        }
+      },
+      "layer": {
+        "app/(commonLayout)/page": "action-browser"
+      },
+      "filename": "src/actions/menuItem.action.ts",
+      "exportedName": "getAllMenuItems"
     }
   },
   "edge": {},
