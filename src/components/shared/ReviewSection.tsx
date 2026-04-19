@@ -51,12 +51,12 @@ export default function ReviewSection({ menuItemId }: { menuItemId: string }) {
                {/* Left: Info & Action */}
                <div className="lg:col-span-4">
                     <div className="sticky top-24 space-y-6">
-                         <div className="bg-white p-8 rounded-[2rem] border-2 border-slate-50 shadow-xl shadow-slate-100/50">
+                         <div className="bg-white/40 backdrop-blur-sm p-8 rounded-[2rem] border border-white/50 shadow-sm">
                               <div className="flex items-center gap-3 mb-6">
-                                   <div className="h-10 w-10 rounded-2xl bg-primary/10 flex items-center justify-center">
-                                        <MessageSquare className="w-5 h-5 text-primary" />
+                                   <div className="h-10 w-10 rounded-2xl bg-black flex items-center justify-center">
+                                        <MessageSquare className="w-5 h-5 text-white" />
                                    </div>
-                                   <h4 className="text-xl font-black tracking-tight">Guest Reviews</h4>
+                                   <h4 className="text-xl font-black tracking-tight text-black">Guest Reviews</h4>
                               </div>
 
                               {user ? (
@@ -70,15 +70,15 @@ export default function ReviewSection({ menuItemId }: { menuItemId: string }) {
                                                             </p>
                                                             <Button 
                                                                  onClick={() => setIsReviewDialogOpen(true)}
-                                                                 className="w-full h-14 rounded-2xl font-black text-lg gap-3 shadow-lg shadow-primary/20 group"
+                                                                 className="w-full h-14 rounded-2xl font-black text-lg gap-3 bg-black text-white shadow-xl shadow-black/20 group border-0"
                                                             >
                                                                  WRITE A REVIEW
                                                             </Button>
                                                        </div>
                                                   ) : (
-                                                       <div className="flex flex-col items-center gap-3 p-6 bg-slate-50 rounded-2xl border border-dashed text-center">
-                                                            <Lock className="h-6 w-6 text-slate-300" />
-                                                            <p className="text-xs font-bold text-slate-400 uppercase tracking-widest leading-relaxed">
+                                                       <div className="flex flex-col items-center gap-3 p-6 bg-black/5 rounded-2xl border border-black/10 text-center">
+                                                            <Lock className="h-6 w-6 text-black/40" />
+                                                            <p className="text-xs font-bold text-black/60 uppercase tracking-widest leading-relaxed">
                                                                  {eligibility.reason || "Review locked"}
                                                             </p>
                                                        </div>

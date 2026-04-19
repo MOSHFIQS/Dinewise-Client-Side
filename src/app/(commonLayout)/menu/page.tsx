@@ -15,14 +15,15 @@ export default async function MenuPage({ searchParams }: { searchParams: Promise
     const meta = menuRes?.meta || { page: 1, limit: 10, totalPages: 1 };
 
     return (
-        <div className="container mx-auto px-4 py-8">
-            <div className="text-center mb-12">
-                <h1 className="text-4xl font-bold tracking-tight mb-4">Our Menu</h1>
-                <p className="text-muted-foreground w-full max-w-2xl mx-auto">
-                    Explore our exquisite selection of dishes crafted to perfection by our culinary masters.
-                    Filter by categories to find your next favorite meal.
-                </p>
-            </div>
+        <div className="w-full bg-gradient-to-br from-[#eff3e3] via-[#faede0] to-[#fadcc6] min-h-screen text-black">
+            <div className="container mx-auto px-4 py-8 pt-16">
+                <div className="text-center mb-12">
+                    <h1 className="text-4xl font-black tracking-tight mb-4">Our Menu</h1>
+                    <p className="text-black/70 font-medium w-full max-w-2xl mx-auto">
+                        Explore our exquisite selection of dishes crafted to perfection by our culinary masters.
+                        Filter by categories to find your next favorite meal.
+                    </p>
+                </div>
 
             <MenuGrid initialItems={menuItems} categories={categories} />
             
@@ -32,6 +33,7 @@ export default async function MenuPage({ searchParams }: { searchParams: Promise
                       totalPages={meta.totalPages}
                       limit={meta.limit}
                  />
+            </div>
             </div>
         </div>
     );

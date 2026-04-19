@@ -5,7 +5,7 @@ import { FeaturesSection, PopularDishesSection, TestimonialsSection, HowItWorksS
 
 export default function Home() {
     return (
-        <div className="flex flex-col w-full bg-gradient-to-br from-[#eff3e3] via-[#faede0] to-[#fadcc6] min-h-screen text-slate-900 pb-20">
+        <div className="flex flex-col w-full bg-gradient-to-br from-[#eff3e3] via-[#faede0] to-[#fadcc6] min-h-screen text-slate-900 pb-20 space-y-10">
             {/* Hero Section */}
             <section className="relative w-full py-20 lg:py-32 xl:py-48 pb-10 overflow-hidden">
                 <div className="container mx-auto px-4 md:px-6 relative z-10 flex flex-col items-center text-center space-y-8">

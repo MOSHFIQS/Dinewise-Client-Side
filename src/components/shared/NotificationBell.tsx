@@ -140,7 +140,7 @@ export default function NotificationBell() {
                                                      <Button 
                                                           variant="ghost" 
                                                           size="icon" 
-                                                          className="h-8 w-8 text-primary/40 hover:text-primary hover:bg-primary/10 rounded-full opacity-0 group-hover:opacity-100 transition-all hover:border-primary border" 
+                                                          className="h-8 w-8 text-white bg-black rounded-full transition-all hover:border-primary border" 
                                                           onClick={() => handleMarkRead(n.id)}
                                                      >
                                                           <Check className="w-4 h-4" />

@@ -48,8 +48,8 @@ export default function MenuGrid({ initialItems, categories, isHome = false, hid
                         className={cn(
                             "px-8 py-3 rounded-full text-sm font-black uppercase tracking-widest transition-all border-2",
                             selectedCat === "ALL" 
-                                ? "bg-primary text-white border-primary shadow-lg shadow-primary/20 scale-105" 
-                                : "bg-white text-slate-400 border-slate-100 hover:border-primary/20 hover:text-primary"
+                                ? "bg-black text-white border-black shadow-lg shadow-black/20 scale-105" 
+                                : "bg-white/80 backdrop-blur-sm text-black border-black/10 hover:border-black/50"
                         )}
                         onClick={() => handleCategoryChange("ALL")}
                      >
@@ -61,8 +61,8 @@ export default function MenuGrid({ initialItems, categories, isHome = false, hid
                               className={cn(
                                 "px-8 py-3 rounded-full text-sm font-black uppercase tracking-widest transition-all border-2",
                                 selectedCat === c.id 
-                                    ? "bg-primary text-white border-primary shadow-lg shadow-primary/20 scale-105" 
-                                    : "bg-white text-slate-400 border-slate-100 hover:border-primary/20 hover:text-primary"
+                                    ? "bg-black text-white border-black shadow-lg shadow-black/20 scale-105" 
+                                    : "bg-white/80 backdrop-blur-sm text-black border-black/10 hover:border-black/50"
                             )}
                               onClick={() => handleCategoryChange(c.id)}
                           >
@@ -74,9 +74,9 @@ export default function MenuGrid({ initialItems, categories, isHome = false, hid
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                 {initialItems?.map((item: any) => (
-                    <div key={item.id} className="group relative bg-white rounded-[2.5rem] border border-slate-100 p-2 shadow-sm hover:shadow-2xl hover:shadow-primary/5 hover:-translate-y-2 transition-all duration-500">
+                    <div key={item.id} className="group relative bg-white/90 backdrop-blur-xl rounded-[2.5rem] border border-white p-2 shadow-sm hover:shadow-2xl hover:shadow-black/10 hover:-translate-y-2 transition-all duration-500">
                         {/* Image Wrapper */}
-                        <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden bg-slate-50 ring-1 ring-slate-100/50">
+                        <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden bg-slate-50">
                             <Image 
                                 src={item.images[0] || "/placeholder-food.jpg"} 
                                 alt={item.name} 
@@ -91,7 +91,7 @@ export default function MenuGrid({ initialItems, categories, isHome = false, hid
                                          -{Math.round((1 - item.discountPrice/item.price) * 100)}%
                                      </Badge>
                                 )}
-                                <Badge variant="secondary" className="bg-white/80 backdrop-blur-md text-primary font-bold px-3 py-1 rounded-full border-none shadow-sm">
+                                <Badge variant="secondary" className="bg-white/80 backdrop-blur-md text-black font-bold px-3 py-1 rounded-full border border-white/50 shadow-sm">
                                     {item.category?.name || "Premium"}
                                 </Badge>
                             </div>
@@ -99,11 +99,11 @@ export default function MenuGrid({ initialItems, categories, isHome = false, hid
                             {/* Hover Actions */}
                             <div className="absolute inset-x-0 bottom-4 flex justify-center gap-3 translate-y-20 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 delay-75">
                                  <Link href={`/menu/${item.id}`}>
-                                     <Button variant="secondary" size="icon" className="h-12 w-12 rounded-2xl bg-white shadow-xl hover:bg-primary hover:text-white transition-all">
+                                     <Button variant="secondary" size="icon" className="h-12 w-12 rounded-2xl bg-white shadow-xl hover:bg-black hover:text-white transition-all border border-black/10">
                                           <Eye className="w-5 h-5" />
                                      </Button>
                                  </Link>
-                                 <Button size="icon" className="h-12 w-12 rounded-2xl bg-primary text-white shadow-xl hover:scale-110 transition-all" onClick={() => handleAdd(item)}>
+                                 <Button size="icon" className="h-12 w-12 rounded-2xl bg-black text-white shadow-xl hover:scale-110 transition-all" onClick={() => handleAdd(item)}>
                                       <ShoppingCart className="w-5 h-5" />
                                  </Button>
                             </div>
@@ -116,26 +116,26 @@ export default function MenuGrid({ initialItems, categories, isHome = false, hid
                                 <span className="text-xs font-black tracking-tight text-slate-800">4.9 (120)</span>
                             </div>
                             
-                            <h3 className="font-black text-xl text-slate-900 group-hover:text-primary transition-colors line-clamp-1 mb-1 lowercase first-letter:uppercase">
+                            <h3 className="font-black text-xl text-black line-clamp-1 mb-1 lowercase first-letter:uppercase">
                                 <Link href={`/menu/${item.id}`}>{item.name}</Link>
                             </h3>
                             
-                            <p className="text-sm text-slate-400 font-medium line-clamp-2 mb-6">
+                            <p className="text-sm text-black/50 font-medium line-clamp-2 mb-6">
                                 {item.description}
                             </p>
                             
-                            <div className="flex items-center justify-between mt-auto bg-slate-50/50 p-3 rounded-2xl border border-slate-50">
+                            <div className="flex items-center justify-between mt-auto bg-black/5 p-3 rounded-2xl">
                                 <div className="flex flex-col">
                                      {item.discountPrice ? (
                                          <div className="flex items-end gap-2">
-                                            <span className="font-black text-xl tracking-tight text-slate-900">${item.discountPrice.toFixed(2)}</span>
-                                            <span className="text-[10px] text-slate-400 line-through font-bold mb-1">${item.price.toFixed(2)}</span>
+                                            <span className="font-black text-xl tracking-tight text-black">${item.discountPrice.toFixed(2)}</span>
+                                            <span className="text-[10px] text-black/40 line-through font-bold mb-1">${item.price.toFixed(2)}</span>
                                          </div>
                                      ) : (
-                                         <span className="font-black text-xl tracking-tight text-slate-900">${item.price.toFixed(2)}</span>
+                                         <span className="font-black text-xl tracking-tight text-black">${item.price.toFixed(2)}</span>
                                      )}
                                 </div>
-                                <Button size="sm" className="h-10 px-5 rounded-xl bg-white text-slate-900 border border-slate-100 hover:bg-primary hover:text-white hover:border-primary transition-all font-black text-xs gap-2 group/btn" onClick={() => handleAdd(item)}>
+                                <Button size="sm" className="h-10 px-5 rounded-xl bg-white text-black border border-black/10 hover:bg-black hover:text-white transition-all font-black text-xs gap-2 group/btn shadow-sm" onClick={() => handleAdd(item)}>
                                     ADD <Plus className="w-3.5 h-3.5 group-hover/btn:rotate-90 transition-transform" />
                                 </Button>
                             </div>

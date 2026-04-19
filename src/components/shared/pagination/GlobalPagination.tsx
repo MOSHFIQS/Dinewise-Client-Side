@@ -71,11 +71,11 @@ export default function GlobalPagination({
       {/* LIMIT */}
       <Field
         orientation="horizontal"
-        className="w-fit items-center gap-2 px-2 py-1 rounded-lg border bg-[#ebd6fb] dark:bg-white/5 backdrop-blur-sm"
+        className="w-fit items-center gap-2 px-3 py-1.5 rounded-xl border border-black/10 bg-white/70 backdrop-blur-sm shadow-sm"
       >
         <FieldLabel
           htmlFor="select-rows-per-page"
-          className="text-xs text-gray-500 dark:text-gray-400"
+          className="text-xs font-black uppercase tracking-widest text-black/50"
         >
           Rows
         </FieldLabel>
@@ -83,12 +83,12 @@ export default function GlobalPagination({
         <Select value={String(limit)} onValueChange={handleLimitChange}>
           <SelectTrigger
             id="select-rows-per-page"
-            className="h-7 w-[70px] text-xs rounded-md border border-purple-200 bg-[#eef0ff] shadow  dark:bg-[#1f1f23] focus:ring-1 focus:ring-violet-500"
+            className="h-7 w-[70px] text-xs rounded-lg border border-black/10 bg-white shadow-sm focus:ring-1 focus:ring-black text-black"
           >
             <SelectValue placeholder="10" />
           </SelectTrigger>
 
-          <SelectContent align="end" className="rounded-md text-xs bg-[#eef0ff] dark:bg-[#1f1f23]">
+          <SelectContent align="end" className="rounded-xl text-xs bg-white border border-black/10 shadow-xl">
             <SelectGroup>
               <SelectItem value="5">5</SelectItem>
               <SelectItem value="10">10</SelectItem>
@@ -101,28 +101,28 @@ export default function GlobalPagination({
 
       {/* PAGINATION */}
       <Pagination className="mx-0 w-auto">
-        <PaginationContent className="flex items-center gap-2 px-2 py-1 rounded-lg border bg-[#ebd6fb] dark:bg-white/5 backdrop-blur-sm">
+        <PaginationContent className="flex items-center gap-2 px-3 py-1.5 rounded-xl border border-black/10 bg-white/70 backdrop-blur-sm shadow-sm">
 
           <PaginationItem>
             <PaginationPrevious
               onClick={() => handlePageChange("prev")}
-              className={`h-7 px-2 text-xs rounded-md transition ${page === 1
-                  ? "pointer-events-none opacity-40"
-                  : "cursor-pointer hover:bg-gray-100 dark:hover:bg-[#1f1f23]"
+              className={`h-7 px-2 text-xs rounded-lg font-black transition-all border-0 ${page === 1
+                  ? "pointer-events-none opacity-30 text-black/40"
+                  : "cursor-pointer text-black hover:bg-black hover:text-white"
                 }`}
             />
           </PaginationItem>
 
-          <span className="px-2 text-xs text-gray-500 dark:text-gray-400">
+          <span className="px-3 py-0.5 text-xs font-black text-black bg-black/5 rounded-lg">
             {page} / {totalPages}
           </span>
 
           <PaginationItem>
             <PaginationNext
               onClick={() => handlePageChange("next")}
-              className={`h-7 px-2 text-xs rounded-md transition ${page === totalPages
-                  ? "pointer-events-none opacity-40"
-                  : "cursor-pointer hover:bg-gray-100 dark:hover:bg-[#1f1f23]"
+              className={`h-7 px-2 text-xs rounded-lg font-black transition-all border-0 ${page === totalPages
+                  ? "pointer-events-none opacity-30 text-black/40"
+                  : "cursor-pointer text-black hover:bg-black hover:text-white"
                 }`}
             />
           </PaginationItem>

@@ -190,7 +190,7 @@ export function HowItWorksSection() {
         { icon: <Truck className="h-8 w-8 text-white" />, title: "Fast Delivery", desc: "It arrives at your door hot and ready to eat." },
     ];
     return (
-        <section className="relative">
+        <section className="relative py-20">
             <div className="container px-4 mx-auto">
                 <div className="text-center max-w-2xl mx-auto mb-16">
                     <h2 className="text-4xl md:text-5xl font-black mb-4 text-slate-900">How It Works</h2>

@@ -54,7 +54,7 @@ export default function MenuItemView({ item, relatedItems }: MenuItemViewProps) 
                                 </Badge>
                             )}
                             {item.stock < 5 && item.stock > 0 && (
-                                <Badge variant="outline" className="bg-white/80 backdrop-blur-md border-orange-200 text-orange-600 font-bold px-4 py-1.5 rounded-full shadow-sm">
+                                <Badge variant="outline" className="bg-white/80 backdrop-blur-md border-white/50 text-black font-bold px-4 py-1.5 rounded-full shadow-sm">
                                     Only {item.stock} left
                                 </Badge>
                             )}
@@ -64,13 +64,13 @@ export default function MenuItemView({ item, relatedItems }: MenuItemViewProps) 
                         {images.length > 1 && (
                             <div className="absolute inset-0 flex items-center justify-between p-4 pointer-events-none">
                                 <Button
-                                    variant="outline" size="icon" className="h-10 w-10 rounded-full bg-white/80 backdrop-blur-sm pointer-events-auto border-none shadow-lg hover:bg-primary hover:text-white transition-all"
+                                    variant="outline" size="icon" className="h-10 w-10 rounded-full bg-white/80 backdrop-blur-sm pointer-events-auto border-none shadow-lg hover:bg-black hover:text-white transition-all"
                                     onClick={() => setActiveImage((prev) => (prev === 0 ? images.length - 1 : prev - 1))}
                                 >
                                     <ChevronLeft className="w-6 h-6" />
                                 </Button>
                                 <Button
-                                    variant="outline" size="icon" className="h-10 w-10 rounded-full bg-white/80 backdrop-blur-sm pointer-events-auto border-none shadow-lg hover:bg-primary hover:text-white transition-all"
+                                    variant="outline" size="icon" className="h-10 w-10 rounded-full bg-white/80 backdrop-blur-sm pointer-events-auto border-none shadow-lg hover:bg-black hover:text-white transition-all"
                                     onClick={() => setActiveImage((prev) => (prev === images.length - 1 ? 0 : prev + 1))}
                                 >
                                     <ChevronRight className="w-6 h-6" />
@@ -104,56 +104,56 @@ export default function MenuItemView({ item, relatedItems }: MenuItemViewProps) 
                 <div className="w-full lg:w-[45%] flex flex-col pt-2">
                     <div className="mb-8">
                         <div className="flex items-center gap-2 mb-4">
-                            <Badge variant="secondary" className="bg-primary/5 text-primary border-primary/10 hover:bg-primary/10 transition-colors uppercase font-bold tracking-wider px-3 py-1">
+                            <Badge variant="secondary" className="bg-white/50 text-black border-black/10 hover:bg-white transition-colors uppercase font-bold tracking-wider px-3 py-1 shadow-sm">
                                 {item.category?.name || "Premium Dish"}
                             </Badge>
                             <div className="flex items-center text-yellow-500 gap-1 ml-auto">
                                 <Star className="w-4 h-4 fill-current" />
-                                <span className="font-bold text-sm">4.9</span>
-                                <span className="text-muted-foreground text-xs font-normal">(120+ Reviews)</span>
+                                <span className="font-bold text-sm text-black">4.9</span>
+                                <span className="text-black/60 text-xs font-normal">(120+ Reviews)</span>
                             </div>
                         </div>
 
-                        <h1 className="text-4xl lg:text-5xl xl:text-6xl font-black tracking-tight mb-4 text-slate-900 leading-[1.1]">
+                        <h1 className="text-4xl lg:text-5xl xl:text-6xl font-black tracking-tight mb-4 text-black leading-[1.1]">
                             {item.name}
                         </h1>
-                        <p className="text-lg text-muted-foreground leading-relaxed">
+                        <p className="text-lg text-black/60 font-medium leading-relaxed">
                             {item.description}
                         </p>
                     </div>
 
                     {/* Meta Stats */}
                     <div className="grid grid-cols-2 gap-4 mb-10">
-                        <div className="flex items-center gap-3 p-4 rounded-3xl bg-slate-50 border border-slate-100">
-                            <div className="p-2.5 bg-white rounded-2xl shadow-sm text-primary">
+                        <div className="flex items-center gap-3 p-4 rounded-3xl bg-white/40 backdrop-blur-sm border border-white/50 shadow-sm">
+                            <div className="p-2.5 bg-white rounded-2xl shadow-sm text-black">
                                 <Clock className="w-5 h-5" />
                             </div>
                             <div>
-                                <p className="text-xs text-muted-foreground uppercase font-bold tracking-tighter">Prep Time</p>
-                                <p className="text-sm font-black">15-20 Mins</p>
+                                <p className="text-xs text-black/60 uppercase font-bold tracking-tighter">Prep Time</p>
+                                <p className="text-sm font-black text-black">15-20 Mins</p>
                             </div>
                         </div>
-                        <div className="flex items-center gap-3 p-4 rounded-3xl bg-slate-50 border border-slate-100">
-                            <div className="p-2.5 bg-white rounded-2xl shadow-sm text-orange-500">
+                        <div className="flex items-center gap-3 p-4 rounded-3xl bg-white/40 backdrop-blur-sm border border-white/50 shadow-sm">
+                            <div className="p-2.5 bg-white rounded-2xl shadow-sm text-black">
                                 <Flame className="w-5 h-5" />
                             </div>
                             <div>
-                                <p className="text-xs text-muted-foreground uppercase font-bold tracking-tighter">Intensity</p>
-                                <p className="text-sm font-black text-orange-600">Hearty & Fresh</p>
+                                <p className="text-xs text-black/60 uppercase font-bold tracking-tighter">Intensity</p>
+                                <p className="text-sm font-black text-black">Hearty & Fresh</p>
                             </div>
                         </div>
                     </div>
 
                     {/* Pricing */}
-                    <div className="flex items-center gap-6 mb-10 bg-slate-900 p-6 rounded-[2rem] text-white shadow-xl shadow-slate-200">
+                    <div className="flex items-center gap-6 mb-10 bg-black p-6 rounded-[2rem] text-white shadow-2xl shadow-black/20">
                         <div className="flex flex-col">
-                            <span className="text-xs uppercase font-bold tracking-widest text-slate-400 mb-1">Total Price</span>
+                            <span className="text-xs uppercase font-bold tracking-widest text-white/50 mb-1">Total Price</span>
                             {item.discountPrice ? (
                                 <div className="flex items-end gap-3">
                                     <span className="text-4xl font-black tracking-tighter text-white">
                                         ${item.discountPrice.toFixed(2)}
                                     </span>
-                                    <span className="text-xl text-slate-500 line-through font-medium mb-1">
+                                    <span className="text-xl text-white/40 line-through font-medium mb-1">
                                         ${item.price.toFixed(2)}
                                     </span>
                                 </div>
@@ -172,8 +172,8 @@ export default function MenuItemView({ item, relatedItems }: MenuItemViewProps) 
                     {/* Ingredients List */}
                     {item.ingredients && (
                         <div className="mb-10">
-                            <h3 className="font-black mb-4 text-lg flex items-center gap-2">
-                                <span className="w-2 h-2 bg-primary rounded-full" />
+                            <h3 className="font-black mb-4 text-lg text-black flex items-center gap-2">
+                                <span className="w-2 h-2 bg-black rounded-full" />
                                 Fresh Ingredients
                             </h3>
                             <div className="flex flex-wrap gap-2">
@@ -181,7 +181,7 @@ export default function MenuItemView({ item, relatedItems }: MenuItemViewProps) 
                                     ? item.ingredients.split(',').map((s: string) => s.trim()).filter(Boolean)
                                     : Array.isArray(item.ingredients) ? item.ingredients : []
                                   ).map((ing: string, i: number) => (
-                                    <span key={i} className="px-5 py-2.5 bg-white border border-slate-200 rounded-2xl text-sm font-semibold hover:border-primary hover:text-primary transition-all cursor-default">
+                                    <span key={i} className="px-5 py-2.5 bg-white/40 backdrop-blur-sm border border-white/50 rounded-2xl text-sm font-semibold text-black hover:border-black/20 hover:bg-white transition-all cursor-default">
                                         {ing}
                                     </span>
                                 ))}
@@ -193,7 +193,7 @@ export default function MenuItemView({ item, relatedItems }: MenuItemViewProps) 
                     <div className="mt-auto space-y-4">
                         <Button
                             size="lg"
-                            className="w-full h-16 text-lg font-black rounded-2xl shadow-2xl shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all group overflow-hidden relative"
+                            className="w-full h-16 text-lg font-black rounded-2xl bg-black text-white shadow-2xl shadow-black/20 hover:scale-[1.02] active:scale-95 transition-all group relative border-0"
                             onClick={handleAddToCart}
                             disabled={item.stock === 0}
                         >
@@ -201,9 +201,8 @@ export default function MenuItemView({ item, relatedItems }: MenuItemViewProps) 
                                 <ShoppingCart className="h-6 w-6 group-hover:rotate-12 transition-transform" />
                                 {item.stock === 0 ? "OUT OF STOCK" : "ADD TO CART"}
                             </span>
-                            <div className="absolute inset-0 bg-gradient-to-r from-primary to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity" />
                         </Button>
-                        <p className="text-center text-xs text-muted-foreground font-medium">
+                        <p className="text-center text-xs text-black/60 font-bold uppercase tracking-widest">
                             Premium delivery included for orders above $50
                         </p>
                     </div>
@@ -212,17 +211,17 @@ export default function MenuItemView({ item, relatedItems }: MenuItemViewProps) 
 
             {/* Related Items section */}
             {relatedItems.length > 0 && (
-                <div className="mt-32 pt-20 border-t border-slate-100">
+                <div className="mt-32 pt-20 border-t border-black/10">
                     <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
                         <div>
-                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/5 text-primary text-[10px] font-black uppercase tracking-widest mb-3">
+                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/50 text-black border border-white text-[10px] shadow-sm font-black uppercase tracking-widest mb-3">
                                 <Star className="w-3 h-3 fill-current" />
                                 Chef's Recommendation
                             </div>
-                            <h2 className="text-4xl font-black tracking-tight">Related Masterpieces</h2>
-                            <p className="text-muted-foreground text-lg italic">Explore more culinary creations from the {item?.category?.name} collection.</p>
+                            <h2 className="text-4xl font-black tracking-tight text-black">Related Masterpieces</h2>
+                            <p className="text-black/60 font-medium text-lg italic">Explore more culinary creations from the {item?.category?.name} collection.</p>
                         </div>
-                        <Button variant="ghost" onClick={() => window.location.href = '/menu'} className="text-slate-400 font-bold uppercase tracking-tight text-xs hover:text-primary gap-2">
+                        <Button variant="ghost" onClick={() => window.location.href = '/menu'} className="text-black font-black uppercase tracking-tight text-xs hover:bg-white hover:text-black gap-2 backdrop-blur-sm border border-transparent hover:border-white">
                             View Full Menu <ArrowRight className="w-4 h-4" />
                         </Button>
                     </div>
@@ -231,16 +230,16 @@ export default function MenuItemView({ item, relatedItems }: MenuItemViewProps) 
             )}
 
             {/* Reviews Grid */}
-            <div className="mt-32 pt-20 border-t border-slate-100">
+            <div className="mt-32 pt-20 border-t border-black/10">
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
                     <div className="max-w-xl">
-                        <h2 className="text-4xl font-black tracking-tight mb-4">Guest Experience</h2>
-                        <p className="text-muted-foreground text-lg italic">Read how our community feels about this culinary masterpiece.</p>
+                        <h2 className="text-4xl font-black tracking-tight mb-4 text-black">Guest Experience</h2>
+                        <p className="text-black/60 font-medium text-lg italic">Read how our community feels about this culinary masterpiece.</p>
                     </div>
-                    <div className="bg-slate-50 p-6 rounded-3xl border border-dashed flex items-center gap-6">
+                    <div className="bg-white/40 p-6 rounded-3xl border border-white/50 backdrop-blur-sm shadow-sm flex items-center gap-6">
                         <div className="text-center">
-                            <p className="text-3xl font-black text-primary">4.9</p>
-                            <p className="text-[10px] uppercase font-black text-muted-foreground">Global Rating</p>
+                            <p className="text-3xl font-black text-black">4.9</p>
+                            <p className="text-[10px] uppercase font-black text-black/60">Global Rating</p>
                         </div>
                         <div className="flex text-yellow-500 gap-0.5">
                             {[1, 2, 3, 4, 5].map(n => <Star key={n} className="w-4 h-4 fill-current" />)}

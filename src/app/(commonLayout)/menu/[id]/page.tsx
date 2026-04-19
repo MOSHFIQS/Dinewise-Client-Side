@@ -25,5 +25,9 @@ export default async function MenuItemDetailsPage({ params }: { params: Promise<
         }
     }
 
-    return <MenuItemView item={item} relatedItems={relatedItems} />;
+    return (
+        <div className="w-full bg-gradient-to-br from-[#eff3e3] via-[#faede0] to-[#fadcc6] min-h-screen text-black">
+            <MenuItemView item={item} relatedItems={relatedItems} />
+        </div>
+    );
 }
