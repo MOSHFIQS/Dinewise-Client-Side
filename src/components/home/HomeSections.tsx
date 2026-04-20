@@ -67,7 +67,7 @@ export function PopularDishesSection() {
         const fetchItems = async () => {
             setLoading(true);
             try {
-                const res = await getAllMenuItems({ limit: "4" });
+                const res = await getAllMenuItems({ limit: "8" });
                 if (res.success && res.data) {
                     const itemsList = res.data;
                     setItems(itemsList);
@@ -98,8 +98,8 @@ export function PopularDishesSection() {
                 </div>
 
                 {loading ? (
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-pulse">
-                        {[1, 2, 3].map(n => <div key={n} className="h-96 bg-muted rounded-2xl" />)}
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 animate-pulse">
+                        {[1, 2, 3, 4, 5, 6, 7, 8].map(n => <div key={n} className="h-96 bg-muted rounded-[2rem]" />)}
                     </div>
                 ) : (
                     <MenuGrid initialItems={items} isHome={true} />

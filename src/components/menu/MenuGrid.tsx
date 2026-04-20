@@ -72,7 +72,7 @@ export default function MenuGrid({ initialItems, categories, isHome = false, hid
                 </div>
             )}
 
-            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-6">
                 {initialItems?.map((item: any) => (
                     <div key={item.id} className="group relative bg-white/90 backdrop-blur-xl rounded-[2rem] border border-white overflow-hidden shadow-sm hover:shadow-xl hover:shadow-black/10 hover:-translate-y-1 transition-all duration-300">
                         {/* Image Wrapper */}
