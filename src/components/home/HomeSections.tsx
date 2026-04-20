@@ -33,7 +33,7 @@ export function FeaturesSection() {
     ];
 
     return (
-        <section className="py-24">
+        <section className="py-24" data-aos="fade-up">
             <div className="container px-4 mx-auto">
                 <div className="text-center max-w-3xl mx-auto mb-20">
                     <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white text-black border border-black/10 text-[10px] font-black uppercase tracking-widest mb-4 shadow-sm">
@@ -81,7 +81,7 @@ export function PopularDishesSection() {
     }, []);
 
     return (
-        <section className="py-20">
+        <section className="py-20" data-aos="fade-up">
             <div className="container px-4 mx-auto">
                 <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
                     <div className="max-w-xl text-center md:text-left">
@@ -126,7 +126,7 @@ export function TestimonialsSection() {
     ];
 
     return (
-        <section className="py-32 overflow-hidden relative">
+        <section className="py-32 overflow-hidden relative" data-aos="fade-up">
             <div className="container px-4 mx-auto relative z-10">
                 <div className="grid lg:grid-cols-2 gap-24 items-center">
                     <div>
@@ -190,7 +190,7 @@ export function HowItWorksSection() {
         { icon: <Truck className="h-8 w-8 text-white" />, title: "Fast Delivery", desc: "It arrives at your door hot and ready to eat." },
     ];
     return (
-        <section className="relative py-20">
+        <section className="relative py-20" data-aos="fade-up">
             <div className="container px-4 mx-auto">
                 <div className="text-center max-w-2xl mx-auto mb-16">
                     <h2 className="text-4xl md:text-5xl font-black mb-4 text-slate-900">How It Works</h2>
@@ -220,7 +220,7 @@ export function ServicesSection() {
         { icon: <ChefHat className="h-6 w-6 text-black" />, title: "Private Chef", desc: "Hire our top chefs for an exclusive, curated dining experience at your home." },
     ];
     return (
-        <section className="py-24 border-y border-black/5  backdrop-blur-sm">
+        <section className="py-24 border-y border-black/5  backdrop-blur-sm" data-aos="fade-up">
             <div className="container px-4 mx-auto">
                 <div className="text-center max-w-2xl mx-auto mb-16">
                     <h2 className="text-3xl md:text-4xl font-black mb-4 text-black inline-block pb-2">Our Premium Services</h2>
@@ -247,7 +247,7 @@ export function StatisticsSection() {
         { icon: <Heart className="h-6 w-6 text-black" />, value: "4.9/5", label: "Average Rating" },
     ];
     return (
-        <section className="py-20 relative overflow-hidden">
+        <section className="py-20 relative overflow-hidden" data-aos="fade-up">
             <div className="container px-4 mx-auto relative z-10">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 text-center border-y border-black/10 py-16">
                     {stats.map((stat, i) => (
@@ -265,7 +265,7 @@ export function StatisticsSection() {
 
 export function NewsletterSection() {
     return (
-        <section className="py-12 relative">
+        <section className="py-12 relative" data-aos="zoom-in">
             <div className="container px-4 mx-auto">
                 <div className="max-w-4xl mx-auto bg-black rounded-[3rem] p-10 md:p-16 text-center text-white relative overflow-hidden shadow-2xl shadow-black/20">
                     <div className="relative z-10 flex flex-col items-center">

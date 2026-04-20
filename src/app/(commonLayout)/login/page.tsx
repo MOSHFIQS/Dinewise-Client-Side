@@ -9,7 +9,7 @@ export default function LoginPage() {
             <div className="absolute top-0 -left-4 w-72 h-72 bg-primary/5 rounded-full blur-3xl animate-pulse" />
             <div className="absolute bottom-0 -right-4 w-72 h-72 bg-primary/10 rounded-full blur-3xl animate-pulse delay-700" />
             
-            <div className="relative z-10 w-full max-w-md">
+            <div className="relative z-10 w-full max-w-md" data-aos="zoom-in">
                 <Suspense fallback={
                     <div className="flex flex-col items-center justify-center min-h-[400px] space-y-4">
                         <Loader2 className="h-10 w-10 text-primary animate-spin" />

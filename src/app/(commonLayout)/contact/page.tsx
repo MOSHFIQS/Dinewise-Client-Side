@@ -75,7 +75,7 @@ export default function ContactPage() {
         <div className="w-full bg-gradient-to-br from-[#eff3e3] via-[#faede0] to-[#fadcc6] min-h-screen text-black">
 
             {/* Hero Banner */}
-            <div className="relative overflow-hidden border-b border-black/5">
+            <div className="relative overflow-hidden border-b border-black/5" data-aos="fade-down">
                 <div className="container mx-auto px-4 py-24 md:py-32 flex flex-col items-center text-center">
                     <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white text-black border border-black/10 text-[10px] font-black uppercase tracking-widest mb-6 shadow-sm">
                         <MessageSquare className="w-3 h-3" />
@@ -92,7 +92,7 @@ export default function ContactPage() {
 
             {/* Contact Info Cards */}
             <div className="container mx-auto px-4 py-16">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-20" data-aos="fade-up">
                     {contactInfo.map((item, i) => (
                         <div key={i} className="bg-white/70 backdrop-blur-sm border border-white rounded-[2rem] p-8 flex flex-col gap-4 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/5 transition-all duration-300">
                             <div className="w-12 h-12 bg-black rounded-2xl flex items-center justify-center text-white shadow-sm">
@@ -111,7 +111,7 @@ export default function ContactPage() {
                 <div className="grid lg:grid-cols-2 gap-12 mb-24">
 
                     {/* Contact Form */}
-                    <div className="bg-white/60 backdrop-blur-md rounded-[2.5rem] border border-white p-10 shadow-sm">
+                    <div className="bg-white/60 backdrop-blur-md rounded-[2.5rem] border border-white p-10 shadow-sm" data-aos="fade-right">
                         <div className="flex items-center gap-3 mb-8">
                             <div className="w-10 h-10 bg-black rounded-2xl flex items-center justify-center">
                                 <Send className="w-4 h-4 text-white" />
@@ -183,7 +183,7 @@ export default function ContactPage() {
                     {/* Map + Info */}
                     <div className="flex flex-col gap-8">
                         {/* Leaflet Map */}
-                        <div className="rounded-[2.5rem] overflow-hidden border-4 border-white shadow-xl flex-1 min-h-[380px] relative">
+                        <div className="rounded-[2.5rem] overflow-hidden border-4 border-white shadow-xl flex-1 min-h-[380px] relative" data-aos="fade-left">
                             <LeafletMap lat={21.427476} lng={92.003366} label="DineWise Restaurant" />
                             {/* Custom overlay badge */}
                             <div className="absolute top-4 left-4 z-[1000] bg-black text-white px-4 py-2 rounded-2xl flex items-center gap-2 shadow-lg">
@@ -193,7 +193,7 @@ export default function ContactPage() {
                         </div>
 
                         {/* CTA Card */}
-                        <div className="bg-black text-white rounded-[2rem] p-8 flex items-center gap-6 shadow-2xl shadow-black/20">
+                        <div className="bg-black text-white rounded-[2rem] p-8 flex items-center gap-6 shadow-2xl shadow-black/20" data-aos="zoom-in">
                             <div className="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center flex-shrink-0">
                                 <ChefHat className="w-7 h-7 text-white" />
                             </div>
@@ -211,7 +211,7 @@ export default function ContactPage() {
                 </div>
 
                 {/* FAQ Section */}
-                <div className="mb-20">
+                <div className="mb-20" data-aos="fade-up">
                     <div className="text-center mb-12">
                         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white text-black border border-black/10 text-[10px] font-black uppercase tracking-widest mb-4 shadow-sm">
                             <Star className="w-3 h-3" />

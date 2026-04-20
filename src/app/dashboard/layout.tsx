@@ -53,7 +53,7 @@ export default async function DashboardLayout({
                          <div className="flex-1" />
                          <NotificationBell />
                     </header>
-                    <div className="flex flex-1 flex-col gap-4 p-4 lg:p-6 bg-transparent">
+                    <div className="flex flex-1 flex-col gap-4 p-4 lg:p-6 bg-transparent" data-aos="fade-up">
                          {content}
                     </div>
                </SidebarInset>

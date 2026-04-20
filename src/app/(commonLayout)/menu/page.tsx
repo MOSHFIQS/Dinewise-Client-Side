@@ -17,7 +17,7 @@ export default async function MenuPage({ searchParams }: { searchParams: Promise
     return (
         <div className="w-full bg-gradient-to-br from-[#eff3e3] via-[#faede0] to-[#fadcc6] min-h-screen text-black">
             <div className="container mx-auto px-4 py-8 pt-16">
-                <div className="text-center mb-12">
+                <div className="text-center mb-12" data-aos="fade-down">
                     <h1 className="text-4xl font-black tracking-tight mb-4">Our Menu</h1>
                     <p className="text-black/70 font-medium w-full max-w-2xl mx-auto">
                         Explore our exquisite selection of dishes crafted to perfection by our culinary masters.
@@ -25,7 +25,9 @@ export default async function MenuPage({ searchParams }: { searchParams: Promise
                     </p>
                 </div>
 
-            <MenuGrid initialItems={menuItems} categories={categories} />
+            <div data-aos="fade-up">
+                <MenuGrid initialItems={menuItems} categories={categories} />
+            </div>
             
             <div className="mt-12 flex justify-end">
                  <GlobalPagination

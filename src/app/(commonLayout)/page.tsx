@@ -7,7 +7,7 @@ export default function Home() {
     return (
         <div className="flex flex-col w-full bg-gradient-to-br from-[#eff3e3] via-[#faede0] to-[#fadcc6] min-h-screen text-slate-900 pb-20 space-y-10">
             {/* Hero Section */}
-            <section className="relative w-full py-20 lg:py-32 xl:py-48 pb-10 overflow-hidden">
+            <section className="relative w-full py-20 lg:py-32 xl:py-48 pb-10 overflow-hidden" data-aos="fade-down">
                 <div className="container mx-auto px-4 md:px-6 relative z-10 flex flex-col items-center text-center space-y-8">
                     <div className="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-sm font-medium text-primary shadow-sm space-x-2 animate-in fade-in slide-in-from-bottom-4 duration-1000">
                         <Utensils className="h-4 w-4" />
@@ -50,7 +50,7 @@ export default function Home() {
             <NewsletterSection />
             
             {/* CTA Section */}
-            <section className="pt-20 pb-10">
+            <section className="pt-20 pb-10" data-aos="fade-up">
                 <div className="container px-4 mx-auto text-center">
                     <div className="max-w-3xl mx-auto space-y-6">
                         <h2 className="text-3xl md:text-4xl font-bold">Ready to Taste Perfection?</h2>
