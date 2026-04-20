@@ -29,6 +29,7 @@ import {
 } from "lucide-react"
 
 import Link from "next/link"
+import Image from "next/image"
 import { usePathname } from "next/navigation"
 
 type NavItem = {
@@ -128,25 +129,24 @@ export function AppSidebar({ user }: { user: { role: string } }) {
 
   return (
     <Sidebar collapsible="icon" className="border-none">
-      <SidebarHeader className="flex h-16 items-center border-b bg-white/50 backdrop-blur-sm rounded-t-xl">
-        <div className="flex items-center gap-2 px-2 w-full group-data-[state=collapsed]:justify-center group-data-[state=collapsed]:px-0">
-
-          {/* Logo */}
-          <div className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground shrink-0">
-            <UtensilsCrossed className="size-4" />
-          </div>
-
-          {/* Text */}
-          <div className="grid flex-1 text-left text-sm leading-tight group-data-[state=collapsed]:hidden">
-            <span className="font-semibold text-lg">
+      <SidebarHeader className="flex h-16 items-center border-b bg-white/50 backdrop-blur-sm rounded-t-xl px-4 group-data-[state=collapsed]:px-2">
+        <Link href="/" className="flex items-center gap-3 w-full group-data-[state=collapsed]:justify-center overflow-hidden">
+          <Image 
+            src="/logo.png" 
+            alt="DineWise Logo" 
+            width={40} 
+            height={40} 
+            className="h-8 w-auto min-w-[30px] shrink-0 transition-all duration-300"
+          />
+          <div className="flex flex-col group-data-[state=collapsed]:hidden min-w-0 overflow-hidden">
+            <span className="font-semibold text-lg leading-tight truncate">
               Dine<span className="text-primary">Wise</span>
             </span>
-            <span className="text-xs text-muted-foreground">
+            <span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground truncate">
               {user?.role} Portal
             </span>
           </div>
-
-        </div>
+        </Link>
       </SidebarHeader>
 
       <SidebarContent className="px-2 pt-4 bg-white/50 backdrop-blur-sm">

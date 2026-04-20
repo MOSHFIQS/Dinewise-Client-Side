@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Facebook, Twitter, Instagram, MapPin, Mail, Phone, UtensilsCrossed } from "lucide-react";
 
 export default function Footer() {
@@ -9,9 +10,13 @@ export default function Footer() {
                     {/* Brand */}
                     <div className="space-y-5">
                         <Link href="/" className="flex items-center gap-2 text-white">
-                            <div className="bg-white p-2 text-black rounded-xl shadow-lg">
-                                <UtensilsCrossed className="h-5 w-5 fill-current" />
-                            </div>
+                            <Image 
+                                src="/logo.png" 
+                                alt="DineWise Logo" 
+                                width={40} 
+                                height={40} 
+                                className="h-10 w-auto"
+                            />
                             <span className="font-bold text-2xl tracking-tight">Dine<span className="text-white/70">Wise</span></span>
                         </Link>
                         <p className="text-slate-400 max-w-xs leading-relaxed">

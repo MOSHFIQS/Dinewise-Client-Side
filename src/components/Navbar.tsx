@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "./ui/button";
 import { Menu, UtensilsCrossed, LogIn, ShoppingCart, LayoutDashboard, Settings, LogOut, Package } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "./ui/sheet";
@@ -45,17 +46,22 @@ export default function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-md">
+    <header className="sticky top-0 z-[1001] w-full border-b bg-background/80 backdrop-blur-md">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2 group">
-          <div className="bg-primary/10 p-2 rounded-xl group-hover:bg-primary/20 transition-colors">
-            <UtensilsCrossed className="h-6 w-6 text-primary" />
-          </div>
+          <Image 
+            src="/logo.png" 
+            alt="DineWise Logo" 
+            width={40} 
+            height={40} 
+            className="h-10 w-auto"
+            priority
+          />
           <span className="text-xl font-bold tracking-tight">
             Dine<span className="text-primary">Wise</span>
           </span>
         </Link>
-        
+
         {/* Desktop Nav */}
         <div className="hidden md:flex gap-6 items-center">
           <nav className="flex items-center gap-6 text-sm font-medium">
@@ -179,7 +185,15 @@ export default function Navbar() {
                 </Button>
               </SheetTrigger>
               <SheetContent side="right">
-                <SheetTitle className="text-xl font-bold mb-8">DineWise</SheetTitle>
+                <SheetTitle className="mb-8">
+                  <Image 
+                    src="/logo.png" 
+                    alt="DineWise Logo" 
+                    width={100} 
+                    height={32} 
+                    className="h-8 w-auto"
+                  />
+                </SheetTitle>
                 <nav className="flex flex-col gap-4">
                   {navItems.map((item) => (
                     <Link

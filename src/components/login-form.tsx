@@ -12,7 +12,8 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
 import Link from "next/link";
-import { UtensilsCrossed, Loader2 } from "lucide-react";
+import Image from "next/image";
+import { UtensilsCrossed, Loader2, ArrowRight } from "lucide-react";
 import { useAuth } from "@/context/AuthProvider";
 import { useSearchParams } from "next/navigation";
 
@@ -56,42 +57,74 @@ export default function LoginForm() {
      };
 
      return (
-          <div className="flex items-center justify-center min-h-[calc(100vh-100px)] py-12 px-4 sm:px-6 lg:px-8">
-               <Card className="w-full max-w-md shadow-xl border-primary/10">
-                    <CardHeader className="space-y-1 items-center text-center">
-                         <div className="bg-primary/10 p-3 rounded-xl mb-2">
-                              <UtensilsCrossed className="h-8 w-8 text-primary" />
+          <div className="flex items-center justify-center py-6">
+               <Card className="w-full max-w-md bg-white/70 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border-white/20 overflow-hidden">
+                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+                    
+                    <CardHeader className="space-y-4 items-center text-center pb-8 pt-10">
+                         <Link href="/" className="flex flex-col items-center gap-3 group transition-transform duration-300 hover:scale-105">
+                              <Image 
+                                   src="/logo.png" 
+                                   alt="DineWise Logo" 
+                                   width={60} 
+                                   height={60} 
+                                   className="h-14 w-auto drop-shadow-sm"
+                                   priority
+                              />
+                              <span className="text-3xl font-black tracking-tighter">
+                                   Dine<span className="text-primary">Wise</span>
+                              </span>
+                         </Link>
+                         <div className="space-y-1">
+                              <CardTitle className="text-2xl font-bold tracking-tight">Welcome back</CardTitle>
+                              <CardDescription className="text-base">
+                                   Enter your credentials to continue your culinary journey
+                              </CardDescription>
                          </div>
-                         <CardTitle className="text-2xl font-bold tracking-tight">Welcome back</CardTitle>
-                         <CardDescription>
-                              Enter your credentials to access your account
-                         </CardDescription>
                     </CardHeader>
-                    <CardContent>
-                         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                    <CardContent className="px-8">
+                         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
                               <div className="space-y-2">
-                                   <Label htmlFor="email">Email</Label>
-                                   <Input id="email" type="email" placeholder="john@example.com" {...register("email")} />
-                                   {errors.email && <p className="text-xs text-destructive">{errors.email.message}</p>}
+                                   <Label htmlFor="email" className="text-xs font-bold uppercase tracking-wider text-muted-foreground ml-1">Email Address</Label>
+                                   <Input 
+                                        id="email" 
+                                        type="email" 
+                                        placeholder="name@example.com" 
+                                        className="h-12 bg-white/50 border-white/40 focus:bg-white transition-all duration-200"
+                                        {...register("email")} 
+                                   />
+                                   {errors.email && <p className="text-xs text-destructive font-medium ml-1">{errors.email.message}</p>}
                               </div>
                               <div className="space-y-2">
-                                   <div className="flex items-center justify-between">
-                                        <Label htmlFor="password">Password</Label>
-                                        <Link href="#" className="text-xs text-primary hover:underline">Forgot password?</Link>
+                                   <div className="flex items-center justify-between ml-1">
+                                        <Label htmlFor="password" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Password</Label>
+                                        {/* <Link href="#" className="text-xs text-primary hover:underline font-bold">Forgot?</Link> */}
                                    </div>
-                                   <Input id="password" type="password" {...register("password")} />
-                                   {errors.password && <p className="text-xs text-destructive">{errors.password.message}</p>}
+                                   <Input 
+                                        id="password" 
+                                        type="password" 
+                                        placeholder="••••••••"
+                                        className="h-12 bg-white/50 border-white/40 focus:bg-white transition-all duration-200"
+                                        {...register("password")} 
+                                   />
+                                   {errors.password && <p className="text-xs text-destructive font-medium ml-1">{errors.password.message}</p>}
                               </div>
-                              <Button type="submit" className="w-full h-11" disabled={isLoading}>
-                                   {isLoading ? "Signing in..." : "Sign in"}
+                              <Button type="submit" className="w-full h-12 text-base font-bold shadow-lg shadow-primary/20 transition-all duration-300 hover:shadow-primary/40 active:scale-[0.98] group" disabled={isLoading}>
+                                   {isLoading ? (
+                                        <Loader2 className="h-5 w-5 animate-spin" />
+                                   ) : (
+                                        <div className="flex items-center justify-center gap-2">
+                                             Sign In <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                                        </div>
+                                   )}
                               </Button>
                          </form>
                     </CardContent>
-                    <CardFooter className="flex justify-center border-t p-4">
-                         <p className="text-sm text-muted-foreground">
+                    <CardFooter className="flex flex-col gap-4 border-t border-white/20 bg-muted/20 p-6">
+                         <p className="text-sm text-center text-muted-foreground">
                               Don't have an account?{" "}
-                              <Link href="/register" className="text-primary hover:underline font-medium">
-                                   Sign up
+                              <Link href="/register" className="text-primary hover:underline font-bold transition-colors">
+                                   Create an account
                               </Link>
                          </p>
                     </CardFooter>
